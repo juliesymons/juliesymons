@@ -1,26 +1,43 @@
-#HPE Cognitive Computing Toolkit (HPE-CCT)
+#Download and Set up Instructions
 
-##System Requirements
-64-bit architecture (Linux, Windows, MacOS)
-GPU Hardware (NVidia, AMD, Intel)
-OpenCL
+*   [System Requirements](#sysreq)
+*   [Programming Environment](#lang)
+*   [Download/Install/Confgiure Steps](#steps)
+*   [Gotchas](#gotchas)
+    *   [Proxy](#proxy)
+    *   [32-bit](#arch)
+    *   [Git-lfs](#git-lfs)
 
-##Programming Language
-Scala (programming language built upon Java)
-SBT (build tool)
+<h2 id="sysreq">System Requirements</h2>
+* 64-bit architecture (Linux, Windows, MacOS)
+* GPU Hardware (NVIDIA, AMD, Intel)
+* OpenCL (already included by default with most GPU drivers)
 
-##Download and Set up Instructions
+<h2 id="Language">Programming Environment</h2>
+* Scala 
+* SBT (Scala build tool)
+* IntelliJ IDEA (preferred IDE) 
 
-Note: These instructions are based on the preferred IDE, IntelliJ. 
+##Download, Install, Configure environment
 
-1. Download and install 64 bit JDK (JDK8)
-2. Download and install IntelliJ (Community Edition works fine)
-3.
+Note: These instructions are based on the preferred IDE, IntelliJ IDEA. 
 
-## this is a test if this does markdown
+1.  Download and install 64 bit JDK (JDK8)
+2.  Download and install IntelliJ IDEA IDE (Community Edition works fine) // choose 64 bit desk top icon 
+// check if 64 bit launcher is still required
+3.  Configure IntelliJ
+3a.  Set the environment variable IDEA_JDK_64 to point to the JDK. For example:
+> IDEA_JDK_64=C:\Program Files\Java\jkd1.8.0._73
+3b.  Install Scala Plugin (Configure -> Plugins -> Scala -> Install/Update) - does download and configure
+      now it is a "Featured Plugin"
+3c.  Configure project SDK (Configure->Project Defaults->Project Structure->For Project SDK, add a new JDK to the one installed above.
+4.  Download the cct-tutorial from IntelliJ 
+4a.  Check out from Version Control
+4b.  Verify
 
 
-
-###The HPE Cognitive Computing Toolkit can be found at [hpe-cct](https://github.com/hpe-cct "HPE Cognitive Computing Toolkit").
-
-What is hpe-cct?  It is a GPU-accelerated cognitive computing and deep learning platform from Hewlett Packard Enterprise.
+Other Gotchas
+1.  set proxy environment variables and inside IntelliJ (Configure -> Plugins -> Browse Repositories -> HTTP Proxy Settings...)
+2.  try with intellij 32 bit?
+3.  IDEA_JDK_64 // try without this set on Omen
+4.  git-lfs
