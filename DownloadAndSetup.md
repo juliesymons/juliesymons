@@ -10,7 +10,7 @@
     *   [Git-lfs](#git-lfs)
 
 <h2 id="sysreq">System Requirements</h2>
-* 64-bit architecture (Linux, Windows, MacOS)
+* 64-bit architecture (Linux, Windows, OS X)
 * GPU Hardware (NVIDIA, AMD, Intel)
 * OpenCL (already included by default with most GPU drivers)
 
