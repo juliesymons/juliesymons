@@ -42,6 +42,13 @@ Now you are ready to clone a CCT repository.
 available
 [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala). 
 
+    *  In your IDE, navigate to the directory `cct-tutorial/src/main/scala/tutorial/cogio/`. 
+    *  Open `BackgroundSubtraction.scala`. 
+    *  Right click in the source window and select *Run 'BackgroundSubtraction'*. 
+    *  Verify that the application compiles and launches in a debugger window. 
+    *  You can then double click on any field in the left panel, such as "suspicious". 
+    *  And then click *Run*.
+
 Now you are ready for the next step, [Getting Started](https://github.com/hpe-cct/cct-tutorial/blob/master/README.md). (Note: this is just a place holder link for now)
 
 <h2 id="gotchas">Common Problems</h2>
