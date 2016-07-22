@@ -28,7 +28,7 @@ Note: These instructions are based on the preferred IDE, IntelliJ IDEA.
 
 4.  Configure the project SDK in IntelliJ 
 
-     From the Welcome window, select *Configure*, select *Project Defaults*, select *Project Structure*. If there is *\<No SDK>*, click *New* to add the JDK that was installed in Step 1.
+     From the *Welcome to IntelliJ IDEA* window, select *Configure*, select *Project Defaults*, select *Project Structure*. If there is *\<No SDK>*, click *New* to add the JDK that was installed in Step 1.
 
 Now you are ready to clone a CCT repository. 
 
@@ -36,7 +36,7 @@ Now you are ready to clone a CCT repository.
 
 1. Check out from Version Control.
 
-    From the Welcome window, select *Check out from Version Control*, select *GitHub*, enter `https://github.com/hpe-cct/cct-tutorial.git"` for the *Git Repository URL*. Enter the *Parent Directory*. Then click *Clone*.
+    From the *Welcome to IntelliJ IDEA* window, select *Check out from Version Control*, select *GitHub*, enter `https://github.com/hpe-cct/cct-tutorial.git"` for the *Git Repository URL*. Enter the *Parent Directory*. Then click *Clone*.
 
 2. Verify. A good first example to try is the `BackgroundSubtraction` application,
 available
