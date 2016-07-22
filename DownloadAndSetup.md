@@ -20,25 +20,29 @@
 
 Note: These instructions are based on the preferred IDE, IntelliJ IDEA. 
 
-1.  Download and install the lastest 64-bit JDK (JDK8)
-2.  Download and install the latest [IntelliJ IDEA IDE](https://www.jetbrains.com/idea/download) (Community Edition works fine) 
-3.  Install Scala Plugin in IntelliJ. The Scala Plugin includes SBT.
+1.  Download and install the lastest 64-bit JDK (JDK8).
+2.  Download and install the latest [IntelliJ IDEA IDE](https://www.jetbrains.com/idea/download). (The Community Edition works fine.) 
+3.  Download and install the Scala Plugin in IntelliJ. This plugin includes SBT. 
 
-     From the Welcome window, select *Configure*, select *Install JetBrains Plugins*, select *Scala*, click *Install*
+     From the Welcome window, select *Configure*, select *Install JetBrains Plugins* (or *Browse Repositories*), select *Scala*, click *Install*
 
 4.  Configure the project SDK in IntelliJ 
 
-     From the Welcome screen, Select *Configure*, select *Project Defaults*, select *Project Structure*. If there is *\<No SDK>*, click *New* to add the JDK that was installed in Step 1.
+     From the Welcome window, select *Configure*, select *Project Defaults*, select *Project Structure*. If there is *\<No SDK>*, click *New* to add the JDK that was installed in Step 1.
 
 Now you are ready to clone a CCT repository. 
-
 
 <h2 id="clone">Download CCT-Tutorial and Verify</h2>
 
 1. Check out from Version Control.
-2. Verify by running the BackgroundSubtraction sample application. (Requires X display capabilities on Linux)
 
-Now you are ready for "Getting Started".  (add link to getting started or the home page of the tutorial)
+    From the Welcome window, select *Check out from Version Control*, select *GitHub*, enter `https://github.com/hpe-cct/cct-tutorial.git"` for the *Git Repository URL*. Enter the *Parent Directory*. Then click *Clone*.
+
+2. Verify. A good first example to try is the `BackgroundSubtraction` application,
+available
+[here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala). 
+
+Now you are ready for the next step, [Getting Started](https://github.com/hpe-cct/cct-tutorial/blob/master/README.md).
 
 <h2 id="gotchas">Common Problems</h2>
 1.  git-lfs - describe problem/symptom and solution
