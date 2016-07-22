@@ -20,13 +20,12 @@
 
 Note: These instructions are based on the preferred IDE, IntelliJ IDEA. 
 
-1.  Download and install 64 bit JDK (JDK8)
-2.  Download and install IntelliJ IDEA IDE (Community Edition works fine) 
-3.  Install Scala Plugin in IntelliJ
-   (Configure -> Plugins -> Scala -> Install/Update) - does download and configure
-      now it is a "Featured Plugin"
-4.  Configure project SDK in IntelliJ 
-   (Configure->Project Defaults->Project Structure->For Project SDK, add a new JDK to the one installed above.
+1.  Download and install the lastest 64-bit JDK (JDK8)
+2.  Download and install the latest [IntelliJ IDEA IDE](https://www.jetbrains.com/idea/download) (Community Edition works fine) 
+3.  Install Scala Plugin in IntelliJ. The Scala Plugin includes SBT.
+   > From the Welcome window, select *Configure*, select *Install JetBrains Plugins*, select *Scala*, click *Install*
+4.  Configure the project SDK in IntelliJ 
+   > From the Welcome screen, Select *Configure*, select *Project Defaults*, select *Project Structure*. If there is *No SDK*, click *New" to add the JDK that was installed in Step 1.
 
 Now you are ready to clone a CCT repository. 
 
