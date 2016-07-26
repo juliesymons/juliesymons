@@ -36,7 +36,10 @@ Now you are ready to clone a CCT repository.
 
 1. Check out from Version Control.
 
-    From the *Welcome to IntelliJ IDEA* window, select *Check out from Version Control*, select *GitHub*, enter `https://github.com/hpe-cct/cct-tutorial.git"` for the *Git Repository URL*. Enter the *Parent Directory*. Then click *Clone*.
+    *  From the *Welcome to IntelliJ IDEA* window, select *Check out from Version Control*, select *GitHub*, enter `https://github.com/hpe-cct/cct-tutorial.git"` for the *Git Repository URL*. Enter the *Parent Directory*. Then click *Clone*.
+    *  Click "Yes" to open the `build.sbt` project file.
+    *  Check "Use auto-import" and "Create directories..", make sure the proper "Project "SDK" is selected, then click "OK".
+    *  Select both the root and build modules to include. Click "OK".
 
 2. Verify. A good first example to try is the `BackgroundSubtraction` application,
 available
@@ -67,5 +70,3 @@ Now you are ready for the next step, [Getting Started](https://github.com/hpe-cc
 4.  **Problem:** IntelliJ IDEA cannot find the 64-bit JDK VM in older versions of IntelliJ IDEA.
 
     **Solution:** Make sure you set the JAVA_HOME and IDEA_JDK_64 environment variables to the 64-bit JDK you have installed.
-
-  
