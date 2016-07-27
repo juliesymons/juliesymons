@@ -20,15 +20,40 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 **cct-sandbox** - This library contains unstable CCT libraries for applications including signal processing and computer vision.
 
+**cogdebugger** - This is a UI Wrapper for debugging CCT applicatiosn. Allows developer to visualize the compute graph, viewing the fields, step through the inputs
+
 ## Abstractions
+
+The CCT programming model has three core abstractions: *tensor fields*, *operators*, and *compute graphs*.
 
 brief mention of abstractions - fields, sensors, actuators, operators
 
 ## First Example
 
-- add pointer to first one in tutorial to look at
+Background subtraction [link to BackgroundSubtraction.scala] is a relatively simple example to start with. It includes several of the concepts that we will use.
+./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala
 
-- add some explanation
+run inside cogdebugger - allows developer to visualize the graph, the fields, and step
+wrapped in a compute graph
+- input is mp4 file, each image or frame is size is 270x480, 3 bytes per pixel
+- ColorMovieAPI from cct-io opens file and creates a sensor for feeding each frame into the compute graph  
+- synchronous = false ? (look up what this does)
+- vectorField (converts from ColorMovie data type to vectorField - most operations are supporte  
+- background - initialized vectorField (same shape as the movie and sample depth (dimmension)
+- background <== 0.999f*background + 0.001f*movieVector   
+- operations - 2 x multiply by constant, or adds background and movieVector frame)
+- <== feedback operator
+- convert fromm vecotr field to color field
+- caclulate suspicious 
+- operations - subtract, absolute value, reduce sum
+- intuition
+- probe (part of cog debugger)
+- run/stop/step/reset
+- inspect - graph, fields, values
+
+
+
+
 
 ## Fields
 
