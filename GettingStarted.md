@@ -10,12 +10,15 @@ The CCT platform is software platform for developing-massively parallel applicat
 
 CCT is written in the Scala programming language which runs on the Java Virtual Machine (JVM).
 
-### Libraries
+### Libraries 
 
-*  CCT-Core - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application.
-*  CCT-IO - This library provides a set of objects useful for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the core CCT API.
-*  CCT-NN - Deep learning with neural networks 
-*  CCT-Sandbox - Unstable CCT application libraries, including signal processing and computer vision
+**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application.
+
+**cct-io** - This library provides a set of objects useful for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the core CCT API.
+
+**cct-nn** - This library provides APIs for deep learning and neural networks.
+
+**cct-sandbox** - This library contains unstable CCT libraries for applications including signal processing and computer vision.
 
 ## Abstractions
 
