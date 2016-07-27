@@ -22,7 +22,7 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 **cct-sandbox** - This library contains unstable CCT libraries for applications including signal processing and computer vision.
 
-**cogdebugger** - This is a UI Wrapper for debugging CCT applicatiosn. Allows developer to visualize the compute graph, viewing the fields, step through the inputs
+**cogdebugger** - This is a UI Wrapper for debugging CCT applicatiosn. Allows developer to visualize the compute graph, viewing the fields, step through the inputs. The debugger is part of the cct-core repository.
 
 ## Abstractions
 
