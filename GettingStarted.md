@@ -12,7 +12,10 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 ### Libraries
 
-brief mention of abstractions - fields, sensors, actuators, operators
+1.  CCT-Core
+2.  CCT-IO
+3.  CCT-NN
+4.  CCT-Sandbox
 
 ## Abstractions
 
@@ -28,13 +31,20 @@ brief mention of abstractions - fields, sensors, actuators, operators
 
 what are the different types of fields
 
+which tutorial examples are relevant here 
+
 ## Sensors
 
 random, file sensor, user defined sensors
 
+which tutorial examples are relevant here 
+
+
 ## Actuators
 
 what can we say about actuators
+
+which tutorial examples are relevant here 
 
 ## Operators
 
