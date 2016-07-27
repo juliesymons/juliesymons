@@ -12,6 +12,8 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 ### Libraries 
 
+- look at readme for what Ben has put here.
+
 **cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application.
 
 **cct-io** - This library provides a set of objects useful for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the core CCT API.
