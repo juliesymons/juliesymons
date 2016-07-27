@@ -1,12 +1,20 @@
-#Getting Started
+#Getting Started with the HPE Cognitive Computing Toolkit
 
-add a paragraph here
-link to programming guide and scala docs
-
+The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep learning and other advanced analytics. The CCT-Tutorial contains a number of examples from each of the repositories that comprise the Cognitive Computing Toolkit. This guide can be used to get an introduction to the platform.
 
 ## Intro
 
-add a paragraph here
+The CCT platform is software platform for developing-massively parallel applications that execute on multi-core processors such as GPUs. CCT differs from most other parallel programming paradigms (such as MPI, actors, transactional memory) by exposing the parallelism implicitly in the programming model rather than through explicit mechanisms and data structures. The model contains no threads, locks, message queues, critical sections, or races. It is a deterministic, massively-parallel programming model. It is also a declarative dataflow programming model, meaning that a CCT application describes the structure of the computation, not sequential actions.
+
+### Language
+
+CCT is written in the Scala programming language which runs on the Java Virtual Machine (JVM).
+
+### Libraries
+
+brief mention of abstractions - fields, sensors, actuators, operators
+
+## Abstractions
 
 brief mention of abstractions - fields, sensors, actuators, operators
 
