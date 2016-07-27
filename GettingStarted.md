@@ -1,4 +1,4 @@
-#Getting Started with the HPE Cognitive Computing Toolkit
+#Getting Started
 
 The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep learning and other advanced analytics. The CCT-Tutorial contains a number of examples from each of the repositories that comprise the Cognitive Computing Toolkit. This guide can be used to get an introduction to the platform.
 
