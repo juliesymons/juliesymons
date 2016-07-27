@@ -31,7 +31,7 @@ brief mention of abstractions - fields, sensors, actuators, operators
 ## First Example
 
 `BackgroundSubtraction` 
- is a relatively simple example to start with. It includes several of the concepts that we will use.  It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and under this path in your IDE:
+ is a relatively simple example to start with. It can be used to introduced several of the concepts covered in this tutorial.  It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and under this path in your IDE:
 `./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
 
 run inside cogdebugger - allows developer to visualize the graph, the fields, and step
