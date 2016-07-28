@@ -12,15 +12,17 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 ### Libraries 
 
-**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. The cct-core repository also contains the visual debugger, *cogdebugger*. 
+The cct-tutorial currently has the following library dependencies.
 
-**cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read a ColorMovie file and put it into a sensor.
+**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The cct-core repository also contains the visual debugger, *cogdebugger*. 
 
-**cct-nn** - This library provides APIs to support deep learning and neural networks.
+**cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read a ColorMovie file and put it into a sensor. This package is currently imported as `cogio`.
+
+**cct-nn** - This library provides APIs to support deep learning and neural networks. This package is currently imported into  tutorial examples as `toolkit.neuralnetwork`.
 
 **cct-sandbox** - This library contains unstable CCT libraries for applications including signal processing and computer vision.
 
-**cogdebugger** - This is a UI Wrapper for debugging CCT applicatiosn. Allows developer to visualize the compute graph, viewing the fields, step through the inputs. The debugger is part of the cct-core repository.
+**cogdebugger** - This is a UI Wrapper for debugging CCT applications. Allows developer to visualize the compute graph, viewing the fields, step through the inputs. The debugger is part of the cct-core repository, but the package is imported separately as `cogdebugger`.
 
 ## Abstractions
 
@@ -30,13 +32,18 @@ The CCT programming model has three core abstractions: *tensor fields*, *operato
 * An *operator* combines one or more tensor fields to create a new tensor field. 
 * A *compute graph* combines tensor fields and operators into a single, massively-parallel unit of computation. 
  
-The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning. The compute graph can be embedded in and controlled by a conventional application.  
+The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.
 
 Using these simple abstractions, the CCT compiler optimizes the computation across operators and can distribute the work efficiently to scale from one CPU to clusters with millions of GPU cores.
 
 <center>
 ![CCT Compute Graph](doc/cctComputeGraph4.png)
 </center>
+
+## Introductory Example
+
+`Counter` is a very simple example.  It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala)
+
 
 ## First Example
 
@@ -91,6 +98,12 @@ which tutorial examples are relevant here
 - feedback operator
 - user-defined GPU operators
 - user-defined CPU operators
+
+
+## The Compute Graph
+
+The compute graph can be embedded in and controlled by a conventional application.  
+ 
 
 ## The Debugger
 
