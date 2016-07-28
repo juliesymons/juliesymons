@@ -26,7 +26,9 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 ## Abstractions
 
-The CCT programming model has three core abstractions: *tensor fields*, *operators*, and *compute graphs*.  A *tensor field* is a multidimensional array (field) of multidimensional arrays (tensors) of elements (e.g. 32-bit floating point numbers).  Fields are used for inputs, outputs, computations, and persistent state. An *operator* combines on or more tensor fields to create a new tensor field. A *compute graph* combines tensor fields and operators into a single, massively-parallel unit of computation. The compute graph can be embeede in and controlled by a conventional application. It is the compute graph that is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.   
+The CCT programming model has three core abstractions: *tensor fields*, *operators*, and *compute graphs*.  A *tensor field* is a multidimensional array (field) of multidimensional arrays (tensors) of elements (e.g. 32-bit floating point numbers).  Fields are used for inputs, outputs, computations, and persistent state. An *operator* combines one or more tensor fields to create a new tensor field. A *compute graph* combines tensor fields and operators into a single, massively-parallel unit of computation. The compute graph can be embedded in and controlled by a conventional application. The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.   
+
+
 
 
 
