@@ -60,7 +60,7 @@ Using these simple abstractions, the CCT compiler optimizes the computation acro
  It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) and under this path in your IDE: `./cct-tutorial/src/scala/tutorial/libcog/fields/Counter.scala`.
 
 <center>
-![cogdebugger running Counter](doc/cctComputeGraph4.png)
+![cogdebugger running Counter](doc/cogDebugger2.png)
 </center>
 
 
