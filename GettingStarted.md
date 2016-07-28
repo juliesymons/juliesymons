@@ -66,7 +66,7 @@ This next figure shows `Counter` running in the visual debugger. add more detail
 
 
 <center>
-![cogdebugger running Counter](doc/cogdebugger2.png)
+![cogdebugger running Counter](doc/cogdebugger3.png)
 </center>
 
 
