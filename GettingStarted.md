@@ -36,6 +36,10 @@ add graphic here
 ![CCT Compute Graph](doc/cctComputeGraph.png)
 </center>
 
+<center>
+![CCT Compute Graph](doc/cctComputeGraph3.png)
+</center>
+
 
 
 
