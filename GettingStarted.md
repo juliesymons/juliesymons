@@ -12,13 +12,11 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 ### Libraries 
 
-- look at readme for what Ben has put here.
+**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. The cct-core repository also contains the visual debugger, *cogdebugger*. 
 
-**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application.
+**cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read a ColorMovie file and put it into a sensor.
 
-**cct-io** - This library provides a set of objects useful for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the core CCT API.
-
-**cct-nn** - This library provides APIs for deep learning and neural networks.
+**cct-nn** - This library provides APIs to support deep learning and neural networks.
 
 **cct-sandbox** - This library contains unstable CCT libraries for applications including signal processing and computer vision.
 
