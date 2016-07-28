@@ -14,7 +14,7 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 The cct-tutorial currently has the following library dependencies.
 
-**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The cct-core repository also contains the visual debugger, *cogdebugger*. 
+**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The cct-core library also contains the visual debugger, *cogdebugger*. 
 
 **cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read a ColorMovie file and put it into a sensor. This package is currently imported as `cogio`.
 
