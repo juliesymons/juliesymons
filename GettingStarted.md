@@ -40,16 +40,31 @@ Using these simple abstractions, the CCT compiler optimizes the computation acro
 ![CCT Compute Graph](doc/cctComputeGraph4.png)
 </center>
 
-## Introductory Example
+## Introductory Examples
 
-`Counter` is a very simple example.  It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) and under this path in your IDE: `./cct-tutorial/src/scala/tutorial/libcog/fields/Counter.scala`.
+### Example #1
+`Counter` is a very simple example. Here is the code:
+
+    package tutorial.libcog.fields
+
+    import libcog._
+    import cogdebugger._Intro
+
+    object Counter extends CogDebuggerApp(
+      new ComputeGraph {
+        val counter = ScalarField(200, 200)
+        counter <== counter 
+      }
+    )
+
+ It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) and under this path in your IDE: `./cct-tutorial/src/scala/tutorial/libcog/fields/Counter.scala`.
 
 <center>
 ![cogdebugger running Counter](doc/cctComputeGraph4.png)
 </center>
 
 
-## Another Example
+### Example #2
 
 `BackgroundSubtraction` 
  is a relatively simple example to start with. It illusrtates several of the concepts covered in this tutorial.  It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and under this path in your IDE:
