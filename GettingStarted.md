@@ -32,6 +32,11 @@ brief mention of abstractions - fields, sensors, actuators, operators
 
 add graphic here
 
+<center>
+![CCT Compute Graph](doc/cctComputeGraph.png)
+</center>
+
+
 
 
 ## First Example
