@@ -37,7 +37,7 @@ add graphic here
 </center>
 
 <center>
-![CCT Compute Graph](doc/cctComputeGraph3.png)
+![CCT Compute Graph](doc/ComputeGraph3.png)
 </center>
 
 
