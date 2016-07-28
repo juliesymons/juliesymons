@@ -16,7 +16,7 @@ The cct-tutorial currently has the following library dependencies.
 
 **cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The cct-core library also contains the visual debugger, *cogdebugger*. 
 
-**cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read a ColorMovie file and put it into a sensor. This package is currently imported into some of the tutorial examples as `cogio`.
+**cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read an image file or movie file. This package is currently imported into some of the tutorial examples as `cogio`.
 
 **cct-nn** - This library provides APIs to support deep learning and neural networks. This package is currently imported into some of the tutorial examples as `toolkit.neuralnetwork`.
 
@@ -42,10 +42,14 @@ Using these simple abstractions, the CCT compiler optimizes the computation acro
 
 ## Introductory Example
 
-`Counter` is a very simple example.  It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala)
+`Counter` is a very simple example.  It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) and under this path in your IDE: `./cct-tutorial//src/scala/tutorial/libcog/fields/Counter.scala`.
+
+<center>
+![cogdebugger running Counter](doc/cctComputeGraph4.png)
+</center>
 
 
-## First Example
+## Another Example
 
 `BackgroundSubtraction` 
  is a relatively simple example to start with. It illusrtates several of the concepts covered in this tutorial.  It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and under this path in your IDE:
