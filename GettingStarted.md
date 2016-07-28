@@ -16,13 +16,13 @@ The cct-tutorial currently has the following library dependencies.
 
 **cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The cct-core library also contains the visual debugger, *cogdebugger*. 
 
-**cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read a ColorMovie file and put it into a sensor. This package is currently imported as `cogio`.
+**cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read a ColorMovie file and put it into a sensor. This package is currently imported into some of the tutorial examples as `cogio`.
 
-**cct-nn** - This library provides APIs to support deep learning and neural networks. This package is currently imported into  tutorial examples as `toolkit.neuralnetwork`.
+**cct-nn** - This library provides APIs to support deep learning and neural networks. This package is currently imported into some of the tutorial examples as `toolkit.neuralnetwork`.
 
 **cct-sandbox** - This library contains unstable CCT libraries for applications including signal processing and computer vision.
 
-**cogdebugger** - This is a UI Wrapper for debugging CCT applications. Allows developer to visualize the compute graph, viewing the fields, step through the inputs. The debugger is part of the cct-core repository, but the package is imported separately as `cogdebugger`.
+**cogdebugger** - This is a UI Wrapper for debugging CCT applications. Allows developer to visualize the compute graph, viewing the fields, step through the inputs. The debugger is part of the cct-core library, but the package is imported separately as `cogdebugger`.
 
 ## Abstractions
 
