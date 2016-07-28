@@ -22,7 +22,7 @@ The cct-tutorial currently has the following library dependencies.
 
 **cct-sandbox** - This library contains unstable CCT libraries for applications including signal processing and computer vision.
 
-**cogdebugger** - This is a UI Wrapper for debugging CCT applications. Allows developer to visualize the compute graph, viewing the fields, step through the inputs. The debugger is part of the cct-core library, but the package is imported separately as `cogdebugger`.
+**cogdebugger** - This is a UI Wrapper for debugging CCT applications. It allows developers to visualize the compute graph, inspect the fields, and step through the compute graph. The visual debugger is part of the cct-core library, but the package is imported separately as `cogdebugger`.
 
 ## Abstractions
 
