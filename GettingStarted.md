@@ -47,20 +47,20 @@ Using these simple abstractions, the CCT compiler optimizes the computation acro
 
     package tutorial.libcog.fields
 
+    import cogdebugger._
     import libcog._
-    import cogdebugger._Intro
-
+    
     object Counter extends CogDebuggerApp(
       new ComputeGraph {
         val counter = ScalarField(200, 200)
-        counter <== counter 
+        counter <== counter + 1
       }
     )
 
 
 It can also be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) and at this location  in your IDE: `./cct-tutorial/src/scala/tutorial/libcog/fields/Counter.scala`.
 
-This program defines one field, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It then uses the feedback operator *<==* to increment itself by 1 with each clock tick or step.
+This program defines one field, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It then uses the feedback operator `<==` to increment itself by 1 with each clock tick or step.
 
 This next figure shows `Counter` running in the visual debugger. add more details about the debugger here.
 
@@ -69,6 +69,7 @@ This next figure shows `Counter` running in the visual debugger. add more detail
 ![cogdebugger running Counter](doc/cogdebugger3.png)
 </center>
 
+The visual debugger is a graphical tool that allows you to step, reset, and "peek inside" a `ComputeGraph` to visualize the computation while it executes. Clicking on the blue box labeled "counter" in the left pane, opens the "counter" window in the right-pane (as shown here). In this screen capture, the mouse was hovering over the grayscale image to show the value of "1.0" at the location (1,2) after stepping through the graph once (Cycle: 1). 
 
 ### Example #2
 
