@@ -62,6 +62,9 @@ It can also be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/
 
 This program defines one field, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It then uses the feedback operator *<==* to increment itself by 1 with each clock tick or step.
 
+This next figure shows `Counter` running in the visual debugger. add more details about the debugger here.
+
+
 <center>
 ![cogdebugger running Counter](doc/cogdebugger2.png)
 </center>
