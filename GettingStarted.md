@@ -30,18 +30,9 @@ The CCT programming model has three core abstractions: *tensor fields*, *operato
 
 brief mention of abstractions - fields, sensors, actuators, operators
 
-add graphic here
-
-<center>
-![CCT Compute Graph](doc/cctComputeGraph.png)
-</center>
-
 <center>
 ![CCT Compute Graph](doc/cctComputeGraph4.png)
 </center>
-
-
-
 
 ## First Example
 
