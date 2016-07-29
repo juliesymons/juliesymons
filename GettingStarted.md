@@ -99,11 +99,15 @@ The visual debugger is a graphical tool that allows you to step, reset, and "pee
 It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and at this location in your IDE:
 `./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
 
-run inside cogdebugger - allows developer to visualize the graph, the fields, and step
-wrapped in a compute graph
-- input is mp4 file, each image or frame is size is 270x480, 3 bytes per pixel
-- ColorMovieAPI from cct-io opens file and creates a sensor for feeding each frame into the compute graph  
-- synchronous = false ? (look up what this does)
+The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie' field is ColorField of 270 rows by 480 columns with 3 pixels for the color. It is converted to a VectorField of the same shape. 
+
+A `background` VectorField is created using the same shape and depth as the `movieVector'. 
+
+
+
+
+
+
 - vectorField (converts from ColorMovie data type to vectorField - most operations are supporte  
 - background - initialized vectorField (same shape as the movie and sample depth (dimmension)
 - background <== 0.999f*background + 0.001f*movieVector   
