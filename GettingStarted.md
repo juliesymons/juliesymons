@@ -62,19 +62,41 @@ It can also be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/
 
 This program defines one field, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It then uses the feedback operator `<==` to increment itself by 1 with each clock tick or step.
 
-This next figure shows `Counter` running in the visual debugger. add more details about the debugger here.
+This next figure shows `Counter` running in the visual debugger. 
 
 
 <center>
 ![cogdebugger running Counter](doc/cogdebugger3.png)
 </center>
 
-The visual debugger is a graphical tool that allows you to step, reset, and "peek inside" a `ComputeGraph` to visualize the computation while it executes. Clicking on the blue box labeled "counter" in the left pane, opens the "counter" window in the right-pane (as shown here). In this screen capture, the mouse was hovering over the grayscale image to show the value of "1.0" at the location (1,2) after stepping through the graph once (Cycle: 1). 
+The visual debugger is a graphical tool that allows you to step, reset, and "peek inside" a `ComputeGraph` to visualize the computation while it executes. Clicking on the blue box labeled "counter" in the left pane, opens the "counter" window in the right-pane (as shown here). The "counter" window on the right shows that the "counter" field is a ScalarField with a size of 200x200. Placing the cursor over a point in the field will momentarily bring up a tooltip displaying the coordinates and value at that point. In this case, value is "1.0" at the location (1,2) after stepping through the graph one time. The "Cycle" value at the top shows how many steps have been taken, which in this case is "1". All 40,000 points have a value of "1" after 1 cycle. The buttons in the top left allow you to control stepping through the graph. Clicking "Step 1" will add 1 to every point, which is 40,000 additions. Clicking "Run" with a "0" in the adjacent box, steps through the graph until "Stop" is clicked.  Clicking "Reset" resets the ComputeGraph fields back to their initial state.  
 
 ### Example #2
 
-`BackgroundSubtraction` 
- is a relatively simple example to start with. It illusrtates several of the concepts covered in this tutorial.  It can be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and under this path in your IDE:
+`BackgroundSubtraction` is a good example to illustrate several more concepts covered in this tutorial. Here is the code:
+
+    package tutorial.cogio
+
+    import cogdebugger.CogDebuggerApp
+    import cogio._
+    import libcog._
+
+    object BackgroundSubtraction extends CogDebuggerApp (
+      new ComputeGraph {
+        val movieFile = "resources/courtyard.mp4"
+        val movie = ColorMovie(movieFile, synchronous = false)
+        val movieVector = vectorField(movie)
+        val background = VectorField(movie.fieldShape, Shape(3))
+        background <== 0.999f*background + 0.001f*movieVector
+        val backgroundColor = colorField(background)
+        val suspicious = reduceSum(abs(background - movieVector))
+        probe(movie)
+        probe(background)
+        probe(suspicious)
+      }
+    )
+
+It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and at this location in your IDE:
 `./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
 
 run inside cogdebugger - allows developer to visualize the graph, the fields, and step
