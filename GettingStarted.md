@@ -69,9 +69,13 @@ This next figure shows `Counter` running in the visual debugger.
 ![cogdebugger running Counter](doc/cogdebugger3.png)
 </center>
 
-The visual debugger is a graphical tool that allows you to step, reset, and "peek inside" a `ComputeGraph` to visualize the computation while it executes. Clicking on the blue box labeled "counter" in the left pane, opens the "counter" window in the right-pane (as shown here). The "counter" window on the right shows that the "counter" field is a ScalarField with a size of 200x200. Placing the cursor over a point in the field will momentarily bring up a tooltip displaying the coordinates and value at that point. In this case, value is "1.0" at the location (1,2) after stepping through the graph one time. The "Cycle" value at the top shows how many steps have been taken, which in this case is "1". All 40,000 points have a value of "1" after 1 cycle. The buttons in the top left allow you to control stepping through the graph. Clicking "Step 1" will add 1 to every point, which is 40,000 additions. Clicking "Run" with a "0" in the adjacent box, steps through the graph until "Stop" is clicked.  Clicking "Reset" resets the ComputeGraph fields back to their initial state.  
+The visual debugger is a graphical tool that allows you to step, reset, and "peek inside" a `ComputeGraph` to visualize the computation while it executes. Clicking on the blue box labeled "counter" in the left pane, opens the "counter" window in the right-pane (as shown here). The "counter" window on the right shows that the "counter" field is a ScalarField with a size of 200x200. Placing the cursor over a point in the field will momentarily bring up a tooltip displaying the coordinates and value at that point. In this case, value is "1.0" at the location (1,2) after stepping through the graph one time. 
 
-* Note to Julie: the above was submitted to the main with changes to the names of the pngs
+The "Cycle" value at the top shows how many steps have been taken, which in this case is "1". All 40,000 points have a value of "1" after 1 cycle. 
+
+The buttons in the top left allow you to control stepping through the graph. Clicking "Step 1" will add 1 to every point, which is 40,000 additions. Clicking "Run" with a "0" in the adjacent box, steps through the graph until "Stop" is clicked.  Clicking "Reset" resets the ComputeGraph fields back to their initial state.  
+
+* Note to Julie: the above was submitted to the main with changes to the names of the pngs (changed to multiple paragraphs for debugger)
 
 ### Example #2
 
@@ -103,21 +107,34 @@ It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/
 
 The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie' field is ColorField of 270 rows by 480 columns with 3 pixels for the color. It is converted to a VectorField of the same shape. Most operations work on vector fields, not color fields.
 
-A `background` VectorField is created using the same shape and depth as the `movieVector`, 270x480x3. The background gets learned from the frames of the courtyard over time with the use of the feedback operator, *<==*.  It takes about 1000 frames to stabilize. The constant pixels at each position outweigh any temporary movement. This calculation involves 2 constant multiplications and 1 addition. 
+A `background` VectorField is created using the same shape and depth as the `movieVector`, 270x480x3. The background gets learned from the frames of the courtyard over time with the use of the feedback operator, `<==`.  It takes about 1000 frames to stabilize. The constant pixels at each position outweigh any temporary movement. This calculation involves 2 constant multiplications and 1 addition. 
 The value `backgroundColor` isn't used. It is here to demonstrate how to convert from VectorField to ColorField.
 
 Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. This operation subtracts the movieVector from the background. Takes the absolute value. Then `reduceSum` sums of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, we can distiguish the people moving around the courtyard, even the fluttering of the leaves, from the background.
 
-
-- probe (part of cog debugger)
-- run/stop/step/reset
-- inspect - graph, fields, values
-
-
-
-
+The last 3 lines use the `probe` API of the visual debugger. This is used to enable probing of these fields in the debugger.
 
 ## Fields
+
+A *tensor field* is a multidimensional array of multidimensional arrays of numbers of elements. The elements are numbers, which can be real or complex, and stored as 32-bit floats, except for the `ColorField` which is a vector field holding three 8-bit color channels (red, green, blue). The complex fields have real and imaginary components, which are both floats.
+
+A *tensor* is a multidimensional array.  The dimension of a tensor's array is call the tensor's *order*. An order-0 tensor is call a scalar and contains a single number. An order-1 tensor is valled a vector and contains one or more numbers. An order-2 tensor is call a matrix. The next is just called Tensor3 in CCT. This is currently the highest order supported by CCT.
+
+Thus a *tensor field* is a multidimensional array of tensors. This field can have zero, one, two, or three dimensions. 
+
+Types of fields:
+    * ScalarField
+    * VectorField
+    * MatrixField
+    * ComplexField       (a scalar field with complex elements)
+    * ComplexVectorField (a vector field with complex elements)
+    * ColorField         (a field where each order-1 tensor is a pixel)
+    
+Additional field types may be defined by the user.
+
+ 
+
+
 
 what are the different types of fields
 
