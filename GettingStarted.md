@@ -103,15 +103,12 @@ It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/
 
 The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie' field is ColorField of 270 rows by 480 columns with 3 pixels for the color. It is converted to a VectorField of the same shape. Most operations work on vector fields, not color fields.
 
-A `background` VectorField is created using the same shape and depth as the `movieVector', 270x480x3. The background gets learned from the frames of the courtyard over time with the use of the feedback operator, *<==*.  It takes about 1000 frames to stabilize. The constant pixels at each position outweigh any temporary movement. This calculation involves 2 constant multiplications and 1 addition. 
+A `background` VectorField is created using the same shape and depth as the `movieVector`, 270x480x3. The background gets learned from the frames of the courtyard over time with the use of the feedback operator, *<==*.  It takes about 1000 frames to stabilize. The constant pixels at each position outweigh any temporary movement. This calculation involves 2 constant multiplications and 1 addition. 
 The value `backgroundColor` isn't used. It is here to demonstrate how to convert from VectorField to ColorField.
 
-Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. 
+Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. This operation subtracts the movieVector from the background. Takes the absolute value. Then `reduceSum` sums of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, we can distiguish the people moving around the courtyard, even the fluttering of the leaves, from the background.
 
-- caclulate suspicious 
-- operations - subtract, absolute value, reduce sum
-- intuition - - look at the difference between background and current movie frame, take the absolute value, then sum to one value across the 3 color frames - if there is no difference, point stays black if there is a difference it shows white 
-- 
+
 - probe (part of cog debugger)
 - run/stop/step/reset
 - inspect - graph, fields, values
