@@ -101,24 +101,17 @@ The visual debugger is a graphical tool that allows you to step, reset, and "pee
 It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and at this location in your IDE:
 `./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
 
-The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie' field is ColorField of 270 rows by 480 columns with 3 pixels for the color. It is converted to a VectorField of the same shape. 
+The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie' field is ColorField of 270 rows by 480 columns with 3 pixels for the color. It is converted to a VectorField of the same shape. Most operations work on vector fields, not color fields.
 
-A `background` VectorField is created using the same shape and depth as the `movieVector'. 
+A `background` VectorField is created using the same shape and depth as the `movieVector', 270x480x3. The background gets learned from the frames of the courtyard over time with the use of the feedback operator, *<==*.  It takes about 1000 frames to stabilize. The constant pixels at each position outweigh any temporary movement. This calculation involves 2 constant multiplications and 1 addition. 
+The value `backgroundColor` isn't used. It is here to demonstrate how to convert from VectorField to ColorField.
 
+Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. 
 
-
-
-
-
-- vectorField (converts from ColorMovie data type to vectorField - most operations are supporte  
-- background - initialized vectorField (same shape as the movie and sample depth (dimmension)
-- background <== 0.999f*background + 0.001f*movieVector   
-- operations - 2 x multiply by constant, or adds background and movieVector frame)
-- <== feedback operator
-- convert fromm vecotr field to color field
 - caclulate suspicious 
 - operations - subtract, absolute value, reduce sum
-- intuition
+- intuition - - look at the difference between background and current movie frame, take the absolute value, then sum to one value across the 3 color frames - if there is no difference, point stays black if there is a difference it shows white 
+- 
 - probe (part of cog debugger)
 - run/stop/step/reset
 - inspect - graph, fields, values
