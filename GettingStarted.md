@@ -131,21 +131,21 @@ Each field has a shape, a tensor shape, and an elementType. The field shape has 
 
 Additional field types may be defined by the user.
 
-For example #1, `counter` is a `ScalarField`. It's field shape is Shape(200 200), 200 rows and 200 columns. Its dimensions is 2. The tensor order is 0.  
+For example #1, `counter` is a `ScalarField`. Its field shape is `Shape(200 200)`, for 200 rows and 200 columns. Its `dimensions` is 2. The tensor order is 0.  
 
 In the `BackgroundSubtraction` example, the `movie` field has the following:
-* movie.fieldShape = Shape(270 480)
-* movie.fieldShape.dimensions = 2
-* movie.tensorShape = Shape(3)
-* movie.tensorShape.dimensions = 1
-* movie.tensorOrder = 1 
-* movie.elementType = Uint8Pixel
+* `movie.fieldShape = Shape(270 480)`
+* `movie.fieldShape.dimensions = 2`
+* `movie.tensorShape = Shape(3)`
+* `movie.tensorShape.dimensions = 1`
+* `movie.tensorOrder = 1` 
+* `movie.elementType = Uint8Pixel`
 
-This would show in the visual debugger as `ColorField( 720 480 )( 3 )`.
+This shows in the visual debugger as `ColorField( 720 480 )( 3 )`.
 
 The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`.
 
-The cct-tutorial directory libcog/fields contains some examples using different types of fields and `CombiningFields` shows the various legal combinations of different fields.
+The cct-tutorial directory libcog/fields contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields.
 
 
 ## Sensors
