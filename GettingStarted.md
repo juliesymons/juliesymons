@@ -133,20 +133,31 @@ Types of fields:
 Additional field types may be defined by the user.
 
 refer back to counter and colormovie 
-and what are the calls like fieldShape, etc?
+and what are the calls like fieldShape, etc
 
+fieldShape
+layers 3rd dimension of a field
+rows 2nd dimension
+columns 1st dimension
+
+fieldType
+tensorOrder
+elementType
 
  
-
-
-
-what are the different types of fields
 
 which tutorial examples are relevant here 
 
 ## Sensors
 
 random, file sensor, user defined sensors
+
+fieldShape
+nextValue  - optional iterator, next field in row-major order
+resetHook - reset to initial value
+desiredFramesPerSecond optional - to throttle back the speed, for example so movie is played at appropriate speed
+
+pipelined, unpipelined - pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input
 
 which tutorial examples are relevant here 
 
@@ -182,5 +193,5 @@ what can we plut here
 
 * in each section point to good examples to look at 
 
-
+## Debug Flags?
 
