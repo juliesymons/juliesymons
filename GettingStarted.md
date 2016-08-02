@@ -123,14 +123,18 @@ A *tensor* is a multidimensional array.  The dimension of a tensor's array is ca
 Thus a *tensor field* is a multidimensional array of tensors. This field can have zero, one, two, or three dimensions. 
 
 Types of fields:
-    * ScalarField
-    * VectorField
-    * MatrixField
-    * ComplexField       (a scalar field with complex elements)
-    * ComplexVectorField (a vector field with complex elements)
-    * ColorField         (a field where each order-1 tensor is a pixel)
+* ScalarField
+* VectorField
+* MatrixField
+* ComplexField       (a scalar field with complex elements)
+* ComplexVectorField (a vector field with complex elements)
+* ColorField         (a field where each order-1 tensor is a pixel)
     
 Additional field types may be defined by the user.
+
+refer back to counter and colormovie 
+and what are the calls like fieldShape, etc?
+
 
  
 
