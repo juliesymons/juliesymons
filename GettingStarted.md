@@ -157,9 +157,15 @@ The cct-tutorial directory libcog/fields contains some examples using different 
 
 ## The Compute Graph
 
-The compute graph can be embedded in and controlled by a conventional application.  
+From above: The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.
+
+The compute graph defines the inputs and outputs and all of the operations. can be embedded in and controlled by a conventional application.  It is the computation unit, all the operations performed on a frame, for example. 
  
 ## Sensors
+
+Sensors are used feed external input data streams, such as video cameras or files, into a compute graph. The sensor can feed a frame from a video camera as a tensor field for computation within a compute graph. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
+
+
 
 random, file sensor, user defined sensors
 
