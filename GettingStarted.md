@@ -127,7 +127,7 @@ Types of fields:
 * ComplexVectorField (a vector field with complex elements)
 * ColorField         (a field where each order-1 tensor is a pixel)
 
-Each field has a shape, a tensor shape, and an elementType. The field shape has a dimension. The tensor shape also  has a dimension, called an order.  CCT supports up to 3 dimensions and up to 3rd-order tensors.  Shapes are defined by layers, rows, and columns. A field with 3 dimensions has a shape with all of these: layers, rows, and columns. A field with 2 dimensions has rows and columns. An order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The 3rd-order tensor is just called Tensor3 in CCT.  Tensors hold elements, which are defined by the ElementType, e.g. Float32. The complex fields have real and imaginary components, which are both floats. 
+Each field has a shape, a tensor shape, and an elementType. The field shape has a dimension. The tensor shape also  has a dimension, called an order.  CCT supports up to 3 dimensions and up to 3rd-order tensors.  Shapes are defined by layers, rows, and columns. A field with 3 dimensions has layers, rows, and columns. A field with 2 dimensions has rows and columns. For tensors, an order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The 3rd-order tensor is just called Tensor3 in CCT.  Tensors hold elements, which are defined by the ElementType, e.g. Float32. The complex fields have real and imaginary components, which are both floats. 
 
 Additional field types may be defined by the user.
 
