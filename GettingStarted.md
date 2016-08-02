@@ -116,11 +116,10 @@ The last 3 lines use the `probe` API of the visual debugger. This is used to ena
 
 ## Fields
 
-In CCT, fields are primary data structures used for input and output data, computation, and persistent state. 
-
+In CCT, fields, or *tensor fields*, are the primary data structures used for input and output data, computation, and persistent state. 
 A *tensor field* is a multidimensional array of multidimensional arrays of numbers. A *tensor* is a multidimensional array. Therefore, a *tensor field* is a multidimensional array of tensors. 
 
-Types of fields :
+Types of fields:
 * ScalarField
 * VectorField
 * MatrixField
@@ -128,48 +127,25 @@ Types of fields :
 * ComplexVectorField (a vector field with complex elements)
 * ColorField         (a field where each order-1 tensor is a pixel)
 
-Each field has a shape, a tensor shape, and an elementType. The field shape has a dimension. Each tensor has a dimension, called order.  CCT supports up to 3 dimensions and up to 3rd-order tensors.  Shapes are defined by layers, rows, and columns. A field with 3 dimensions has a shape with all of these: layers, rows, and columns. A field with 2 dimensions has rows and columns. Tensors hold elements, which are defined by the ElementType, e.g. Float32.  
-
-Field.fieldShape.dimension
-Field.fieldShape
-
-
-
-
-
-The field types define the data in the tensor. A ScalarField points to a element. A VectorField points to a vector of elements, such as a color field which has 3 elements. 
-
-Shape, fieldShape, tensorShape
-
-
-The field can have zero, one, two, or three dimensions. The actual size of the field dimensions is called the *FieldShape*. ,  
-
-Tensors can have different dimensions, which are referred to as the tensor *order*. An order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The one after that is just called Tensor3 in CCT. This is currently the highest order supported by CCT.
-
-The elements are numbers, which can be real or complex, and stored as 32-bit floats, except for the `ColorField` which is a vector field holding three 8-bit color channels (red, green, blue). The complex fields have real and imaginary components, which are both floats. 
-
-ElementType
-
-For example #1, `counter` is a scalar field. It's shape is (200, 200).  
+Each field has a shape, a tensor shape, and an elementType. The field shape has a dimension. The tensor shape also  has a dimension, called an order.  CCT supports up to 3 dimensions and up to 3rd-order tensors.  Shapes are defined by layers, rows, and columns. A field with 3 dimensions has a shape with all of these: layers, rows, and columns. A field with 2 dimensions has rows and columns. An order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The 3rd-order tensor is just called Tensor3 in CCT.  Tensors hold elements, which are defined by the ElementType, e.g. Float32. The complex fields have real and imaginary components, which are both floats. 
 
 Additional field types may be defined by the user.
 
-refer back to counter and colormovie 
-and what are the calls like fieldShape, etc
+For example #1, `counter` is a `ScalarField`. It's field shape is Shape(200 200), 200 rows and 200 columns. Its dimensions is 2. The tensor order is 0.  
 
-fieldShape
-* field Shape dimensions
-* layers 3rd dimension of a field
-* rows 2nd dimension
-* columns 1st dimension
+In the `BackgroundSubtraction` example, the `movie` field has the following:
+* movie.fieldShape = Shape(270 480)
+* movie.fieldShape.dimensions = 2
+* movie.tensorShape = Shape(3)
+* movie.tensorShape.dimensions = 1
+* movie.tensorOrder = 1 
+* movie.elementType = Uint8Pixel
 
-* fieldType
-* tensorOrder
-* elementType
+This would show in the visual debugger as `ColorField( 720 480 )( 3 )`.
 
- 
+The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`.
 
-which tutorial examples are relevant here :  there are several examples in the libcog/fields directory. In addtion to the `Counter` example, `CombiningFields` defines different types of fields and shows the various legal combinations of different fields.
+The cct-tutorial directory libcog/fields contains some examples using different types of fields and `CombiningFields` shows the various legal combinations of different fields.
 
 
 ## Sensors
