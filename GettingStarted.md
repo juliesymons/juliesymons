@@ -118,7 +118,7 @@ The last 3 lines use the `probe` API of the visual debugger. This is used to ena
 
 A *tensor field* is a multidimensional array of multidimensional arrays of numbers of elements. The elements are numbers, which can be real or complex, and stored as 32-bit floats, except for the `ColorField` which is a vector field holding three 8-bit color channels (red, green, blue). The complex fields have real and imaginary components, which are both floats.
 
-A *tensor* is a multidimensional array.  The dimension of a tensor's array is call the tensor's *order*. An order-0 tensor is call a scalar and contains a single number. An order-1 tensor is valled a vector and contains one or more numbers. An order-2 tensor is call a matrix. The next is just called Tensor3 in CCT. This is currently the highest order supported by CCT.
+A *tensor* is a multidimensional array.  The dimension of a tensor's array is called the tensor's *order*. An order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The one after that is just called Tensor3 in CCT. This is currently the highest order supported by CCT.
 
 Thus a *tensor field* is a multidimensional array of tensors. This field can have zero, one, two, or three dimensions. 
 
