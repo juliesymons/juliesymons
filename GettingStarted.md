@@ -116,11 +116,9 @@ The last 3 lines use the `probe` API of the visual debugger. This is used to ena
 
 ## Fields
 
-A *tensor field* is a multidimensional array of multidimensional arrays of numbers of elements. The elements are numbers, which can be real or complex, and stored as 32-bit floats, except for the `ColorField` which is a vector field holding three 8-bit color channels (red, green, blue). The complex fields have real and imaginary components, which are both floats.
+A *tensor field* is a multidimensional array of multidimensional arrays of numbers of elements. In other terms, a *tensor field* is a multidimensional array of tensors, where a *tensor* is a multidimensional array.  
 
-A *tensor* is a multidimensional array.  The dimension of a tensor's array is called the tensor's *order*. An order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The one after that is just called Tensor3 in CCT. This is currently the highest order supported by CCT.
-
-Thus a *tensor field* is a multidimensional array of tensors. This field can have zero, one, two, or three dimensions. 
+The field can have zero, one, two, or three dimensions. For example, a *ScalarField* has 0 dimensions and a *VectorField* has 1 dimension.
 
 Types of fields:
 * ScalarField
@@ -129,7 +127,13 @@ Types of fields:
 * ComplexField       (a scalar field with complex elements)
 * ComplexVectorField (a vector field with complex elements)
 * ColorField         (a field where each order-1 tensor is a pixel)
-    
+
+Tensors can have different dimensions, which are referred to as the tensor *order*. An order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The one after that is just called Tensor3 in CCT. This is currently the highest order supported by CCT.
+
+The elements are numbers, which can be real or complex, and stored as 32-bit floats, except for the `ColorField` which is a vector field holding three 8-bit color channels (red, green, blue). The complex fields have real and imaginary components, which are both floats.
+
+For example #1, `counter` is a scalar field. It's shape is (200, 200).  
+
 Additional field types may be defined by the user.
 
 refer back to counter and colormovie 
@@ -146,7 +150,8 @@ elementType
 
  
 
-which tutorial examples are relevant here 
+which tutorial examples are relevant here :  there are several examples in the libcog/fields directory. In addtion to the `Counter` example, `CombiningFields` defines different types of fields and shows the various legal combinations of different fields.
+
 
 ## Sensors
 
