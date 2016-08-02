@@ -75,7 +75,7 @@ The "Cycle" value at the top shows how many steps have been taken, which in this
 
 The buttons in the top left allow you to control stepping through the graph. Clicking "Step 1" will add 1 to every point, which is 40,000 additions. Clicking "Run" with a "0" in the adjacent box, steps through the graph until "Stop" is clicked.  Clicking "Reset" resets the ComputeGraph fields back to their initial state.  
 
-* Note to Julie: the above was submitted to the main with changes to the names of the pngs (changed to multiple paragraphs for debugger)
+* Note to Julie: the above was submitted to the main with changes to the names of the pngs (changed to multiple paragraphs for debugger) - maybe switch up order?
 
 ### Example #2
 
@@ -147,7 +147,18 @@ The `ColorField` is a special case of the `VectorField`. The VectorField version
 
 The cct-tutorial directory libcog/fields contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields.
 
+## Operators
 
+- built-in
+- feedback operator
+- user-defined GPU operators
+- user-defined CPU operators
+
+
+## The Compute Graph
+
+The compute graph can be embedded in and controlled by a conventional application.  
+ 
 ## Sensors
 
 random, file sensor, user defined sensors
@@ -168,18 +179,7 @@ what can we say about actuators
 
 which tutorial examples are relevant here 
 
-## Operators
 
-- built-in
-- feedback operator
-- user-defined GPU operators
-- user-defined CPU operators
-
-
-## The Compute Graph
-
-The compute graph can be embedded in and controlled by a conventional application.  
- 
 
 ## The Debugger
 
