@@ -116,8 +116,8 @@ The last 3 lines use the `probe` API of the visual debugger. This is used to ena
 
 ## Fields
 
-In CCT, fields, or *tensor fields*, are the primary data structures used for input and output data, computation, and persistent state. 
-A *tensor field* is a multidimensional array of multidimensional arrays of numbers. A *tensor* is a multidimensional array. Therefore, a *tensor field* is a multidimensional array of tensors. 
+In CCT, fields (or *tensor fields*) are the primary data structures used for input and output data, computation, and persistent state. 
+A *tensor field* is a multidimensional array of multidimensional arrays of numbers. A *tensor* is a multidimensional array. Thus, a *tensor field* is a multidimensional array of tensors. 
 
 Types of fields:
 * ScalarField
