@@ -131,7 +131,7 @@ Each field has a shape, a tensor shape, and an elementType. The field shape has 
 
 Additional field types may be defined by the user.
 
-For example #1, `counter` is a `ScalarField`. Its field shape is `Shape(200 200)`, for 200 rows and 200 columns. Its `dimensions` is 2. The tensor order is 0.  
+For example #1, `counter` is a `ScalarField`. Its field shape is `Shape(200 200)`, for 200 rows and 200 columns. Its `dimensions` is 2. The `tensorOrder` is 0.  
 
 In the `BackgroundSubtraction` example, the `movie` field has the following:
 * `movie.fieldShape = Shape(270 480)`
