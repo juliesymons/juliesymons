@@ -5,9 +5,6 @@ The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep
 *   [Intro](#intro)
 *   [Abstractions](#abstractions)
 *   [Introductory Examples](#introductory-examples)
-*   [Tensor Fields](#tensor-fields)
-*   [Operators](#operators)
-*   [The Compute Graph](#compute-graph)
 *   [Neural Network Toolkit](#neural-network-toolkit)
 *   [Programming CCT Applications](#programming-cct-applications)
 *   [Visual Debugger](#visual-debugger)
@@ -51,6 +48,93 @@ Using these simple abstractions, the CCT compiler optimizes the computation acro
 ![CCT Compute Graph](doc/cctComputeGraph4.png)
 </center>
 
+
+
+### Tensor Fields
+
+In CCT, fields (or *tensor fields*) are the primary data structures used for input and output data, computation, and persistent state. 
+A *tensor field* is a multidimensional array of multidimensional arrays of numbers. A *tensor* is a multidimensional array. Thus, a *tensor field* is a multidimensional array of tensors. 
+
+Types of fields:
+* ScalarField
+* VectorField
+* MatrixField
+* ComplexField       (a scalar field with complex elements)
+* ComplexVectorField (a vector field with complex elements)
+* ColorField         (a field where each order-1 tensor is a pixel)
+
+Each field has a shape, a tensor shape, and an element type. The field shape has a dimension. The tensor shape also  has a dimension, called an order.  CCT supports up to 3 dimensions and up to 3rd-order tensors.  Shapes are defined by layers, rows, and columns. A field with 3 dimensions has layers, rows, and columns. A field with 2 dimensions has rows and columns. For tensors, an order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The 3rd-order tensor is just called `Tensor3` in CCT.  Tensors hold elements, which are defined by the `ElementType`, e.g. `Float32`. The complex fields have real and imaginary components, which are both floats. 
+
+Additional field types may be defined by the user.
+
+For example #1, `counter` is a `ScalarField`. Its field shape is `Shape(200 200)`, for 200 rows and 200 columns. Its `dimensions` is 2. The `tensorOrder` is 0.  
+
+In the `BackgroundSubtraction` example, the `movie` field has the following:
+* `movie.fieldShape = Shape(270 480)`
+* `movie.fieldShape.dimensions = 2`
+* `movie.tensorShape = Shape(3)`
+* `movie.tensorShape.dimensions = 1`
+* `movie.tensorOrder = 1` 
+* `movie.elementType = Uint8Pixel`
+
+This shows in the visual debugger as `ColorField( 720 480 )( 3 )`.
+
+The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`.
+
+The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields. 
+
+#### Sensors
+
+Sensors are inputs to *tensor fields* from external data streams, such as a video camera or a file, into a *compute graph*. The sensor can feed a frame from a video camera as a tensor field for computation within a compute graph. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
+
+In the `BackgroundSubtraction` example, the `ColorMovie` API from `cogio` feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. Other examples in the `cogio` folder of the tutorial illustrate APIs for reading movie files (in color or grayscale), a variety of image file formats, a webcam, and binary files. 
+
+The `libcog/sensors/ScalarSensorActuatorExample` in the tutorial illustrates how to implement a scalar sensor and actuator using
+scala iterators and functions.
+
+`val date = new Sensor(Shape(3), getTime)`
+
+The `Sensor` constructor take a a parameterless function, which returns an `Option[Iterator[Float]]`. In this example, it is the `getTime` function.
+
+`Sensor` parameters:
+* fieldShape
+* nextValue  - optional iterator, next field in row-major order, can return `None`.
+* resetHook - reset to initial value, this can be empty.
+* desiredFramesPerSecond (optional) - to throttle back the speed; for example, so that a movie is played at an appropriate speed.
+
+Sensors can be pipelined or unpipelined. Pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input. Pipelined sensors are the default. The class `UnpipelinedSensor` is used for unpipelined sensor, which does the work in series, first on the CPU, then the GPU at each step. And unlike the pipelined sensor, it must always return a nextValue. The **cct-core** library also contains sensor classes specifically for Vector and Color fields.
+
+The **cct-nn** package also provides sensor APIs, such as `ByteDataSource`, used for reading binary files. There is also a `RandomSource` API, for generating random data. Several examples in the `toolkit/neuralnetwork/` directory use these APIs to read the MNIST training dataset and labels.
+
+#### Actuators
+
+Actuators are *tensor fields* that are output from a *compute graph*.  The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files. Actuators are the complement of Sensors.
+
+
+what can we say about actuators - pipelined/unpipelined, special case for Color and Vector, 
+* @param op The actuator opcode for this field.
+* @param source The scalar field driving this actuator.
+* @param update A user-supplied callback function that is provided an iterator over the actuator's new data.
+* @param resetHook An optional callback function that is called upon reset.
+
+
+which tutorial examples are relevant here - `libcog/sensors/ScalarSensorActuatorExample` defines an actuator to do blah. `libcog/actuators/ActuatorExample`
+
+
+### Operators
+
+- built-in
+- feedback operator
+- user-defined GPU operators
+- user-defined CPU operators
+
+
+### Compute Graph
+
+From above: The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.
+
+The compute graph defines the inputs and outputs and all of the operations. can be embedded in and controlled by a conventional application.  It is the computation unit, all the operations performed on a frame, for example. 
+ 
 ## Introductory Examples
 
 ### Example #1
@@ -125,92 +209,6 @@ The value `backgroundColor` isn't used. It is here to demonstrate how to convert
 Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. The calculation  is to subtract the movieVector from the background, take the absolute value, then apply `reduceSum` to sum of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, the application identifies the people moving around the courtyard, even the fluttering of the leaves, from the background.
 
 The last 3 lines use the `probe` API of the visual debugger. This is used to enable probing of these fields in the debugger.
-
-## Tensor Fields
-
-In CCT, fields (or *tensor fields*) are the primary data structures used for input and output data, computation, and persistent state. 
-A *tensor field* is a multidimensional array of multidimensional arrays of numbers. A *tensor* is a multidimensional array. Thus, a *tensor field* is a multidimensional array of tensors. 
-
-Types of fields:
-* ScalarField
-* VectorField
-* MatrixField
-* ComplexField       (a scalar field with complex elements)
-* ComplexVectorField (a vector field with complex elements)
-* ColorField         (a field where each order-1 tensor is a pixel)
-
-Each field has a shape, a tensor shape, and an element type. The field shape has a dimension. The tensor shape also  has a dimension, called an order.  CCT supports up to 3 dimensions and up to 3rd-order tensors.  Shapes are defined by layers, rows, and columns. A field with 3 dimensions has layers, rows, and columns. A field with 2 dimensions has rows and columns. For tensors, an order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The 3rd-order tensor is just called `Tensor3` in CCT.  Tensors hold elements, which are defined by the `ElementType`, e.g. `Float32`. The complex fields have real and imaginary components, which are both floats. 
-
-Additional field types may be defined by the user.
-
-For example #1, `counter` is a `ScalarField`. Its field shape is `Shape(200 200)`, for 200 rows and 200 columns. Its `dimensions` is 2. The `tensorOrder` is 0.  
-
-In the `BackgroundSubtraction` example, the `movie` field has the following:
-* `movie.fieldShape = Shape(270 480)`
-* `movie.fieldShape.dimensions = 2`
-* `movie.tensorShape = Shape(3)`
-* `movie.tensorShape.dimensions = 1`
-* `movie.tensorOrder = 1` 
-* `movie.elementType = Uint8Pixel`
-
-This shows in the visual debugger as `ColorField( 720 480 )( 3 )`.
-
-The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`.
-
-The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields. 
-
-### Sensors
-
-Sensors are inputs to *tensor fields* from external data streams, such as a video camera or a file, into a *compute graph*. The sensor can feed a frame from a video camera as a tensor field for computation within a compute graph. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
-
-In the `BackgroundSubtraction` example, the `ColorMovie` API from `cogio` feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. Other examples in the `cogio` folder of the tutorial illustrate APIs for reading movie files (in color or grayscale), a variety of image file formats, a webcam, and binary files. 
-
-The `libcog/sensors/ScalarSensorActuatorExample` in the tutorial illustrates how to implement a scalar sensor and actuator using
-scala iterators and functions.
-
-`val date = new Sensor(Shape(3), getTime)`
-
-The `Sensor` constructor take a a parameterless function, which returns an `Option[Iterator[Float]]`. In this example, it is the `getTime` function.
-
-`Sensor` parameters:
-* fieldShape
-* nextValue  - optional iterator, next field in row-major order, can return `None`.
-* resetHook - reset to initial value, this can be empty.
-* desiredFramesPerSecond (optional) - to throttle back the speed; for example, so that a movie is played at an appropriate speed.
-
-Sensors can be pipelined or unpipelined. Pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input. Pipelined sensors are the default. The class `UnpipelinedSensor` is used for unpipelined sensor, which does the work in series, first on the CPU, then the GPU at each step. And unlike the pipelined sensor, it must always return a nextValue. The **cct-core** library also contains sensor classes specifically for Vector and Color fields.
-
-The **cct-nn** package also provides sensor APIs, such as `ByteDataSource`, used for reading binary files. There is also a `RandomSource` API, for generating random data. Several examples in the `toolkit/neuralnetwork/` directory use these APIs to read the MNIST training dataset and labels.
-
-### Actuators
-
-Actuators are *tensor fields* that are output from a *compute graph*.  The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files. Actuators are the complement of Sensors.
-
-
-what can we say about actuators - pipelined/unpipelined, special case for Color and Vector, 
-* @param op The actuator opcode for this field.
-* @param source The scalar field driving this actuator.
-* @param update A user-supplied callback function that is provided an iterator over the actuator's new data.
-* @param resetHook An optional callback function that is called upon reset.
-
-
-which tutorial examples are relevant here - `libcog/sensors/ScalarSensorActuatorExample` defines an actuator to do blah. `libcog/actuators/ActuatorExample`
-
-
-## Operators
-
-- built-in
-- feedback operator
-- user-defined GPU operators
-- user-defined CPU operators
-
-
-## Compute Graph
-
-From above: The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.
-
-The compute graph defines the inputs and outputs and all of the operations. can be embedded in and controlled by a conventional application.  It is the computation unit, all the operations performed on a frame, for example. 
- 
 
 ## Neural Network Toolkit
 
