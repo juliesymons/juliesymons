@@ -159,18 +159,18 @@ scala iterators and functions.
 
 `val date = new Sensor(Shape(3), getTime)`
 
-In this example, the `getTime` function is a parameterless function that returns an `Option[Iterator[Float]]`.
+The `Sensor` constructor take a a parameterless function, which returns an `Option[Iterator[Float]]`. In this example, it is the `getTime` function.
 
+`Sensor` Parameters:
 * fieldShape
-* nextValue  - optional iterator, next field in row-major order
-* resetHook - reset to initial value
-* desiredFramesPerSecond optional - to throttle back the speed, for example so movie is played at appropriate speed
+* nextValue  - optional iterator, next field in row-major order, can return `None`.
+* resetHook - reset to initial value, this can be empty.
+* desiredFramesPerSecond (optional) - to throttle back the speed; for example, so that movie is played at an appropriate speed.
 
+Sensors can be pipelined or unpipelined. Pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input. Pipelined sensors are the default. The class `UnpipelinedSensor` is used for unpipelined sensor. And unlike the pipeleined sensor, it must always return a nextValue. The **cct-core** library also contains sensor classes specifically for Vector and Color fields.
 
-pipelined, unpipelined - pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input
-
-
-random, file sensor (nn has ByteDataSource and ByteLabelSource (byte file sensor), float data/label source (Float file sensor), label sensor), user defined sensors
+The **cct-nn** package also provides sensor APIs.
+random, file sensor (nn has ByteDataSource and ByteLabelSource (byte file sensor), float data/label source (Float file sensor), label sensor), user defined sensors.
 
 
 which tutorial examples are relevant here (add one?)
