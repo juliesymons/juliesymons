@@ -150,31 +150,30 @@ The **cct-tutorial** directory `libcog/fields` contains some examples using diff
 
 ### Sensors
 
-Sensors are inputs to *tensor fields* from external data streams, such as video cameras or files, into a *compute graph*. The sensor can feed a frame from a video camera as a tensor field for computation within a compute graph. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
+Sensors are inputs to *tensor fields* from external data streams, such as a video camera or a file, into a *compute graph*. The sensor can feed a frame from a video camera as a tensor field for computation within a compute graph. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
 
-In the `BackgroundSubtraction` example, the `ColorMovie` API from `cogio` feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. The examples in the `cogio` folder of the tutorial illustrate APIs for reading movie files (in color or grayscale), a variety of image files, and a webcam. 
+In the `BackgroundSubtraction` example, the `ColorMovie` API from `cogio` feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. Other examples in the `cogio` folder of the tutorial illustrate APIs for reading movie files (in color or grayscale), a variety of image file formats, a webcam, and binary files. 
 
 The `libcog/ScalarSensorActuatorExample` in the tutorial illustrates how to implement a scalar sensor and actuator using
 scala iterators and functions.
 
 `val date = new Sensor(Shape(3), getTime)`
 
+In this example, the `getTime` function is a parameterless function that returns an `Option[Iterator[Float]]`.
 
-//Define the Sensor function which must be a parameterless function that returns
-  // an Option[Iterator[Float]]
+* fieldShape
+* nextValue  - optional iterator, next field in row-major order
+* resetHook - reset to initial value
+* desiredFramesPerSecond optional - to throttle back the speed, for example so movie is played at appropriate speed
+
+
+pipelined, unpipelined - pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input
 
 
 random, file sensor (nn has ByteDataSource and ByteLabelSource (byte file sensor), float data/label source (Float file sensor), label sensor), user defined sensors
 
-fieldShape
-nextValue  - optional iterator, next field in row-major order
-resetHook - reset to initial value
-desiredFramesPerSecond optional - to throttle back the speed, for example so movie is played at appropriate speed
-
-pipelined, unpipelined - pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input
 
 which tutorial examples are relevant here (add one?)
-
 
 ### Actuators
 
