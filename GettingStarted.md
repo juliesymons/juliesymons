@@ -7,7 +7,7 @@ The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep
 *   [Introductory Examples](#introductory-examples)
 *   [Tensor Fields](#tensor-fields)
 *   [Operators](#operators)
-*   [Compute Graph](#compute-graph)
+*   [The Compute Graph](#the-compute-graph)
 *   [Visual Debugger](#visual-debugger)
 *   Programming CCT Applications
 *   Neural Network Toolkit
@@ -157,7 +157,7 @@ This shows in the visual debugger as `ColorField( 720 480 )( 3 )`.
 
 The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`.
 
-The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields. Also, `libcog/tensors` contains examples 
+The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields. 
 
 ### Sensors
 
@@ -165,7 +165,7 @@ Sensors are inputs to *tensor fields* from external data streams, such as a vide
 
 In the `BackgroundSubtraction` example, the `ColorMovie` API from `cogio` feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. Other examples in the `cogio` folder of the tutorial illustrate APIs for reading movie files (in color or grayscale), a variety of image file formats, a webcam, and binary files. 
 
-The `libcog/ScalarSensorActuatorExample` in the tutorial illustrates how to implement a scalar sensor and actuator using
+The `libcog/sensors/ScalarSensorActuatorExample` in the tutorial illustrates how to implement a scalar sensor and actuator using
 scala iterators and functions.
 
 `val date = new Sensor(Shape(3), getTime)`
@@ -184,11 +184,17 @@ The **cct-nn** package also provides sensor APIs, such as `ByteDataSource`, used
 
 ### Actuators
 
-Actuators are *tensor fields* that are output from a *compute graph*.  The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files.
+Actuators are *tensor fields* that are output from a *compute graph*.  The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files. Actuators are the complement of Sensors.
 
-what can we say about actuators
 
-which tutorial examples are relevant here 
+what can we say about actuators - pipelined/unpipelined, special case for Color and Vector, 
+* @param op The actuator opcode for this field.
+* @param source The scalar field driving this actuator.
+* @param update A user-supplied callback function that is provided an iterator over the actuator's new data.
+* @param resetHook An optional callback function that is called upon reset.
+
+
+which tutorial examples are relevant here - `libcog/sensors/ScalarSensorActuatorExample` defines an actuator to do blah. `libcog/actuators/ActuatorExample`
 
 
 ## Operators
@@ -199,7 +205,7 @@ which tutorial examples are relevant here
 - user-defined CPU operators
 
 
-## The Compute Graph
+## Compute Graph
 
 From above: The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.
 
@@ -208,7 +214,7 @@ The compute graph defines the inputs and outputs and all of the operations. can 
 
 
 
-## The Debugger
+## Visual Debugger
 
 go over its functionality
 
