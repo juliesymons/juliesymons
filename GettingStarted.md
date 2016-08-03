@@ -2,6 +2,17 @@
 
 The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep learning and other advanced analytics. The **cct-tutorial** contains a number of examples from each of the repositories that comprise the Cognitive Computing Toolkit. This guide can be used to get an introduction to the platform.
 
+*   [Intro](#intro)
+*   [Abstractions](#abstractions)
+*   [Introductory Examples](#introductory-examples)
+*   [Tensor Fields](#tensor-fields)
+*   [Operators](#gotchas)
+*   [Compute Graph](#compute-graph)
+*   [Visual Debugger](#visual-debugger)
+*   Programming CCT Applications
+*   Neural Network Toolkit
+*   Other Tidbits
+
 ## Intro
 
 The CCT platform is software platform for developing-massively parallel applications that execute on multi-core processors such as GPUs. CCT differs from most other parallel programming paradigms (such as MPI, actors, transactional memory) by exposing the parallelism implicitly in the programming model rather than through explicit mechanisms and data structures. The model contains no threads, locks, message queues, critical sections, or races. It is a deterministic, massively-parallel programming model. It is also a declarative dataflow programming model, meaning that a CCT application describes the structure of the computation, not sequential actions.
@@ -146,7 +157,7 @@ This shows in the visual debugger as `ColorField( 720 480 )( 3 )`.
 
 The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`.
 
-The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields.
+The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields. Also, `libcog/tensors` contains examples 
 
 ### Sensors
 
@@ -161,7 +172,7 @@ scala iterators and functions.
 
 The `Sensor` constructor take a a parameterless function, which returns an `Option[Iterator[Float]]`. In this example, it is the `getTime` function.
 
-`Sensor` Parameters:
+`Sensor` parameters:
 * fieldShape
 * nextValue  - optional iterator, next field in row-major order, can return `None`.
 * resetHook - reset to initial value, this can be empty.
@@ -173,7 +184,7 @@ The **cct-nn** package also provides sensor APIs, such as `ByteDataSource`, used
 
 ### Actuators
 
-Actuators are *tensor fields* that are output from a *compute graph*.
+Actuators are *tensor fields* that are output from a *compute graph*.  The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files.
 
 what can we say about actuators
 
