@@ -1,6 +1,6 @@
 #Getting Started
 
-The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep learning and other advanced analytics. The CCT-Tutorial contains a number of examples from each of the repositories that comprise the Cognitive Computing Toolkit. This guide can be used to get an introduction to the platform.
+The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep learning and other advanced analytics. The **cct-tutorial** contains a number of examples from each of the repositories that comprise the Cognitive Computing Toolkit. This guide can be used to get an introduction to the platform.
 
 ## Intro
 
@@ -12,7 +12,7 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 ### Libraries 
 
-The cct-tutorial currently has the following library dependencies.
+The **cct-tutorial** currently has the following library dependencies.
 
 **cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The cct-core library also contains the visual debugger, *cogdebugger*. 
 
@@ -105,10 +105,11 @@ The buttons in the top left allow you to control stepping through the graph. Cli
 It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and at this location in your IDE:
 `./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
 
-The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie' field is ColorField of 270 rows by 480 columns with 3 pixels for the color. It is converted to a VectorField of the same shape. Most operations work on vector fields, not color fields.
+The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie' field is `ColorField` of 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most operations work on vector fields, not color fields.
 
-A `background` VectorField is created using the same shape and depth as the `movieVector`, 270x480x3. The background gets learned from the frames of the courtyard over time with the use of the feedback operator, `<==`.  It takes about 1000 frames to stabilize. The constant pixels at each position outweigh any temporary movement. This calculation involves 2 constant multiplications and 1 addition. 
-The value `backgroundColor` isn't used. It is here to demonstrate how to convert from VectorField to ColorField.
+A `background` `VectorField` is created using the same shape, dimenstions, and order as the `movieVector`, 270x480x3. The background is learned over time from the frames of the courtyard movie with the use of the feedback operator, `<==`.  It takes about 1000 frames to stabilize. The background pixels at each position outweigh any temporary movement in the foreground. This calculation involves 2 constant multiplications and 1 addition.  
+
+The value `backgroundColor` isn't used. It is here to demonstrate how to convert from `VectorField` to `ColorField`.
 
 Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. This operation subtracts the movieVector from the background. Takes the absolute value. Then `reduceSum` sums of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, we can distiguish the people moving around the courtyard, even the fluttering of the leaves, from the background.
 
@@ -127,7 +128,7 @@ Types of fields:
 * ComplexVectorField (a vector field with complex elements)
 * ColorField         (a field where each order-1 tensor is a pixel)
 
-Each field has a shape, a tensor shape, and an elementType. The field shape has a dimension. The tensor shape also  has a dimension, called an order.  CCT supports up to 3 dimensions and up to 3rd-order tensors.  Shapes are defined by layers, rows, and columns. A field with 3 dimensions has layers, rows, and columns. A field with 2 dimensions has rows and columns. For tensors, an order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The 3rd-order tensor is just called Tensor3 in CCT.  Tensors hold elements, which are defined by the ElementType, e.g. Float32. The complex fields have real and imaginary components, which are both floats. 
+Each field has a shape, a tensor shape, and an element type. The field shape has a dimension. The tensor shape also  has a dimension, called an order.  CCT supports up to 3 dimensions and up to 3rd-order tensors.  Shapes are defined by layers, rows, and columns. A field with 3 dimensions has layers, rows, and columns. A field with 2 dimensions has rows and columns. For tensors, an order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The 3rd-order tensor is just called `Tensor3` in CCT.  Tensors hold elements, which are defined by the `ElementType`, e.g. `Float32`. The complex fields have real and imaginary components, which are both floats. 
 
 Additional field types may be defined by the user.
 
@@ -145,7 +146,7 @@ This shows in the visual debugger as `ColorField( 720 480 )( 3 )`.
 
 The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`.
 
-The cct-tutorial directory libcog/fields contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields.
+The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields.
 
 ### Sensors
 
