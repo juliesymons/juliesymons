@@ -75,7 +75,7 @@ The "Cycle" value at the top shows how many steps have been taken, which in this
 
 The buttons in the top left allow you to control stepping through the graph. Clicking "Step 1" will add 1 to every point, which is 40,000 additions. Clicking "Run" with a "0" in the adjacent box, steps through the graph until "Stop" is clicked.  Clicking "Reset" resets the ComputeGraph fields back to their initial state.  
 
-* Note to Julie: the above was submitted to the main with changes to the names of the pngs (changed to multiple paragraphs for debugger) - maybe switch up order?
+* Note to Julie: the above was submitted to the main with changes to the names of the pngs (changed to multiple paragraphs for debugger) - maybe switch up order? - get my version to match what was submitted
 
 ### Example #2
 
@@ -105,13 +105,13 @@ The buttons in the top left allow you to control stepping through the graph. Cli
 It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and at this location in your IDE:
 `./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
 
-The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie' field is `ColorField` of 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most operations work on vector fields, not color fields.
+The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie` field is `ColorField` of 2 dimensions, 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most operations work on vector fields, not color fields.
 
-A `background` `VectorField` is created using the same shape, dimenstions, and order as the `movieVector`, 270x480x3. The background is learned over time from the frames of the courtyard movie with the use of the feedback operator, `<==`.  It takes about 1000 frames to stabilize. The background pixels at each position outweigh any temporary movement in the foreground. This calculation involves 2 constant multiplications and 1 addition.  
+The `VectorField` named `background`is created using the same shape, dimensions, and order as the `movieVector`, 270x480x3. The background is learned over time from the frames of the courtyard movie with the use of the feedback operator, `<==`.  It takes about 1000 frames to stabilize. The background pixels at each position outweigh any temporary movement in the foreground. This calculation involves two constant multiplications and one addition at each point.  
 
 The value `backgroundColor` isn't used. It is here to demonstrate how to convert from `VectorField` to `ColorField`.
 
-Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. This operation subtracts the movieVector from the background. Takes the absolute value. Then `reduceSum` sums of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, we can distiguish the people moving around the courtyard, even the fluttering of the leaves, from the background.
+Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. The calculation  is to subtract the movieVector from the background, take the absolute value, then apply `reduceSum` to sum of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, the application identifies the people moving around the courtyard, even the fluttering of the leaves, from the background.
 
 The last 3 lines use the `probe` API of the visual debugger. This is used to enable probing of these fields in the debugger.
 
@@ -173,7 +173,7 @@ desiredFramesPerSecond optional - to throttle back the speed, for example so mov
 
 pipelined, unpipelined - pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input
 
-which tutorial examples are relevant here 
+which tutorial examples are relevant here (add one?)
 
 
 ### Actuators
