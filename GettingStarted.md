@@ -1,17 +1,17 @@
 #Getting Started
 
-The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep learning and other advanced analytics. The **cct-tutorial** contains a number of examples from each of the repositories that comprise the Cognitive Computing Toolkit. This guide can be used to get an introduction to the platform.
+The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep learning and other advanced analytics. The **cct-tutorial** contains a number of examples from each of the repositories that comprise the Cognitive Computing Toolkit. This guide along with the examples in this tutorial can be used to get an introduction to the platform.
 
 *   [Intro](#intro)
 *   [Abstractions](#abstractions)
 *   [Introductory Examples](#introductory-examples)
 *   [Tensor Fields](#tensor-fields)
 *   [Operators](#operators)
-*   [The Compute Graph](#the-compute-graph)
+*   [The Compute Graph](#compute-graph)
+*   [Neural Network Toolkit](#neural-network-toolkit)
+*   [Programming CCT Applications](#programming-cct-applications)
 *   [Visual Debugger](#visual-debugger)
-*   Programming CCT Applications
-*   Neural Network Toolkit
-*   Other Tidbits
+*   [Other Tidbits](#other-tidbits)
 
 ## Intro
 
@@ -212,19 +212,24 @@ From above: The compute graph is a state machine, which evolves in discrete time
 The compute graph defines the inputs and outputs and all of the operations. can be embedded in and controlled by a conventional application.  It is the computation unit, all the operations performed on a frame, for example. 
  
 
+## Neural Network Toolkit
 
+* in each section point to good examples to look at 
+
+
+## Programming CCT Applications
+
+what can we plu here
 
 ## Visual Debugger
 
 go over its functionality
 
-## Programming CCT Applications
 
-what can we plut here
 
-## Neural Network Toolkit
 
-* in each section point to good examples to look at 
 
-## Debug Flags?
+## Other Tidbits
+
+Debug Flags?
 
