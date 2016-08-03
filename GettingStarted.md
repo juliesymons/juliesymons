@@ -4,11 +4,17 @@ The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep
 
 *   [Intro](#intro)
 *   [Abstractions](#abstractions)
+    *    [Tensor Fields](#tensor-fields)
+         *    [Sensors](#sensors)
+         *    [Actuators](#actuators)
+    *    [Operators](#operators)
+    *    [Compute Graph](#compute-graph)
 *   [Introductory Examples](#introductory-examples)
 *   [Neural Network Toolkit](#neural-network-toolkit)
 *   [Programming CCT Applications](#programming-cct-applications)
 *   [Visual Debugger](#visual-debugger)
 *   [Other Tidbits](#other-tidbits)
+
 
 ## Intro
 
