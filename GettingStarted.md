@@ -121,13 +121,13 @@ The **cct-nn** package also provides sensor APIs, such as `ByteDataSource`, used
 
 Actuators are *tensor fields* that are output from a *compute graph*.  The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files. Actuators are the complement of sensors.
 
-This tutorial has two Actuator examples. The simple example is the [ActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/actuators/AcuatorExample.scala), located at `libcog/actuators/ActuatorExample`.   
+This tutorial has two Actuator examples. The simple example is the [ActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/actuators/ActuatorExample.scala), located at `libcog/actuators/ActuatorExample`.   
 
 `val actuator = Actuator(field, actuatorData, (column) => 4 - column)`
 
 This one just defines an array to stash data from a field in the compute graph for printing out with each step of the compute graph.
 
-The second example, [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorAcuatorExample.scala), defines an actuator function which is a unit function that takes an `Iterator[Float]`. 
+The second example, [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorActuatorExample.scala), defines an actuator function which is a unit function that takes an `Iterator[Float]`. 
 
 
 what can we say about actuators - pipelined/unpipelined, special case for Color and Vector, 
