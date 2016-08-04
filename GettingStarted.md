@@ -125,19 +125,25 @@ This tutorial has two Actuator examples. The simple example is the [ActuatorExam
 
 `val actuator = Actuator(field, actuatorData, (column) => 4 - column)`
 
-This one just defines an array to stash data from a field in the compute graph for printing out with each step of the compute graph.
+This one just defines the `actuatorData` array to stash data from a `field` in the compute graph for printing out with each step of the compute graph. The third parameter defines the initial state of `actuator`.
 
-The second example, [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorActuatorExample.scala), defines an actuator function which is a unit function that takes an `Iterator[Float]`. 
+The second example, [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorActuatorExample.scala), defines an actuator function which is a unit function that takes an `Iterator[Float]`. This is a user-supplied callback function that is provided an iterator over the actuator's new data.
 
+`val printer = new Actuator(date, printIterator)`
 
-what can we say about actuators - pipelined/unpipelined, special case for Color and Vector, 
-* @param op The actuator opcode for this field.
-* @param source The scalar field driving this actuator.
-* @param update A user-supplied callback function that is provided an iterator over the actuator's new data.
-* @param resetHook An optional callback function that is called upon reset.
+where
 
+`val printIterator = (x:Iterator[Float]) => {
+    val hour = x.next().toInt
+    val minute = x.next().toInt
+    val second = x.next().toInt
+    println(s"Executing Actuator function. $hour:$minute:$second")
+  }`
 
-which tutorial examples are relevant here - `libcog/sensors/ScalarSensorActuatorExample` defines an actuator to do blah. `libcog/actuators/ActuatorExample`
+Actuators can be pipelined (default) or unpipelined. And there are special case actuators for color and vector fields. Like the sensor, you can provide an optional callback function that is called upon reset to set the actuator back to its initial state. 
+
+? does the source have to be a scalar field?? vanilla actuator is for scalar, `VectorActuator` or `ColorActuator` for VectorField or ColorField.
+
 
 
 ### Operators
