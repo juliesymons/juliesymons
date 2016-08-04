@@ -20,6 +20,11 @@ The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep
 
 The CCT platform is software platform for developing-massively parallel applications that execute on multi-core processors such as GPUs. CCT differs from most other parallel programming paradigms (such as MPI, actors, transactional memory) by exposing the parallelism implicitly in the programming model rather than through explicit mechanisms and data structures. The model contains no threads, locks, message queues, critical sections, or races. It is a deterministic, massively-parallel programming model. It is also a declarative dataflow programming model, meaning that a CCT application describes the structure of the computation, not sequential actions.
 
+For more detail, a draft of the CCT programming guide is available
+[here](http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf). Note that
+this is an early document, and still refers to CCT by its original internal
+working name (Cog ex Machina or Cog).
+
 ### Language
 
 CCT is written in the Scala programming language which runs on the Java Virtual Machine (JVM).
@@ -114,7 +119,15 @@ The **cct-nn** package also provides sensor APIs, such as `ByteDataSource`, used
 
 #### Actuators
 
-Actuators are *tensor fields* that are output from a *compute graph*.  The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files. Actuators are the complement of Sensors.
+Actuators are *tensor fields* that are output from a *compute graph*.  The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files. Actuators are the complement of sensors.
+
+This tutorial has two Actuator examples. The simple example is the [ActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/actuators/AcuatorExamples.scala), located at `libcog/actuators/ActuatorExample`.   
+
+`val actuator = Actuator(field, actuatorData, (column) => 4 - column)`
+
+This one just defines an array to stash data from a field in the compute graph for printing out with each step of the compute graph.
+
+The second example, [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorAcuatorExamples.scala), defines an actuator function which is a unit function that takes an `Iterator[Float]`. 
 
 
 what can we say about actuators - pipelined/unpipelined, special case for Color and Vector, 
@@ -140,6 +153,8 @@ which tutorial examples are relevant here - `libcog/sensors/ScalarSensorActuator
 From above: The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.
 
 The compute graph defines the inputs and outputs and all of the operations. can be embedded in and controlled by a conventional application.  It is the computation unit, all the operations performed on a frame, for example. 
+
+see the  `libcog/sensors/ScalarSensorActuatorExample` comments 
  
 ## Introductory Examples
 
