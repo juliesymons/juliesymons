@@ -133,12 +133,12 @@ The second example, [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct
 
 where
 
-`val printIterator = (x:Iterator[Float]) => {
-    val hour = x.next().toInt
-    val minute = x.next().toInt
-    val second = x.next().toInt
-    println(s"Executing Actuator function. $hour:$minute:$second")
-  }`
+`    val printIterator = (x:Iterator[Float]) => {
+         val hour = x.next().toInt
+         val minute = x.next().toInt
+         val second = x.next().toInt
+         println(s"Executing Actuator function. $hour:$minute:$second")
+      }`
 
 Actuators can be pipelined (default) or unpipelined. And there are special case actuators for color and vector fields. Like the sensor, you can provide an optional callback function that is called upon reset to set the actuator back to its initial state. 
 
