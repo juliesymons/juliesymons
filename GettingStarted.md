@@ -20,7 +20,7 @@ The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep
 
 The CCT platform is software platform for developing-massively parallel applications that execute on multi-core processors such as GPUs. CCT differs from most other parallel programming paradigms (such as MPI, actors, transactional memory) by exposing the parallelism implicitly in the programming model rather than through explicit mechanisms and data structures. The model contains no threads, locks, message queues, critical sections, or races. It is a deterministic, massively-parallel programming model. It is also a declarative dataflow programming model, meaning that a CCT application describes the structure of the computation, not sequential actions.
 
-For more detail, a draft of the CCT programming guide is available
+For more detailed information, a draft of the CCT programming guide is available
 [here](http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf). Note that
 this is an early document, and still refers to CCT by its original internal
 working name (Cog ex Machina or Cog).
@@ -131,7 +131,7 @@ The second example, [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct
 
 `val printer = new Actuator(date, printIterator)`
 
-where
+where `date` is a `Sensor` as defined above, and: 
 
      val printIterator = (x:Iterator[Float]) => {
          val hour = x.next().toInt
