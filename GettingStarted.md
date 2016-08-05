@@ -148,12 +148,22 @@ Actuators can be pipelined (default) or unpipelined. There are special case actu
 An *operator* combines one or more tensor fields to create a new tensor field. For example the + operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands.
 
 #### built-in operators
-* Basic
-* algabraic and transcendental
+* Basic (see the CogOperatorAPI)
+* algabraic and transcendental (see the CogFunctionAPI)
 * signal processing
 * cognitive models
 See operator api (add link) or appendix A? 
 where does convolve belong?
+
+
+* arithmetic + - * /
+* convolution
+* real unary - takes one real field, applied to each number component of each tensor in the field, or take a real field and a constant scalar to compute result by apply the operator to each tensor element independently, === and !===
+* real binary - take two real fields on the same shape to produce a result with the same shape (for one operand of 0D field shape and or 0D tensor shape) - replicated along the missing shape or dimension
+* complex operators
+* transformations
+* 
+
 
 #### feedback operator
 
