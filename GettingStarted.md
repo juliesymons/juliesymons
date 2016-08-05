@@ -145,11 +145,27 @@ Actuators can be pipelined (default) or unpipelined. There are special case actu
 
 ### Operators
 
-- built-in
-- feedback operator
-- user-defined GPU operators
-- user-defined CPU operators
+An *operator* combines one or more tensor fields to create a new tensor field. For example the + operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands.
 
+#### built-in operators
+* Basic
+* algabraic and transcendental
+* signal processing
+* cognitive models
+See operator api (add link) or appendix A? 
+where does convolve belong?
+
+#### feedback operator
+
+`<==`
+
+#### user-defined GPU operators
+
+`GPUOperator`
+
+#### user-defined CPU operators
+
+`Operator`
 
 ### Compute Graph
 
