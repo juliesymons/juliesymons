@@ -161,7 +161,7 @@ where does convolve belong?
 * real unary - takes one real field, applied to each number component of each tensor in the field, or take a real field and a constant scalar to compute result by apply the operator to each tensor element independently, === and !===
 * real binary - take two real fields on the same shape to produce a result with the same shape (for one operand of 0D field shape and or 0D tensor shape) - replicated along the missing shape or dimension
 * complex operators
-* transformations
+* transformations - stacking, slicing, trimming, expanding (borderPolicy - BorderZero, BorderClamp, BorderCyclic), shifting, warping, subfield, apply(Range), downsampling, upsampling
 * 
 
 
