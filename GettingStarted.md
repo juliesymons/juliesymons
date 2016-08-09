@@ -90,7 +90,7 @@ In the `BackgroundSubtraction` example, the `movie` field has the following:
 
 This shows in the visual debugger as `ColorField( 720 480 )( 3 )`.
 
-The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`.
+The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`. Color fields are arithmetically incompatible with all other field types since their element type (color pixel) is non-numeric. If you want to perform operators on color fields you must first explicitly cast them as vector fields by using colorField.toVectorField.
 
 The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields. 
 
@@ -145,24 +145,26 @@ Actuators can be pipelined (default) or unpipelined. There are special case actu
 
 ### Operators
 
-An *operator* combines one or more tensor fields to create a new tensor field. For example the + operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands.
+All field operations are expresses using oeprators. An *operator* combines one or more tensor fields to create a new tensor field. 
+
+For example the + operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands.
 
 #### built-in operators
-* Basic (see the CogOperatorAPI)
+* basic, such as + - *, for more see the CogOperatorAPI)
 * algabraic and transcendental (see the CogFunctionAPI)
 * signal processing
 * cognitive models
 See operator api (add link) or appendix A? 
 where does convolve belong?
 
-
-* arithmetic + - * /
 * convolution
 * real unary - takes one real field, applied to each number component of each tensor in the field, or take a real field and a constant scalar to compute result by apply the operator to each tensor element independently, === and !===
 * real binary - take two real fields on the same shape to produce a result with the same shape (for one operand of 0D field shape and or 0D tensor shape) - replicated along the missing shape or dimension
 * complex operators
 * transformations - stacking, slicing, trimming, expanding (borderPolicy - BorderZero, BorderClamp, BorderCyclic), shifting, warping, subfield, apply(Range), downsampling, upsampling
 * 
+
+paragraph
 
 
 #### feedback operator
