@@ -135,7 +135,7 @@ Then finally we can calculate the `suspicious` activity, which is any activity t
 
 The last 3 lines use the `probe` API of the visual debugger. This is used to enable probing of these fields in the debugger.
 
-### Tensor Fields
+## Tensor Fields
 
 In CCT, fields (or *tensor fields*) are the primary data structures used for input and output data, computation, and persistent state. 
 A *tensor field* is a multidimensional array of multidimensional arrays of numbers. A *tensor* is a multidimensional array. Thus, a *tensor field* is a multidimensional array of tensors. 
@@ -168,7 +168,7 @@ The `ColorField` is a special case of the `VectorField`. The VectorField version
 
 The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields. 
 
-#### Sensors
+### Sensors
 
 Sensors are inputs to *tensor fields* from external data streams, such as a video camera or a file, into a *compute graph*. The sensor can feed a frame from a video camera as a tensor field for computation within a compute graph. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
 
@@ -191,7 +191,7 @@ Sensors can be pipelined or unpipelined. Pipelined sensors use the CPU to produc
 
 The **cct-nn** package also provides sensor APIs, such as `ByteDataSource`, used for reading binary files. There is also a `RandomSource` API, for generating random data. Several examples in the `toolkit/neuralnetwork/` directory use these APIs to read the MNIST training dataset and labels.
 
-#### Actuators
+### Actuators
 
 Actuators are *tensor fields* that are output from a *compute graph*.  The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files. Actuators are the complement of sensors.
 
@@ -217,13 +217,13 @@ where `date` is a `Sensor` as defined above, and:
 Actuators can be pipelined (default) or unpipelined. There are special case actuators, `VectorActuator` or `ColorActuator`, for vevctor and color. And like the sensor, you can provide an optional callback function that is invoked upon reset to set the actuator back to its initial state. 
 
 
-### Operators
+## Operators
 
 All field operations are expresses using oeprators. An *operator* combines one or more tensor fields to create a new tensor field. 
 
 For example the + operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands.
 
-#### built-in operators
+### built-in operators
 * basic, such as + - *, for more see the CogOperatorAPI)
 * algabraic and transcendental (see the CogFunctionAPI)
 * signal processing
@@ -241,19 +241,19 @@ where does convolve belong?
 paragraph
 
 
-#### feedback operator
+### feedback operator
 
 `<==`
 
-#### user-defined GPU operators
+### user-defined GPU operators
 
 `GPUOperator`
 
-#### user-defined CPU operators
+### user-defined CPU operators
 
 `Operator`
 
-### Compute Graph
+## Compute Graph
 
 From above: The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.
 
