@@ -4,12 +4,13 @@ The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep
 
 *   [Intro](#intro)
 *   [Abstractions](#abstractions)
-    *    [Tensor Fields](#tensor-fields)
-         *    [Sensors](#sensors)
-         *    [Actuators](#actuators)
-    *    [Operators](#operators)
-    *    [Compute Graph](#compute-graph)
 *   [Introductory Examples](#introductory-examples)
+*   [Tensor Fields](#tensor-fields)
+      *    [Sensors](#sensors)
+         *    cogio
+      *    [Actuators](#actuators)
+*   [Operators](#operators)
+*   [Compute Graph](#compute-graph)
 *   [Neural Network Toolkit](#neural-network-toolkit)
 *   [Programming CCT Applications](#programming-cct-applications)
 *   [Visual Debugger](#visual-debugger)
@@ -59,7 +60,80 @@ Using these simple abstractions, the CCT compiler optimizes the computation acro
 ![CCT Compute Graph](doc/cctComputeGraph.png)
 </center>
 
+## Introductory Examples
 
+### Example #1
+`Counter` is a very simple example. Here is the code:
+
+    package tutorial.libcog.fields
+
+    import cogdebugger._
+    import libcog._
+    
+    object Counter extends CogDebuggerApp(
+      new ComputeGraph {
+        val counter = ScalarField(200, 200)
+        counter <== counter + 1
+      }
+    )
+
+
+It can also be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) and at this location  in your IDE: `./cct-tutorial/src/scala/tutorial/libcog/fields/Counter.scala`.
+
+This program defines one field, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It uses the feedback operator `<==` to increment itself by 1 with each clock tick or step.
+
+This next figure shows `Counter` running in the visual debugger. 
+
+
+<center>
+![cogdebugger running Counter](doc/cctVisualDebugger.png)
+</center>
+
+The visual debugger is a graphical tool that allows you to step, reset, and "peek inside" a `ComputeGraph` to visualize the computation while it executes. Clicking on the blue box labeled "counter" in the left pane, opens the "counter" window in the right-pane (as shown here). The "counter" window on the right shows that the "counter" field is a ScalarField with a size of 200x200. Placing the cursor over a point in the field will momentarily bring up a tooltip displaying the coordinates and value at that point. In this case, value is "1.0" at the location (1,2) after stepping through the graph one time. 
+
+The "Cycle" value at the top shows how many steps have been taken, which in this case is "1". All 40,000 points have a value of "1" after 1 cycle. 
+
+The buttons in the top left allow you to control stepping through the graph. Clicking "Step 1" will add 1 to every point, which is 40,000 additions. Clicking "Run" with a "0" in the adjacent box, steps through the graph until "Stop" is clicked.  Clicking "Reset" resets the ComputeGraph fields back to their initial state.  
+
+* Note to Julie: the above was submitted to the main with changes to the names of the pngs (changed to multiple paragraphs for debugger) - maybe switch up order? - get my version to match what was submitted
+
+### Example #2
+
+`BackgroundSubtraction` is a good example to illustrate several more concepts covered in this tutorial. Here is the code:
+
+    package tutorial.cogio
+
+    import cogdebugger.CogDebuggerApp
+    import cogio._
+    import libcog._
+
+    object BackgroundSubtraction extends CogDebuggerApp (
+      new ComputeGraph {
+        val movieFile = "resources/courtyard.mp4"
+        val movie = ColorMovie(movieFile, synchronous = false)
+        val movieVector = vectorField(movie)
+        val background = VectorField(movie.fieldShape, Shape(3))
+        background <== 0.999f*background + 0.001f*movieVector
+        val backgroundColor = colorField(background)
+        val suspicious = reduceSum(abs(background - movieVector))
+        probe(movie)
+        probe(background)
+        probe(suspicious)
+      }
+    )
+
+It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and at this location in your IDE:
+`./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
+
+The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie` field is `ColorField` of 2 dimensions, 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most operations work on vector fields, not color fields.
+
+The `VectorField` named `background`is created using the same shape, dimensions, and order as the `movieVector`, 270x480x3. The background is learned over time from the frames of the courtyard movie with the use of the feedback operator, `<==`.  It takes about 1000 frames to stabilize. The background pixels at each position outweigh any temporary movement in the foreground. This calculation involves two constant multiplications and one addition at each point.  
+
+The value `backgroundColor` isn't used. It is here to demonstrate how to convert from `VectorField` to `ColorField`.
+
+Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. The calculation  is to subtract the movieVector from the background, take the absolute value, then apply `reduceSum` to sum of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, the application identifies the people moving around the courtyard, even the fluttering of the leaves, from the background.
+
+The last 3 lines use the `probe` API of the visual debugger. This is used to enable probing of these fields in the debugger.
 
 ### Tensor Fields
 
@@ -187,80 +261,7 @@ The compute graph defines the inputs and outputs and all of the operations. can 
 
 see the  `libcog/sensors/ScalarSensorActuatorExample` comments 
  
-## Introductory Examples
 
-### Example #1
-`Counter` is a very simple example. Here is the code:
-
-    package tutorial.libcog.fields
-
-    import cogdebugger._
-    import libcog._
-    
-    object Counter extends CogDebuggerApp(
-      new ComputeGraph {
-        val counter = ScalarField(200, 200)
-        counter <== counter + 1
-      }
-    )
-
-
-It can also be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) and at this location  in your IDE: `./cct-tutorial/src/scala/tutorial/libcog/fields/Counter.scala`.
-
-This program defines one field, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It uses the feedback operator `<==` to increment itself by 1 with each clock tick or step.
-
-This next figure shows `Counter` running in the visual debugger. 
-
-
-<center>
-![cogdebugger running Counter](doc/cctVisualDebugger.png)
-</center>
-
-The visual debugger is a graphical tool that allows you to step, reset, and "peek inside" a `ComputeGraph` to visualize the computation while it executes. Clicking on the blue box labeled "counter" in the left pane, opens the "counter" window in the right-pane (as shown here). The "counter" window on the right shows that the "counter" field is a ScalarField with a size of 200x200. Placing the cursor over a point in the field will momentarily bring up a tooltip displaying the coordinates and value at that point. In this case, value is "1.0" at the location (1,2) after stepping through the graph one time. 
-
-The "Cycle" value at the top shows how many steps have been taken, which in this case is "1". All 40,000 points have a value of "1" after 1 cycle. 
-
-The buttons in the top left allow you to control stepping through the graph. Clicking "Step 1" will add 1 to every point, which is 40,000 additions. Clicking "Run" with a "0" in the adjacent box, steps through the graph until "Stop" is clicked.  Clicking "Reset" resets the ComputeGraph fields back to their initial state.  
-
-* Note to Julie: the above was submitted to the main with changes to the names of the pngs (changed to multiple paragraphs for debugger) - maybe switch up order? - get my version to match what was submitted
-
-### Example #2
-
-`BackgroundSubtraction` is a good example to illustrate several more concepts covered in this tutorial. Here is the code:
-
-    package tutorial.cogio
-
-    import cogdebugger.CogDebuggerApp
-    import cogio._
-    import libcog._
-
-    object BackgroundSubtraction extends CogDebuggerApp (
-      new ComputeGraph {
-        val movieFile = "resources/courtyard.mp4"
-        val movie = ColorMovie(movieFile, synchronous = false)
-        val movieVector = vectorField(movie)
-        val background = VectorField(movie.fieldShape, Shape(3))
-        background <== 0.999f*background + 0.001f*movieVector
-        val backgroundColor = colorField(background)
-        val suspicious = reduceSum(abs(background - movieVector))
-        probe(movie)
-        probe(background)
-        probe(suspicious)
-      }
-    )
-
-It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and at this location in your IDE:
-`./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
-
-The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie` field is `ColorField` of 2 dimensions, 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most operations work on vector fields, not color fields.
-
-The `VectorField` named `background`is created using the same shape, dimensions, and order as the `movieVector`, 270x480x3. The background is learned over time from the frames of the courtyard movie with the use of the feedback operator, `<==`.  It takes about 1000 frames to stabilize. The background pixels at each position outweigh any temporary movement in the foreground. This calculation involves two constant multiplications and one addition at each point.  
-
-The value `backgroundColor` isn't used. It is here to demonstrate how to convert from `VectorField` to `ColorField`.
-
-Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. The calculation  is to subtract the movieVector from the background, take the absolute value, then apply `reduceSum` to sum of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, the application identifies the people moving around the courtyard, even the fluttering of the leaves, from the background.
-
-The last 3 lines use the `probe` API of the visual debugger. This is used to enable probing of these fields in the debugger.
 
 ## Neural Network Toolkit
 
