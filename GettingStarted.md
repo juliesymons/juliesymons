@@ -52,7 +52,7 @@ The CCT programming model has three core abstractions: *tensor fields*, *operato
 * An *operator* combines one or more tensor fields to create a new tensor field. 
 * A *compute graph* combines tensor fields and operators into a single, massively-parallel unit of computation. 
  
-The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.
+The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and *fed back* into the compute graph at the next step, providing control loops and learning.
 
 Using these simple abstractions, the CCT compiler optimizes the computation across operators and can distribute the work efficiently to scale from one CPU to clusters with millions of GPU cores.
 
@@ -61,6 +61,8 @@ Using these simple abstractions, the CCT compiler optimizes the computation acro
 </center>
 
 ## Introductory Examples
+
+Here are a couple of simple examples to get started with.  
 
 ### Example #1
 `Counter` is a very simple example. Here is the code:
@@ -94,8 +96,6 @@ The visual debugger is a graphical tool that allows you to step, reset, and "pee
 The "Cycle" value at the top shows how many steps have been taken, which in this case is "1". All 40,000 points have a value of "1" after 1 cycle. 
 
 The buttons in the top left allow you to control stepping through the graph. Clicking "Step 1" will add 1 to every point, which is 40,000 additions. Clicking "Run" with a "0" in the adjacent box, steps through the graph until "Stop" is clicked.  Clicking "Reset" resets the ComputeGraph fields back to their initial state.  
-
-* Note to Julie: the above was submitted to the main with changes to the names of the pngs (changed to multiple paragraphs for debugger) - maybe switch up order? - get my version to match what was submitted
 
 ### Example #2
 
