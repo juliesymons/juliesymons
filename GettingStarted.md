@@ -176,8 +176,6 @@ The tutorial examples in `libcog/tensors` demonstrate the creation and use of th
 
 Sensors are inputs to *tensor fields* from external data streams, such as a video camera or a file, into a *compute graph*. The sensor can feed a frame from a video camera as a tensor field for computation within a compute graph. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
 
-In the `BackgroundSubtraction` example, the `ColorMovie` API from `cogio` feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. Other examples in the `cogio` folder of the tutorial illustrate APIs for reading movie files (in color or grayscale), a variety of image file formats, a webcam, and binary files. 
-
 The `libcog/sensors/ScalarSensorActuatorExample` in the tutorial illustrates how to implement a scalar sensor and actuator using
 scala iterators and functions. Find it here: [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorActuatorExample.scala).
 
@@ -192,6 +190,12 @@ The `Sensor` constructor take a a parameterless function, which returns an `Opti
 * desiredFramesPerSecond (optional) - to throttle back the speed; for example, so that a movie is played at an appropriate speed.
 
 Sensors can be pipelined or unpipelined. Pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input. Pipelined sensors are the default. The class `UnpipelinedSensor` is used for unpipelined sensor, which does the work in series, first on the CPU, then the GPU at each step. And unlike the pipelined sensor, it must always return a nextValue. The **cct-core** library also contains sensor classes specifically for Vector and Color fields.
+
+#### Cogio Sensors
+
+In the `BackgroundSubtraction` example, the `ColorMovie` API from `cogio` feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. Other examples in the `cogio` folder of the tutorial illustrate APIs for reading movie files (in color or grayscale), a variety of image file formats, a webcam, and binary files. 
+
+#### cct-nn Sensors
 
 The **cct-nn** package also provides sensor APIs, such as `ByteDataSource`, used for reading binary files. There is also a `RandomSource` API, for generating random data. Several examples in the `toolkit/neuralnetwork/` directory use these APIs to read the MNIST training dataset and labels.
 
