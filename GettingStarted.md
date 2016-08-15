@@ -230,10 +230,13 @@ Actuators can be pipelined (default) or unpipelined. There are special case actu
 All field operations are expressed using operators. An *operator* combines one or more tensor fields to create a new tensor field. 
 
 For example, the `+` operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands. The `*` operator can be used to multiply every element in a matrix by a constant 2. The tutorial at `libcog/operators/Algebraic.scala` shows some of these simple algebraic operators. 
-     
+
     + - * / %
 
-Comparison operators see `libcog/operators/Comparison.scala` (these along with algebraic, comparison, feedback, and outer product are defined in CogOperatorAPI)
+For the comparison operators, such as `>=`, see tutorial example `libcog/operators/Comparison.scala`. Note, the equality and inequality operators in cct are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the *cct-core* CogOperatorAPI.
+
+The *cct-core* library has many other built in operators. These are defined in the CogFunctionAPI. 
+
 
 other built-in operators from CogFunctionAPI
 * transcendental (non algebraic - exp, log, trig)
