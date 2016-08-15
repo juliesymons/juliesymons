@@ -235,26 +235,9 @@ For example, the `+` operator can be used to combine two tensor fields with the 
 
 For the comparison operators, such as `>=`, see tutorial example `libcog/operators/Comparison.scala`. Note, the equality and inequality operators in cct are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the *cct-core* CogOperatorAPI.
 
-The *cct-core* library has many other built in operators. This includes transcendental operators, complex operators, transformations, convolutions, operators for signal processing and cognitive models. These are defined in the CogFunctionAPI. Examples include Trigonometric, MinMax.
+The *cct-core* library has many other built-in operators. This includes transcendental operators, complex operators, transformations, convolutions, operators for signal processing and cognitive models. These are defined in the CogFunctionAPI. 
 
-`Complex.scala` shows use of the complex operators, such as `fft`.
-
-`Unary.scala` these take one (or two) input tensor field and output a tensor field field of the same size
-* real unary - takes one real field, applied to each number component of each tensor in the field, or take a real field and a constant scalar to compute result by apply the operator to each tensor element independently, === and !===
-
-other built-in operators from CogFunctionAPI
-* transcendental (non algebraic - exp, log, trig)
-* signal processing
-* cognitive models
-See operator api (add link) or appendix A? 
-where does convolve belong?
-
-* convolution and border policies for applying filters - see convolve
-* 
-
-* real binary - take two real fields on the same shape to produce a result with the same shape (for one operand of 0D field shape and or 0D tensor shape) - replicated along the missing shape or dimension
-
-* transformations - stacking, slicing, trimming, expanding (borderPolicy - BorderZero, BorderClamp, BorderCyclic), shifting, warping, subfield, apply(Range), downsampling, upsampling
+Examples in this tutorial include `Trigonometric.scala` and `MinMax.scala`. `Complex.scala` shows use of the operators, such as `fft`, on complex fields. The `Convolve.scala` tutorial shows convolution and cross-correlation.  The `DotProduct.scala` example shows some of the dot product functions.  Several tutorial examples show transformation operations, such as indexing, field and tensor reductions, reshaping, downsampling and upsampling. `MatrixOps.scala` shows a few matrix operations. And `CentralGradient_BackwardDivergence.scala` is an example demonstrating the use of the central gradient, forward gradient, and its adjoint - the backward divergence operator.
 
 
 
