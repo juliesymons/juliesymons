@@ -225,12 +225,11 @@ where `date` is a `Sensor` as defined above, and:
 
 Actuators can be pipelined (default) or unpipelined. There are special case actuators, `VectorActuator` or `ColorActuator`, for vevctor and color. And like the sensor, you can provide an optional callback function that is invoked upon reset to set the actuator back to its initial state. 
 
-
 ## Operators
 
 All field operations are expresses using oeprators. An *operator* combines one or more tensor fields to create a new tensor field. 
 
-For example the + operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands.
+For example, the `+` operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands. Or the `*` operator can be used to multiply every element in a matrix by a constant 2. The tutorial at `libcog/operators/Algebraic` shows some of the simple algebraic operators.
 
 ### built-in operators
 * basic, such as + - *, for more see the CogOperatorAPI)
