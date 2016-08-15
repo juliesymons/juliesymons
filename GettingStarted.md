@@ -56,6 +56,8 @@ The compute graph is a state machine, which evolves in discrete time. A single t
 
 Using these simple abstractions, the CCT compiler optimizes the computation across operators and can distribute the work efficiently to scale from one CPU to clusters with millions of GPU cores.
 
+The next section shows two examples, then the following sections drill down with more details on each of these abstractions.
+
 <center>
 ![CCT Compute Graph](doc/cctComputeGraph.png)
 </center>
@@ -164,9 +166,11 @@ In the `BackgroundSubtraction` example, the `movie` field has the following:
 
 This shows in the visual debugger as `ColorField( 720 480 )( 3 )`.
 
-The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`. Color fields are arithmetically incompatible with all other field types since their element type (color pixel) is non-numeric. If you want to perform operators on color fields you must first explicitly cast them as vector fields by using colorField.toVectorField.
+The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`. Color fields are arithmetically incompatible with all other field types since their element type (color pixel) is non-numeric. If you want to perform operators on color fields you must first explicitly cast them as vector fields by using `colorField.toVectorField` or `vectorField`.
 
-The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. `CombiningFields` shows the various legal combinations of different fields. 
+The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. For example, `CombiningFields` shows the various legal combinations of different fields. 
+
+The tutorial examples in `libcog/tensors` demonstrate the creation and use of the Vector and Matrix types, including generating random data for a vector and taking the dot product of two vectors.
 
 ### Sensors
 
