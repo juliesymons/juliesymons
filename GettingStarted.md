@@ -227,7 +227,7 @@ Actuators can be pipelined (default) or unpipelined. There are special case actu
 
 ## Operators
 
-All field operations are expresses using oeprators. An *operator* combines one or more tensor fields to create a new tensor field. 
+All field operations are expresses using operators. An *operator* combines one or more tensor fields to create a new tensor field. 
 
 For example, the `+` operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands. Or the `*` operator can be used to multiply every element in a matrix by a constant 2. The tutorial at `libcog/operators/Algebraic` shows some of the simple algebraic operators.
 
