@@ -7,7 +7,7 @@ The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep
 *   [Introductory Examples](#introductory-examples)
 *   [Tensor Fields](#tensor-fields)
       *    [Sensors](#sensors)
-         *    [cogio Sensors](#cogio-sensors)
+         *    [cct-io Sensors](#cct-io-sensors)
          *    [cct-nn Sensors](#cct-nn-sensors)
       *    [Actuators](#actuators)
 *   [Operators](#operators)
@@ -192,7 +192,7 @@ The `Sensor` constructor take a a parameterless function, which returns an `Opti
 
 Sensors can be pipelined or unpipelined. Pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input. Pipelined sensors are the default. The class `UnpipelinedSensor` is used for unpipelined sensor, which does the work in series, first on the CPU, then the GPU at each step. And unlike the pipelined sensor, it must always return a nextValue. The **cct-core** library also contains sensor classes specifically for Vector and Color fields.
 
-#### cogio Sensors
+#### cct-io Sensors
 
 The `cogio` folder of the tutorial has examples that use the Sensors provided by the `cogio` library. The sensors used in these tutorials include ColorImage, ColorMovie, GrayscalMovie, ColorWebcam,  For example, the `BackgroundSubtraction` example, the `ColorMovie` Sensor API feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. The `cogio` library also supports a variety of image file formats and binary files. 
 
