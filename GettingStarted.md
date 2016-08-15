@@ -229,29 +229,31 @@ Actuators can be pipelined (default) or unpipelined. There are special case actu
 
 All field operations are expressed using operators. An *operator* combines one or more tensor fields to create a new tensor field. 
 
-For example, the `+` operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands. The `*` operator can be used to multiply every element in a matrix by a constant 2. The tutorial at `libcog/operators/Algebraic.scala` shows some of these simple algebraic operators. 
+### Built-in Operators
 
-`+ - * / %`
+For example, the `+` operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands. The `*` operator can be used to multiply every element in a matrix by a constant 2. The tutorial at `libcog/operators/Algebraic.scala` shows the use of a few of the algebraic operators. 
+
+The algebraic operators: `+ - * / %`
 
 For the comparison operators, such as `>=`, see tutorial example `libcog/operators/Comparison.scala`. Note, the equality and inequality operators in cct are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the *cct-core* CogOperatorAPI.
 
 The *cct-core* library has many other built-in operators. This includes transcendental operators, complex operators, transformations, convolutions, operators for signal processing and cognitive models. These are defined in the CogFunctionAPI. 
 
-Examples in this tutorial include `Trigonometric.scala` and `MinMax.scala`. `Complex.scala` shows use of the operators, such as `fft`, on complex fields. The `Convolve.scala` tutorial shows convolution and cross-correlation.  The `DotProduct.scala` example shows some of the dot product functions.  Several tutorial examples show transformation operations, such as indexing, field and tensor reductions, reshaping, downsampling and upsampling. `MatrixOps.scala` shows a few matrix operations. And `CentralGradient_BackwardDivergence.scala` is an example demonstrating the use of the central gradient, forward gradient, and its adjoint - the backward divergence operator.
+Examples of operators in this tutorial include `Trigonometric.scala` and `MinMax.scala`. `Complex.scala` shows use of the operators on complex fields, such as `fft`. The `Convolve.scala` tutorial shows convolution and cross-correlation.  The `DotProduct.scala` example shows some of the dot product functions.  Several tutorial examples show transformation operations, such as indexing, field and tensor reductions, reshaping, downsampling and upsampling. `MatrixOps.scala` shows a few matrix operations. And `CentralGradient_BackwardDivergence.scala` is an example demonstrating the use of the central gradient, forward gradient, and its adjoint - the backward divergence operator.
 
-
-
-### feedback operator
+### The Feedback Operator
 
 `<==`
 
 explain, and mention which tutorial to see
 
-### user-defined GPU operators
+
+
+### User-defined GPU Operators
 
 `GPUOperator`
 
-### user-defined CPU operators
+### User-defined CPU Operators
 
 `Operator`
 
