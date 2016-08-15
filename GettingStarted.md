@@ -235,8 +235,12 @@ For example, the `+` operator can be used to combine two tensor fields with the 
 
 For the comparison operators, such as `>=`, see tutorial example `libcog/operators/Comparison.scala`. Note, the equality and inequality operators in cct are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the *cct-core* CogOperatorAPI.
 
-The *cct-core* library has many other built in operators. These are defined in the CogFunctionAPI. 
+The *cct-core* library has many other built in operators. This includes transcendental operators, complex operators, transformations, convolutions, operators for signal processing and cognitive models. These are defined in the CogFunctionAPI. Examples include Trigonometric, MinMax.
 
+`Complex.scala` shows use of the complex operators, such as `fft`.
+
+`Unary.scala` these take one (or two) input tensor field and output a tensor field field of the same size
+* real unary - takes one real field, applied to each number component of each tensor in the field, or take a real field and a constant scalar to compute result by apply the operator to each tensor element independently, === and !===
 
 other built-in operators from CogFunctionAPI
 * transcendental (non algebraic - exp, log, trig)
@@ -245,19 +249,20 @@ other built-in operators from CogFunctionAPI
 See operator api (add link) or appendix A? 
 where does convolve belong?
 
-* convolution
-* real unary - takes one real field, applied to each number component of each tensor in the field, or take a real field and a constant scalar to compute result by apply the operator to each tensor element independently, === and !===
-* real binary - take two real fields on the same shape to produce a result with the same shape (for one operand of 0D field shape and or 0D tensor shape) - replicated along the missing shape or dimension
-* complex operators
-* transformations - stacking, slicing, trimming, expanding (borderPolicy - BorderZero, BorderClamp, BorderCyclic), shifting, warping, subfield, apply(Range), downsampling, upsampling
+* convolution and border policies for applying filters - see convolve
 * 
 
-paragraph
+* real binary - take two real fields on the same shape to produce a result with the same shape (for one operand of 0D field shape and or 0D tensor shape) - replicated along the missing shape or dimension
+
+* transformations - stacking, slicing, trimming, expanding (borderPolicy - BorderZero, BorderClamp, BorderCyclic), shifting, warping, subfield, apply(Range), downsampling, upsampling
+
 
 
 ### feedback operator
 
 `<==`
+
+explain, and mention which tutorial to see
 
 ### user-defined GPU operators
 
