@@ -231,7 +231,7 @@ All field operations are expressed using operators. An *operator* combines one o
 
 For example, the `+` operator can be used to combine two tensor fields with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands. The `*` operator can be used to multiply every element in a matrix by a constant 2. The tutorial at `libcog/operators/Algebraic.scala` shows some of these simple algebraic operators. 
      
-    `+ - * / %`
+    + - * / %
 
 Comparison operators see `libcog/operators/Comparison.scala` (these along with algebraic, comparison, feedback, and outer product are defined in CogOperatorAPI)
 
