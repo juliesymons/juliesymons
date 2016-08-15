@@ -175,7 +175,7 @@ The tutorial examples in `libcog/tensors` demonstrate the creation and use of th
 
 ### Sensors
 
-Sensors are inputs to *tensor fields* from external data streams, such as a video camera or a file. The sensor can feed a frame from a video camera as a *tensor field* for computation within a *compute graph*. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
+Sensors are inputs to *tensor fields* from external data streams, such as a video camera or a file. For example, the sensor feeds a frame, or batch of frames, from a video camera as a *tensor field* for computation within a *compute graph* at each tick. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
 
 The `libcog/sensors/ScalarSensorActuatorExample` in the tutorial illustrates how to implement a scalar sensor and actuator using
 scala iterators and functions. Find it here: [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorActuatorExample.scala).
