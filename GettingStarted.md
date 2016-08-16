@@ -91,7 +91,7 @@ Here are two examples to get started with.
 
 It can also be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) and at this location  in your IDE: `./cct-tutorial/src/scala/tutorial/libcog/fields/Counter.scala`.
 
-This program defines one *tensor field*, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It uses the feedback *operator* `<==` to increment itself by 1 with each clock tick or step. And it is wrapped into a *compute graph*.
+This program defines one *tensor field*, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It uses the feedback *operator* `<==` to increment itself by 1 with each clock tick (or step) of the *compute graph*.
 
 This next figure shows `Counter` running in the visual debugger. 
 
