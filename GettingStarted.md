@@ -39,7 +39,7 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 The CCT platform consists of several libraries, each contained in separate github repositories, under the `hpe-cct` root directory. The **cct-tutorial** has dependencies on these libraries.
 
-**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The cct-core library also contains the visual debugger, *cogdebugger*. 
+**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The **cct-core** library also contains the visual debugger, `cogdebugger`, though it is in a separate package. 
 
 **cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read an image file or movie file. This package is currently imported into some of the tutorial examples as `cogio`.
 
