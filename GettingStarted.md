@@ -184,13 +184,14 @@ The tutorial examples in `libcog/tensors` demonstrate the creation and use of th
 Sensors are inputs to *tensor fields* from external data streams, such as a video camera or a file. For a video camera, the sensor feeds one frame (or batch of frames) as a *tensor field* at each step of the *compute graph* for computation. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
 
 The `libcog/sensors/ScalarSensorActuatorExample` in the tutorial illustrates how to implement a scalar sensor and actuator using
-scala iterators and functions. Find it here: [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorActuatorExample.scala).
+Scala iterators and functions. Find it here: [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorActuatorExample.scala).
 
+Here's the constructor of a new sensor:
 `val date = new Sensor(Shape(3), getTime)`
 
-The `Sensor` constructor take a a parameterless function, which returns an `Option[Iterator[Float]]`. In this example, it is the `getTime` function.
+The `Sensor` constructor take a parameterless function, which returns an `Option[Iterator[Float]]`. In this example, the function is `getTime`.
 
-`Sensor` parameters:
+`Sensor` constructor parameters are:
 * `fieldShape`
 * `nextValue`  - optional iterator, next field in row-major order, can return `None`.
 * `resetHook` - reset to initial value, this can be empty.
