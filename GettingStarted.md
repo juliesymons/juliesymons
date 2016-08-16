@@ -57,11 +57,11 @@ The CCT programming model has three core abstractions: *tensor fields*, *operato
 * An *operator* combines one or more *tensor fields* to create a new *tensor field*. 
 * A *compute graph* combines *tensor fields* and *operators* into a single, massively-parallel unit of computation. 
  
-The *compute graph* is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire *compute graph* to its outputs. Persistent state, for learning and adaptation, is handled using feedback. The state of a field can be updated at each step and fed back into the *compute graph* at the next step, providing control loops and learning.
+The *compute graph* is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire *compute graph* to its outputs. Persistent state, for learning and adaptation, is handled using feedback. The state of a *tensor field* can be updated at each step and fed back into the *compute graph* at the next step, providing control loops and learning.
 
-Using these simple abstractions, the CCT compiler optimizes the computation across operators and can distribute the work efficiently to scale from one CPU to clusters with millions of GPU cores.
+Using these simple abstractions, the CCT compiler optimizes the computation across *operators* and can distribute the work efficiently to scale from one CPU to clusters with millions of GPU cores.
 
-The next section shows two examples, then the following sections drill down with more details on each of these abstractions.
+The next section shows two simple examples to illustrate the basic abstractions. The following sections drill down with more details on each of these abstractions.
 
 <center>
 ![CCT Compute Graph](doc/cctComputeGraph.png)
