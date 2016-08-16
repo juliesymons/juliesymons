@@ -102,7 +102,7 @@ This next figure shows `Counter` running in the visual debugger.
 
 The visual debugger is a graphical tool that allows you to step, reset, and "peek inside" a `ComputeGraph` to visualize the computation while it executes. 
 
-Referring to the figure above, one can click on the blue box labeled "counter" in the left pane to open the "counter" window in the right-pane (as shown here). The "counter" window on the right shows that the "counter" field is a `ScalarField` with a size of 200x200. Placing the cursor over a point in the field will momentarily bring up a tooltip displaying the coordinates and value at that point. In this case, value is "1.0" at the location (1,2) after stepping through the *compute graph* one time. 
+Referring to the figure above, one can click on the blue box labeled "counter" in the left pane to open the "counter" window in the right-pane (as shown here). The "counter" window on the right shows that the "counter" field is a `ScalarField` with a size of 200 by 200. Placing the cursor over a point in the field momentarily brings up a tooltip displaying the coordinates and value at that point. In this case, value is "1.0" at the location (1,2) after stepping through the *compute graph* one time. 
 
 The "Cycle" value at the top shows how many steps have been taken, which in this case is "1". All 40,000 points have a value of "1" after 1 cycle. 
 
@@ -110,7 +110,7 @@ The buttons at the top left allow you to control stepping through the *compute g
 
 ### Example #2
 
-`BackgroundSubtraction` is a good example to illustrate several more concepts covered in this tutorial. Here is the code:
+`BackgroundSubtraction` is another good example to illustrate several more concepts covered in this tutorial. Here is the code:
 
     package tutorial.cogio
 
@@ -136,7 +136,7 @@ The buttons at the top left allow you to control stepping through the *compute g
 It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and at this location in your IDE:
 `./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
 
-The input is an mpeg movie file. The `ColorMovie` API from cct-io opens the file, creates a sensor, and feeds one frame into the sensor for each step of the compute graph. The `movie` field is `ColorField` of 2 dimensions, 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most operations work on vector fields, not color fields.
+The input is an mpeg movie file, `courtyard.mp4`. The `ColorMovie` API from **cct-io** (imported as `cogio`) opens the file, creates a sensor, and feeds one frame from the sensor to the *tensor field* `movie` with each step of the *compute graph*. The `movie` field is `ColorField` of 2 dimensions, 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most operations work on vector fields, not color fields.
 
 The `VectorField` named `background`is created using the same shape, dimensions, and order as the `movieVector`, 270x480x3. The background is learned over time from the frames of the courtyard movie with the use of the feedback operator, `<==`.  It takes about 1000 frames to stabilize. The background pixels at each position outweigh any temporary movement in the foreground. This calculation involves two constant multiplications and one addition at each point.  
 
