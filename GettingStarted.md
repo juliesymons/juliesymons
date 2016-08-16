@@ -61,7 +61,7 @@ The *compute graph* is a state machine, which evolves in discrete time. A single
 
 Using these simple abstractions, the CCT compiler optimizes the computation across *operators* and can distribute the work efficiently to scale from one CPU to clusters with millions of GPU cores.
 
-The next section shows two simple examples to illustrate the basic abstractions. The following sections drill down with more details on each of these abstractions.
+The next section shows two simple examples to illustrate the basic abstractions. The sections that follow it drill down with more details on each of these abstractions.
 
 <center>
 ![CCT Compute Graph](doc/cctComputeGraph.png)
