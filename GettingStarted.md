@@ -259,7 +259,7 @@ The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs w
 
 ### User-defined CPU Operators
 
-The operators covered so far are compiled to execute on GPUs or some other multicore compute resources. Some computations are more suited for execution on the CPU. Custom CPU operators can be written using the `Operator` class. Although this adds flexibility, custom operators can be a performance bottleneck since that may not parallelize well on a CPU. These are described in the "User-defined operators" section of the [CCT programming guide] (http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf).
+The operators covered so far are compiled to execute on GPUs or some other multi-core compute resources. Some computations are more suited for execution on the CPU. Custom CPU operators can be written using the `Operator` class. Although this adds flexibility, custom operators can be a performance bottleneck since that may not parallelize well on a CPU. These are described in the "User-defined operators" section of the [CCT programming guide] (http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf).
 
 
 ## Compute Graph
