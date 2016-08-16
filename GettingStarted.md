@@ -193,7 +193,7 @@ The `Sensor` constructor take a parameterless function, which returns an `Option
 
 `Sensor` constructor parameters are:
 * `fieldShape`
-* `nextValue`  - Option Iterator, return the next field in row-major order, can return `None`.
+* `nextValue`  - Option Iterator, returns the next field in row-major order, can return `None`.
 * `resetHook` - reset to initial value, this can be empty.
 * `desiredFramesPerSecond` (optional) - to throttle back the speed; for example, so that a movie is played at an appropriate speed.
 
