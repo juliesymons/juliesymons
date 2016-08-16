@@ -165,15 +165,13 @@ Additional field types may be defined by the user.
 
 For example #1, `counter` is a `ScalarField`. Its field shape is `Shape(200 200)`, for 200 rows and 200 columns. Its `dimensions` is 2. The `tensorOrder` is 0.  
 
-In the `BackgroundSubtraction` example, the `movie` field has the following:
+In the `BackgroundSubtraction` example, `movie` is a `ColorField( 720 480 )( 3 )` with the following:
 * `movie.fieldShape = Shape(270 480)`
 * `movie.fieldShape.dimensions = 2`
 * `movie.tensorShape = Shape(3)`
 * `movie.tensorShape.dimensions = 1`
 * `movie.tensorOrder = 1` 
 * `movie.elementType = Uint8Pixel`
-
-This field would show in the visual debugger as `ColorField( 720 480 )( 3 )`.
 
 The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`. Color fields are arithmetically incompatible with all other field types since their element type (color pixel) is non-numeric. If you want to perform operators on color fields you must first explicitly cast them as vector fields by using `colorField.toVectorField` or `vectorField`.
 
