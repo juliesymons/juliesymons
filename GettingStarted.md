@@ -47,7 +47,7 @@ The CCT platform consists of several libraries, each contained in separate githu
 
 **cct-sandbox** - This library contains unstable CCT libraries for applications including signal processing and computer vision.
 
-**cogdebugger** - This is a UI Wrapper for debugging CCT applications. It allows developers to visualize the compute graph, inspect the fields, and step through the compute graph. The visual debugger is part of the cct-core library, but the package is imported separately as `cogdebugger`.
+**cogdebugger** - This is a UI Wrapper for debugging CCT applications. It allows developers to visualize the *compute graph*, inspect the *fields*, and step through the *compute graph*. The visual debugger is part of the **cct-core library**, but the package is imported separately as `cogdebugger`.
 
 ## Abstractions
 
