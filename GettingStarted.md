@@ -61,7 +61,7 @@ The *compute graph* is a state machine, which evolves in discrete time. A single
 
 Using these simple abstractions, the CCT compiler optimizes the computation across *operators* and can distribute the work efficiently to scale from one CPU to clusters with millions of GPU cores.
 
-The next section shows two simple examples to illustrate the basic abstractions. The sections that follow it drill down with more details on each of these abstractions.
+The next section shows two examples to introduce the basic abstractions. The sections that follow it drill down with more details on each of these abstractions.
 
 <center>
 ![CCT Compute Graph](doc/cctComputeGraph.png)
@@ -69,7 +69,7 @@ The next section shows two simple examples to illustrate the basic abstractions.
 
 ## Introductory Examples
 
-Here are a couple of simple examples to get started with.  
+Here are two examples examples to get started with.  
 
 ### Example #1
 `Counter` is a very simple example. Here is the code:
@@ -89,7 +89,7 @@ Here are a couple of simple examples to get started with.
 
 It can also be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) and at this location  in your IDE: `./cct-tutorial/src/scala/tutorial/libcog/fields/Counter.scala`.
 
-This program defines one field, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It uses the feedback operator `<==` to increment itself by 1 with each clock tick or step.
+This program defines one *tensor field*, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It uses the feedback *operator* `<==` to increment itself by 1 with each clock tick or step. And it is wrapped into a *compute graph*.
 
 This next figure shows `Counter` running in the visual debugger. 
 
