@@ -193,11 +193,13 @@ The `Sensor` constructor take a parameterless function, which returns an `Option
 
 `Sensor` constructor parameters are:
 * `fieldShape`
-* `nextValue`  - optional iterator, next field in row-major order, can return `None`.
+* `nextValue`  - Option Iterator, return the next field in row-major order, can return `None`.
 * `resetHook` - reset to initial value, this can be empty.
 * `desiredFramesPerSecond` (optional) - to throttle back the speed; for example, so that a movie is played at an appropriate speed.
 
-Sensors can be pipelined or unpipelined. Pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input. Pipelined sensors are the default. The class `UnpipelinedSensor` is used for unpipelined sensor, which does the work in series, first on the CPU, then the GPU at each step. And unlike the pipelined sensor, it must always return a nextValue. The **cct-core** library also contains sensor classes specifically for Vector and Color fields.
+Sensors can be pipelined or unpipelined. Pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input. Pipelined sensors are the default. The class `UnpipelinedSensor` is used for an unpipelined sensor, which does the work in series, first on the CPU, then the GPU at each step. And unlike the pipelined sensor, it must always return a nextValue. 
+
+The **cct-core** library also contains sensor classes specifically for Vector and Color fields.
 
 #### cct-io Sensors
 
