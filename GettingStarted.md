@@ -102,7 +102,7 @@ This next figure shows `Counter` running in the visual debugger.
 
 The visual debugger is a graphical tool that allows you to step, reset, and "peek inside" a `ComputeGraph` to visualize the computation while it executes. 
 
-Clicking on the blue box labeled "counter" in the left pane, opens the "counter" window in the right-pane (as shown here). The "counter" window on the right shows that the "counter" field is a `ScalarField` with a size of 200x200. Placing the cursor over a point in the field will momentarily bring up a tooltip displaying the coordinates and value at that point. In this case, value is "1.0" at the location (1,2) after stepping through the *compute graph* one time. 
+Referring to the figure above, one can click on the blue box labeled "counter" in the left pane to open the "counter" window in the right-pane (as shown here). The "counter" window on the right shows that the "counter" field is a `ScalarField` with a size of 200x200. Placing the cursor over a point in the field will momentarily bring up a tooltip displaying the coordinates and value at that point. In this case, value is "1.0" at the location (1,2) after stepping through the *compute graph* one time. 
 
 The "Cycle" value at the top shows how many steps have been taken, which in this case is "1". All 40,000 points have a value of "1" after 1 cycle. 
 
