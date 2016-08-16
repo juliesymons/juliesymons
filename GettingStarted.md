@@ -264,7 +264,7 @@ The operators covered so far are compiled to execute on GPUs or some other multi
 
 ## Compute Graph
 
-The **compute graph** defines the inputs and outputs and all of the operations. It puts all of the operations into a single, massively-parallel unit of computation. It is a state machine that evolves in discrete time. A single tick, or *step* of the CCT clock sends the input data through the entire *compute graph* to its outputs. Persistent state, for learning and adaptation, is handled using feedback. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning. The *compute graph* can be embedded in and controlled by a conventional application. 
+The *compute graph* defines the inputs and outputs and all of the operations. It puts all of the operations into a single, massively-parallel unit of computation. It is a state machine that evolves in discrete time. A single tick, or *step* of the CCT clock sends the input data through the entire *compute graph* to its outputs. Persistent state, for learning and adaptation, is handled using feedback. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning. The *compute graph* can be embedded in and controlled by a conventional application. 
 
 External data is fed into the compute graph via sensors and output to external sources using actuators. 
 
