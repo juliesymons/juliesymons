@@ -247,11 +247,9 @@ Examples of operators in this tutorial include `Trigonometric.scala` and `MinMax
 
 ### The Feedback Operator
 
-`<==`
+The feedback operator, `<==`, is a special operator. It is used to evolve state within a computation. This is essential for learning and adaptation. Like a state machine, each step of computation reads input data (sensors) to produce new outputs (actuators) and update its internal state (using the feedback operator). The update happens at the end of each step.
 
-explain, and mention which tutorial to see
-
-
+The following tutorial examples demonstrate the use of the feedback operator: `Counter.scala`, `BackgroundSubtraction.scala`, and `ActuatorExample`.
 
 ### User-defined GPU Operators
 
