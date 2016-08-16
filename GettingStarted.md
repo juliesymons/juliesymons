@@ -250,11 +250,11 @@ For the comparison *operators*, such as `>=`, see tutorial example `libcog/opera
 
 The *cct-core* library has many other built-in operators, including transcendental operators, complex operators, transformations, convolutions, and operators for signal processing and cognitive models. These are defined in the CogFunctionAPI. 
 
-Examples of *operators* in this tutorial include `Trigonometric.scala` and `MinMax.scala`. `Complex.scala` shows use of the operators on complex fields, such as `fft`. The `Convolve.scala` tutorial shows convolution and cross-correlation.  The `DotProduct.scala` example shows some of the dot product functions.  Several tutorial examples show transformation operations, such as indexing, field and tensor reductions, reshaping, downsampling and upsampling. `MatrixOps.scala` shows a few matrix operations. And `CentralGradient_BackwardDivergence.scala` is an example demonstrating the use of the central gradient, forward gradient, and its adjoint - the backward divergence operator.
+Several examples of various *operators* can be found in the `libcog/operators` directory, for example `Trigonometric.scala` and `MinMax.scala`. For *oeprators* on complex fields, see `Complex.scala`. The `Convolve.scala` tutorial shows convolution and cross-correlation.  The `DotProduct.scala` example shows some of the dot product functions. Several tutorial examples show transformation operations, such as indexing, field and tensor reductions, reshaping, downsampling and upsampling. `MatrixOps.scala` shows a few matrix operations. And `CentralGradient_BackwardDivergence.scala` is an example demonstrating the use of the central gradient, forward gradient, and its adjoint - the backward divergence operator.
 
 ### The Feedback Operator
 
-The feedback operator, `<==`, is a special operator. It is used to evolve state within a computation. This is essential for learning and adaptation. Like a state machine, each step of computation reads input data (sensors) to produce new outputs (actuators) and update its internal state (using the feedback operator). The update happens at the end of each step.
+The feedback operator, `<==`, is a special *operator*. It is used to evolve state within a computation. This is essential for learning and adaptation. Like a state machine, each step of computation reads input data (sensors) to produce new outputs (actuators) and update its internal state (using the feedback operator). The update happens at the end of each step.
 
 The following tutorial examples demonstrate the use of the feedback operator: `Counter.scala`, `BackgroundSubtraction.scala`, and `ActuatorExample.scala`.
 
