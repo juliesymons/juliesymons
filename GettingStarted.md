@@ -194,7 +194,7 @@ The `Sensor` constructor take a parameterless function, which returns an `Option
 `Sensor` constructor parameters are:
 * `fieldShape`
 * `nextValue`  - Option Iterator, returns the next field in row-major order, can return `None`.
-* `resetHook` - reset to initial value, this can be empty.
+* `resetHook` - function to reset to initial value, this can be empty.
 * `desiredFramesPerSecond` (optional) - to throttle back the speed; for example, so that a movie is played at an appropriate speed.
 
 Sensors can be pipelined or unpipelined. Pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input. Pipelined sensors are the default. The class `UnpipelinedSensor` is used for an unpipelined sensor, which does the work in series, first on the CPU, then the GPU at each step. And unlike the pipelined sensor, it must always return a nextValue. 
@@ -203,7 +203,7 @@ The **cct-core** library also contains sensor classes specifically for Vector an
 
 #### cct-io Sensors
 
-The `cogio` folder of the tutorial has examples that use the Sensors provided by the `cogio` library. The sensors used in these tutorials include ColorImage, ColorMovie, GrayscalMovie, ColorWebcam,  For example, the `BackgroundSubtraction` example, the `ColorMovie` Sensor API feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. The `cogio` library also supports a variety of image file formats and binary files. 
+The `cogio` folder of the tutorial has examples that use the Sensors provided by the `cogio` library. The sensors used in these tutorials include `ColorImage`, `ColorMovie`, `GrayscalMovie`, and `ColorWebcam`. In the `BackgroundSubtraction` example, the `ColorMovie` Sensor API feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. The `cogio` library also supports a variety of image file formats and binary files. 
 
 #### cct-nn Sensors
 
@@ -211,19 +211,21 @@ The **cct-nn** package also provides Sensor APIs, such as `ByteDataSource`, used
 
 ### Actuators
 
-Actuators are *tensor fields* that are output from a *compute graph*.  The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files. Actuators are the complement of sensors.
+Actuators are to output *tensor fields* from a *compute graph*. The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files. Actuators are the complement of sensors.
 
-This tutorial has two Actuator examples. The simple example is the [ActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/actuators/ActuatorExample.scala), located at `libcog/actuators/ActuatorExample`.   
+This tutorial has two Actuator examples. The simplest example is the [ActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/actuators/ActuatorExample.scala), located at `libcog/actuators/ActuatorExample`.   
 
+Here is the constructor: 
 `val actuator = Actuator(field, actuatorData, (column) => 4 - column)`
 
-This one just defines the `actuatorData` array to stash data from a scalar `field` in the compute graph for printing out with each step of the compute graph. The third parameter defines the initial state of `actuator`.
+In this actuator, the `actuatorData` array is a copy of the data in `field`. It can then be printed out at each step of the *compute graph*. The third parameter is used to define the initial state of `actuator`.
 
 The second example, [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorActuatorExample.scala), defines an actuator function which is a unit function that takes an `Iterator[Float]`. This is a user-supplied callback function that is provided an iterator over the actuator's new data.
 
+Here is the constructor used in the second example:
 `val printer = new Actuator(date, printIterator)`
 
-where `date` is a `Sensor` as defined above, and: 
+where `date` is the `Sensor` defined above and `printIterator` is a function defined as: 
 
      val printIterator = (x:Iterator[Float]) => {
          val hour = x.next().toInt
@@ -232,7 +234,7 @@ where `date` is a `Sensor` as defined above, and:
          println(s"Executing Actuator function. $hour:$minute:$second")
       }
 
-Actuators can be pipelined (default) or unpipelined. There are special case actuators, `VectorActuator` or `ColorActuator`, for vevctor and color. And like the sensor, you can provide an optional callback function that is invoked upon reset to set the actuator back to its initial state. 
+Actuators can be pipelined (default) or unpipelined. There are special case actuators, `VectorActuator` or `ColorActuator`, for vector and color. And like the sensor, you can provide an optional callback function to set the actuator back to its initial state upon reset of the *compute graph*. 
 
 ## Operators
 
