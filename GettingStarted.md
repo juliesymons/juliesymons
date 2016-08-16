@@ -239,7 +239,7 @@ For example, the `+` operator can be used to combine two tensor fields with the 
 
 The algebraic operators: `+ - * / %`
 
-For the comparison operators, such as `>=`, see tutorial example `libcog/operators/Comparison.scala`. Note, the equality and inequality operators in cct are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the *cct-core* CogOperatorAPI.
+For the comparison operators, such as `>=`, see tutorial example `libcog/operators/Comparison.scala`. Note, the equality and inequality operators in cct are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the **cct-core** CogOperatorAPI.
 
 The *cct-core* library has many other built-in operators. This includes transcendental operators, complex operators, transformations, convolutions, operators for signal processing and cognitive models. These are defined in the CogFunctionAPI. 
 
