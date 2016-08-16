@@ -136,15 +136,15 @@ The buttons at the top left allow you to control stepping through the *compute g
 It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and at this location in your IDE:
 `./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
 
-The input is an mpeg movie file, `courtyard.mp4`. The `ColorMovie` API from **cct-io** (imported as `cogio`) opens the file, creates a sensor, and feeds one frame from the sensor to the *tensor field* `movie` with each step of the *compute graph*. The `movie` field is `ColorField` of 2 dimensions, 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most operations work on vector fields, not color fields.
+The input is an mpeg movie file, `courtyard.mp4`. The `ColorMovie` API from **cct-io** (imported as `cogio`) opens the file, creates a sensor, and feeds one frame from the sensor to the *tensor field* `movie` with each step of the *compute graph*. The `movie` field is `ColorField` of 2 dimensions, 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most *operators* work on vector fields, not color fields.
 
-The `VectorField` named `background`is created using the same shape, dimensions, and order as the `movieVector`, 270x480x3. The background is learned over time from the frames of the courtyard movie with the use of the feedback operator, `<==`.  It takes about 1000 frames to stabilize. The background pixels at each position outweigh any temporary movement in the foreground. This calculation involves two constant multiplications and one addition at each point.  
+The `VectorField` named `background`is created using the same shape, dimensions, and order as the `movieVector`, 270 by 480 by 3. The background is learned over time from the frames of the courtyard movie with the use of the *feedback operator*, `<==`. It takes about 1000 frames to stabilize. The background pixels at each position outweigh any temporary movement in the foreground. This calculation does two constant multiplications and one addition at each point.  
 
 The value `backgroundColor` isn't used. It is here to demonstrate how to convert from `VectorField` to `ColorField`.
 
-Then finally we can calculate the `suspicious` activity, which is any activity that isn't part of the background. The calculation  is to subtract the movieVector from the background, take the absolute value, then apply `reduceSum` to sum of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, the application identifies the people moving around the courtyard, even the fluttering of the leaves, from the background.
+At this point, we can calculate the `suspicious` activity, which is any activity that isn't part of the background. The calculation  is to subtract `movieVector` from the background, take the absolute value, then apply `reduceSum` to sum of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, the application identifies the people moving around the courtyard, even the fluttering of the leaves, from the background.
 
-The last 3 lines use the `probe` API of the visual debugger. This is used to enable probing of these fields in the debugger.
+The last 3 lines use the `probe` API of the visual debugger. This enables probing of these fields in the debugger.
 
 ## Tensor Fields
 
