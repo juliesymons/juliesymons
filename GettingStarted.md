@@ -71,10 +71,10 @@ The next section shows two examples to introduce the basic abstractions. The sec
 
 ## Introductory Examples
 
-Here are two examples examples to get started with.  
+Here are two examples to get started with.  
 
 ### Example #1
-`Counter` is a very simple example. Here is the code:
+`Counter` is a very simple example of a *compute graph* with one *tensor field* and one *operator*. Here is the code:
 
     package tutorial.libcog.fields
 
