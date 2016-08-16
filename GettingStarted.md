@@ -238,13 +238,13 @@ Actuators can be pipelined (default) or unpipelined. There are special case actu
 
 ## Operators
 
-All field operations are expressed using *operators*. An *operator* combines one or more *tensor fields* to create a new *tensor field*. CCT provides many built-in *operators*, but the platform is also extensible to accommodate computations cannot be expressed by combining existing operators.
+All field operations are expressed using *operators*. An *operator* combines one or more *tensor fields* to create a new *tensor field*. CCT provides many built-in *operators*, but the platform is also extensible to accommodate computations that cannot be expressed by combining existing operators.
 
 ### Built-in Operators
 
-To start with, there are the algebraic *operators*. For example, the `+` *operator* can be used to combine two *tensor fields* with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands. The `*` *operator* can be used to multiply every element in a matrix by a constant 2. The tutorial at `libcog/operators/Algebraic.scala` shows the use of a few of the algebraic *operators*. 
+The most basic *operators* are the algebraic *operators*. For example, the `+` *operator* can be used to combine two *tensor fields* with the same shape and tensor order into a new field with the same shape and order, where each tensor element is the sum of the corresponding tensor elements in the operands. The `*` *operator* can be used to multiply every element in a matrix by a constant 2. The tutorial at `libcog/operators/Algebraic.scala` shows the use of a few of the algebraic *operators*. 
 
-The algebraic operators are: `+ - * / %`
+The algebraic *operators* are: `+ - * / %`
 
 For the comparison *operators*, such as `>=`, see tutorial example `libcog/operators/Comparison.scala`. Note, the equality and inequality operators in CCT are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the **cct-core** CogOperatorAPI.
 
