@@ -276,6 +276,9 @@ see the  `libcog/sensors/ScalarSensorActuatorExample` comments
 
 * in each section point to good examples to look at 
 
+## Filtering Toolkit
+
+## Scalabasics examples
 
 ## Programming CCT Applications
 
@@ -284,7 +287,6 @@ what can we plu here
 ## Visual Debugger
 
 go over its functionality
-
 
 
 
