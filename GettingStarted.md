@@ -189,10 +189,10 @@ scala iterators and functions. Find it here: [ScalarSensorActuatorExample](https
 The `Sensor` constructor take a a parameterless function, which returns an `Option[Iterator[Float]]`. In this example, it is the `getTime` function.
 
 `Sensor` parameters:
-* fieldShape
-* nextValue  - optional iterator, next field in row-major order, can return `None`.
-* resetHook - reset to initial value, this can be empty.
-* desiredFramesPerSecond (optional) - to throttle back the speed; for example, so that a movie is played at an appropriate speed.
+* `fieldShape`
+* `nextValue`  - optional iterator, next field in row-major order, can return `None`.
+* `resetHook` - reset to initial value, this can be empty.
+* `desiredFramesPerSecond` (optional) - to throttle back the speed; for example, so that a movie is played at an appropriate speed.
 
 Sensors can be pipelined or unpipelined. Pipelined sensors use the CPU to produce an input to the GPU while the GPU is working on the previous input. Pipelined sensors are the default. The class `UnpipelinedSensor` is used for unpipelined sensor, which does the work in series, first on the CPU, then the GPU at each step. And unlike the pipelined sensor, it must always return a nextValue. The **cct-core** library also contains sensor classes specifically for Vector and Color fields.
 
@@ -259,14 +259,18 @@ The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs w
 
 ### User-defined CPU Operators
 
-The operators covered so far are compiled to execute on GPUs or some other multicore compute resources. Some computations are more suited for execution on the CPU. Custom CPU operators can be written using the `Operator` class. Although this adds flexibility, custom operators can be a perforamnce bottleneck since that may not parallelize well on a CPU. These are described in the "User-defined operators" section of the tutorial document.
+The operators covered so far are compiled to execute on GPUs or some other multicore compute resources. Some computations are more suited for execution on the CPU. Custom CPU operators can be written using the `Operator` class. Although this adds flexibility, custom operators can be a performance bottleneck since that may not parallelize well on a CPU. These are described in the "User-defined operators" section of the [CCT programming guide] (http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf).
 
 
 ## Compute Graph
 
-From above: The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning.
+The **compute graph** defines the inputs and outputs and all of the operations. It puts all of the operations into a single, massively-parallel unit of computation. It is a state machine that evolves in discrete time. A single tick, or *step* of the CCT clock sends the input data through the entire *compute graph* to its outputs. Persistent state, for learning and adaptation, is handled using feedback. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning. The *compute graph* can be embedded in and controlled by a conventional application. 
 
-The compute graph defines the inputs and outputs and all of the operations. can be embedded in and controlled by a conventional application.  It is the computation unit, all the operations performed on a frame, for example. 
+External data is fed into the compute graph via sensors and output to external sources using actuators. 
+
+It is the computation unit, all the operations performed on a frame, for example. 
+
+tick two steps reset
 
 see the  `libcog/sensors/ScalarSensorActuatorExample` comments 
  
