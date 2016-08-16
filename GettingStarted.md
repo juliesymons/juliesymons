@@ -54,10 +54,10 @@ The CCT platform consists of several libraries, each contained in separate githu
 The CCT programming model has three core abstractions: *tensor fields*, *operators*, and *compute graphs*.  
 
 * A *tensor field* is a multidimensional array (field) of multidimensional arrays (tensors) of elements (e.g. 32-bit floating point numbers).  Fields are used for inputs, outputs, computations, and persistent state. 
-* An *operator* combines one or more tensor fields to create a new tensor field. 
-* A *compute graph* combines tensor fields and operators into a single, massively-parallel unit of computation. 
+* An *operator* combines one or more *tensor fields* to create a new *tensor field*. 
+* A *compute graph* combines *tensor fields* and *operators* into a single, massively-parallel unit of computation. 
  
-The *compute graph* is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and *fed back* into the compute graph at the next step, providing control loops and learning.
+The *compute graph* is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire *compute graph* to its outputs. Persistent state, for learning and adaptation, is handled using feedback. The state of a field can be updated at each step and fed back into the *compute graph* at the next step, providing control loops and learning.
 
 Using these simple abstractions, the CCT compiler optimizes the computation across operators and can distribute the work efficiently to scale from one CPU to clusters with millions of GPU cores.
 
