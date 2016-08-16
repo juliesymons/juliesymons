@@ -140,9 +140,9 @@ The input is an mpeg movie file, `courtyard.mp4`. The `ColorMovie` API from **cc
 
 The `VectorField` named `background`is created using the same shape, dimensions, and order as the `movieVector`, 270 by 480 by 3. The background is learned over time from the frames of the courtyard movie with the use of the *feedback operator*, `<==`. It takes about 1000 frames to stabilize. The background pixels at each position outweigh any temporary movement in the foreground. This calculation does two constant multiplications and one addition at each point.  
 
-The value `backgroundColor` isn't used. It is here to demonstrate how to convert from `VectorField` to `ColorField`.
+The value `backgroundColor` isn't used, but is here to demonstrate how to convert from `VectorField` to `ColorField`.
 
-At this point, we can calculate the `suspicious` activity, which is any activity that isn't part of the background. The calculation  is to subtract `movieVector` from the background, take the absolute value, then apply `reduceSum` to sum of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After the background gets learned, the application identifies the people moving around the courtyard, even the fluttering of the leaves, from the background.
+At this point, we can calculate the `suspicious` activity, which is any activity that isn't part of the background. The calculation  is to subtract `movieVector` from the background, take the absolute value, then apply `reduceSum` to sum of the values at each point over the 3 color planes. If there is minimal difference, the point stays black. If there is a difference, the point shows white. After `background` gets learned, the application identifies the people moving around the courtyard, even the fluttering of the leaves.
 
 The last 3 lines use the `probe` API of the visual debugger. This enables probing of these fields in the debugger.
 
@@ -159,7 +159,7 @@ Types of fields:
 * ComplexVectorField (a vector field with complex elements)
 * ColorField         (a field where each order-1 tensor is a pixel)
 
-Each field has a shape, a tensor shape, and an element type. The field shape has a dimension. The tensor shape also  has a dimension, called an order.  CCT supports up to 3 dimensions and up to 3rd-order tensors.  Shapes are defined by layers, rows, and columns. A field with 3 dimensions has layers, rows, and columns. A field with 2 dimensions has rows and columns. For tensors, an order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The 3rd-order tensor is just called `Tensor3` in CCT.  Tensors hold elements, which are defined by the `ElementType`, e.g. `Float32`. The complex fields have real and imaginary components, which are both floats. 
+Each field has a `fieldShape`, a `tensorShape`, and an `elementType`. The field shape has a dimension. The tensor shape also has a dimension, called an order or `tensorOrder`.  CCT supports up to 3 dimensions and up to 3rd-order tensors. Shapes are defined by layers, rows, and columns. A field with 3 dimensions has layers, rows, and columns. A field with 2 dimensions has rows and columns. For tensors, an order-0 tensor is called a scalar and contains a single number. An order-1 tensor is called a vector and contains one or more numbers. An order-2 tensor is called a matrix. The 3rd-order tensor is just called `Tensor3` in CCT. Tensors hold elements, which are defined by the `ElementType`, e.g. `Float32`. The complex fields have real and imaginary components, which are both floats. 
 
 Additional field types may be defined by the user.
 
@@ -173,7 +173,7 @@ In the `BackgroundSubtraction` example, the `movie` field has the following:
 * `movie.tensorOrder = 1` 
 * `movie.elementType = Uint8Pixel`
 
-This shows in the visual debugger as `ColorField( 720 480 )( 3 )`.
+This field would show in the visual debugger as `ColorField( 720 480 )( 3 )`.
 
 The `ColorField` is a special case of the `VectorField`. The VectorField version has an `elementType` of `Float32`. Color fields are arithmetically incompatible with all other field types since their element type (color pixel) is non-numeric. If you want to perform operators on color fields you must first explicitly cast them as vector fields by using `colorField.toVectorField` or `vectorField`.
 
