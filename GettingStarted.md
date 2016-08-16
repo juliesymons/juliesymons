@@ -253,9 +253,13 @@ The following tutorial examples demonstrate the use of the feedback operator: `C
 
 ### User-defined GPU Operators
 
-`GPUOperator`
+The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs without the need to write low-level GPU kernels in CUDA or OpenCL. While there are many built-in operators already provided, there may still be other computations required that cannot be expressed using by combining existing operators. For this the CCT Toolkit provides the capability for user-defined GPU operators through its `GPUOperators` API. GPUOperators provides a high-level, domain-specific language (DSL) for writing GPU kernels.
+
+** add tutorial exampla and link to ERS **
 
 ### User-defined CPU Operators
+
+some computations are more suited for execution on the CPU.
 
 `Operator`
 
