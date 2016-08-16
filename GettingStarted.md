@@ -41,7 +41,7 @@ The CCT platform consists of several libraries, each contained in separate githu
 
 **cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The **cct-core** repository also contains the visual debugger, `cogdebugger`, though it is in a separate package. 
 
-**cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read an image file or movie file. This package is currently imported into some of the tutorial examples as `cogio`.
+**cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API. For example, it has APIs to read an image file or movie file. This package is currently imported into some of the tutorial examples as `cogio`.
 
 **cct-nn** - This library provides APIs to support deep learning and neural networks. This package is currently imported into some of the tutorial examples as `toolkit.neuralnetwork`.
 
@@ -53,7 +53,7 @@ The CCT platform consists of several libraries, each contained in separate githu
 
 The CCT programming model has three core abstractions: *tensor fields*, *operators*, and *compute graphs*.  
 
-* A *tensor field* is a multidimensional array (field) of multidimensional arrays (tensors) of elements (e.g. 32-bit floating point numbers).  Fields are used for inputs, outputs, computations, and persistent state. 
+* A *tensor field* is a multidimensional array (field) of multidimensional arrays (tensors) of elements (e.g. 32-bit floating point numbers). These fields are used for inputs, outputs, computations, and persistent state. 
 * An *operator* combines one or more *tensor fields* to create a new *tensor field*. 
 * A *compute graph* combines *tensor fields* and *operators* into a single, massively-parallel unit of computation. 
  
