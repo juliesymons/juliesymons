@@ -253,15 +253,14 @@ The following tutorial examples demonstrate the use of the feedback operator: `C
 
 ### User-defined GPU Operators
 
-The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs without the need to write low-level GPU kernels in CUDA or OpenCL. While there are many built-in operators already provided, there may still be other computations required that cannot be expressed using by combining existing operators. For this the CCT Toolkit provides the capability for user-defined GPU operators through its `GPUOperators` API. GPUOperators provides a high-level, domain-specific language (DSL) for writing GPU kernels.
+The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs without the need to write low-level GPU kernels in CUDA or OpenCL. While there are many built-in operators already provided, there may still be other computations required that cannot be expressed using by combining existing operators. For this the CCT Toolkit provides the capability for user-defined GPU operators through its *GPUOperators* API. *GPUOperators* provides a high-level, domain-specific language (DSL) for writing GPU kernels. This facility is recommended for more advanced users who have some familiarity with GPU hardware architecture and perofrmance issues.  
 
-** add tutorial exampla and link to ERS **
+*GPUOperators* is described in a separate document, *The Cog GPU Operator External Reference Specification*. 
 
 ### User-defined CPU Operators
 
-some computations are more suited for execution on the CPU.
+The operators covered so far are compiled to execute on GPUs or some other multicore compute resources. Some computations are more suited for execution on the CPU. Custom CPU operators can be written using the `Operator` class. Although this adds flexibility, custom operators can be a perforamnce bottleneck since that may not parallelize well on a CPU. These are described in the "User-defined operators" section of the tutorial document.
 
-`Operator`
 
 ## Compute Graph
 
