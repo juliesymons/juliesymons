@@ -61,7 +61,7 @@ The *compute graph* is a state machine, which evolves in discrete time. A single
 
 Using these simple abstractions, the CCT compiler optimizes the computation across *operators* and can distribute the work efficiently to scale from one CPU to clusters with millions of GPU cores.
 
-This figure shows a small *compute graph* consisting of one sensor supplying external data to a *tensor fields*. A second *tensor field* gets updated using the feedback *operator*. The two *tensor fields* are combined using an *operator* to produce a third *tensor field*, which has an actuator to feed the result to an external consumer.
+This figure shows a small *compute graph* consisting of one sensor supplying external data to a *tensor field*. A second *tensor field* gets updated using the feedback *operator*. The two *tensor fields* are combined using an *operator* to produce a third *tensor field*, which has an actuator to feed the result to an external consumer.
 
 <center>
 ![CCT Compute Graph](doc/cctComputeGraph.png)
