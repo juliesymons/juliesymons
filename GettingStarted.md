@@ -37,7 +37,7 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 ### Libraries 
 
-The hpe-cct platform consists of several libraries, each contained in separate github repositories. The **cct-tutorial** has dependencies on these libraries.
+The CCT platform consists of several libraries, each contained in separate github repositories. The **cct-tutorial** has dependencies on these libraries.
 
 **cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The cct-core library also contains the visual debugger, *cogdebugger*. 
 
