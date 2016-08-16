@@ -39,7 +39,7 @@ CCT is written in the Scala programming language which runs on the Java Virtual 
 
 The CCT platform consists of several libraries, each contained in separate github repositories, under the `hpe-cct` root directory. The **cct-tutorial** has dependencies on these libraries.
 
-**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The **cct-core** library also contains the visual debugger, `cogdebugger`, though it is in a separate package. 
+**cct-core** - This is the core library and API. It contains the compiler and runtime system necessary to optimize and distribute a CCT application. This package is currently imported as `libcog`. The **cct-core** repository also contains the visual debugger, `cogdebugger`, though it is in a separate package. 
 
 **cct-io** - This library provides a set of objects which can be used for getting data into and out of a running CCT application using the field initialization, *sensor*, and *actuator* primatives that are part of the cct-core API.  For example, it has APIs to read an image file or movie file. This package is currently imported into some of the tutorial examples as `cogio`.
 
@@ -57,7 +57,7 @@ The CCT programming model has three core abstractions: *tensor fields*, *operato
 * An *operator* combines one or more tensor fields to create a new tensor field. 
 * A *compute graph* combines tensor fields and operators into a single, massively-parallel unit of computation. 
  
-The compute graph is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and *fed back* into the compute graph at the next step, providing control loops and learning.
+The *compute graph* is a state machine, which evolves in discrete time. A single tick, or "step" of the CCT clock sends the input data through the entire compute graph to its outputs. Persistent state, for learning and adaptation, is handled using *feedback*. The state of a field can be updated at each step and *fed back* into the compute graph at the next step, providing control loops and learning.
 
 Using these simple abstractions, the CCT compiler optimizes the computation across operators and can distribute the work efficiently to scale from one CPU to clusters with millions of GPU cores.
 
