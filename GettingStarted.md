@@ -238,7 +238,7 @@ Actuators can be pipelined (default) or unpipelined. There are special case actu
 
 ## Operators
 
-All field operations are expressed using *operators*. An *operator* combines one or more *tensor fields* to create a new *tensor field*.
+All field operations are expressed using *operators*. An *operator* combines one or more *tensor fields* to create a new *tensor field*. CCT provides many built-in *operators*, but the platform is also extensible to accommodate computations cannot be expressed by combining existing operators.
 
 ### Built-in Operators
 
@@ -250,7 +250,7 @@ For the comparison *operators*, such as `>=`, see tutorial example `libcog/opera
 
 The *cct-core* library has many other built-in operators, including transcendental operators, complex operators, transformations, convolutions, and operators for signal processing and cognitive models. These are defined in the CogFunctionAPI. 
 
-Several examples of various *operators* can be found in the `libcog/operators` directory, for example `Trigonometric.scala` and `MinMax.scala`. For *operators* on complex fields, see `Complex.scala`. The `Convolve.scala` tutorial shows convolution and cross-correlation.  The `DotProduct.scala` example shows some of the dot product functions. Several tutorial examples show transformation operations, such as indexing, field and tensor reductions, reshaping, downsampling and upsampling. `MatrixOps.scala` shows a few matrix operations. And `CentralGradient_BackwardDivergence.scala` is an example demonstrating the use of the central gradient, forward gradient, and its adjoint - the backward divergence operator.
+Several examples of various *operators* can be found in the `libcog/operators` directory, for example `Trigonometric.scala` and `MinMax.scala`. For *operators* on complex fields, see `Complex.scala`. The `Convolve.scala` tutorial shows convolution and cross-correlation.  The `DotProduct.scala` example shows some of the dot product functions. Several of the tutorial examples show transformation operations, such as indexing, field and tensor reductions, reshaping, downsampling and upsampling. `MatrixOps.scala` shows a few matrix operations. And `CentralGradient_BackwardDivergence.scala` is an example demonstrating the use of the central gradient, forward gradient, and its adjoint - the backward divergence operator.
 
 ### The Feedback Operator
 
@@ -260,7 +260,7 @@ The following tutorial examples demonstrate the use of the feedback operator: `C
 
 ### User-defined GPU Operators
 
-The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs without the need to write low-level GPU kernels in CUDA or OpenCL. While there are many built-in operators already provided, there may still be other computations required that cannot be expressed using by combining existing operators. For this the CCT Toolkit provides the capability for user-defined GPU operators through its *GPUOperators* API. *GPUOperators* provides a high-level, domain-specific language (DSL) for writing GPU kernels. This facility is recommended for more advanced users who have some familiarity with GPU hardware architecture and perofrmance issues.  
+The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs without the need to write low-level GPU kernels in CUDA or OpenCL. While there are many built-in operators already provided, there may still be other computations required that cannot be expressed by combining existing operators. For this the CCT Toolkit provides the capability for user-defined GPU operators through its *GPUOperators* API. *GPUOperators* provides a high-level, domain-specific language (DSL) for writing GPU kernels. This facility is recommended for more advanced users who have some familiarity with GPU hardware architecture and perofrmance issues.  
 
 *GPUOperators* is described in a separate document, *The Cog GPU Operator External Reference Specification*. 
 
