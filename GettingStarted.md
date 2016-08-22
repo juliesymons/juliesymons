@@ -256,7 +256,7 @@ Several examples of various *operators* can be found in the `libcog/operators` d
 
 The feedback operator, `<==`, is a special *operator*. It is used to evolve state within a computation. This is essential for learning and adaptation. Like a state machine, each step of computation reads input data (sensors) to produce new outputs (actuators) and update its internal state (using the feedback operator). The update happens at the end of each step.
 
-The following tutorial examples demonstrate the use of the feedback operator: [Counter.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala), [BackgroundSubtraction.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala), and [ActuatorExample.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/ActuatorExample.scala).
+The following tutorial examples demonstrate the use of the feedback operator: [Counter.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala), [BackgroundSubtraction.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala), and [ActuatorExample.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/actuators/ActuatorExample.scala).
 
 ### User-defined GPU Operators
 
