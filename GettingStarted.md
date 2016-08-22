@@ -175,7 +175,7 @@ In the `BackgroundSubtraction` example, `movie` is a `ColorField( 720 480 )( 3 )
 
 The `ColorField` is a special case of the `VectorField`. The VectorField, in this case, has an `elementType` of `Float32`. Color fields are arithmetically incompatible with all other field types since their element type, a color pixel, is non-numeric. If you want to perform operators on color fields you must first explicitly cast them as vector fields by using `colorField.toVectorField` or `vectorField`.
 
-The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. For example, [CombiningFields.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala)shows the various legal combinations of different fields. 
+The **cct-tutorial** directory `libcog/fields` contains some examples using different types of fields. For example, [CombiningFields.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/CombiningFields.scala) shows the various legal combinations of different fields. 
 
 The tutorial examples in `libcog/tensors` demonstrate the creation and use of the Vector and Matrix types, including generating random data for a vector and taking the dot product of two vectors.
 
