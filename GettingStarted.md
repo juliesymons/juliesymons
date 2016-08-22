@@ -246,7 +246,7 @@ The most basic *operators* are the algebraic *operators*. For example, the `+` *
 
 The algebraic *operators* are: `+ - * / %`
 
-For the comparison *operators*, such as `>=`, see tutorial example [Comparison.scala](https://github.com//hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/Comparison.scala) in `libcog/operators`. Note, the equality and inequality operators in CCT are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the **cct-core** [CogOperatorAPI](https://github.com/hpe-cct/cct-core/blob/master/src/main/scala/cogx/api/CogOperatorAPI.scala.
+For the comparison *operators*, such as `>=`, see tutorial example [Comparison.scala](https://github.com//hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/Comparison.scala) in `libcog/operators`. Note, the equality and inequality operators in CCT are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the **cct-core** [CogOperatorAPI](https://github.com/hpe-cct/cct-core/blob/master/src/main/scala/cogx/api/CogOperatorAPI.scala).
 
 The *cct-core* library has many other built-in operators, including transcendental operators, complex operators, transformations, convolutions, and operators for signal processing and cognitive models. These are defined in the [CogFunctionAPI](https://github.com/hpe-cct/cct-core/blob/master/src/main/scala/cogx/api/CogFunctionAPI.scala). 
 
