@@ -165,7 +165,7 @@ Additional field types may be defined by the user.
 
 For example #1, `counter` is a `ScalarField`. Its field shape is `Shape(200 200)`, for 200 rows and 200 columns. Its `dimensions` is 2. The `tensorOrder` is 0.  
 
-In the `BackgroundSubtraction` example, `movie` is a `ColorField( 720 480 )( 3 )` with the following:
+In [BackgroundSubtraction](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala), `movie` is a `ColorField( 720 480 )( 3 )` with the following:
 * `movie.fieldShape = Shape(270 480)`
 * `movie.fieldShape.dimensions = 2`
 * `movie.tensorShape = Shape(3)`
