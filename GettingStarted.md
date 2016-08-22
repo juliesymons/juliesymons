@@ -213,7 +213,7 @@ The **cct-nn** package also provides Sensor APIs, such as `ByteDataSource`, used
 
 Actuators are to output *tensor fields* from a *compute graph*. The *compute graph* sends out information or enacts side-effects through actuators, which are *tensor fields* that source external data streams such as consoles, video displays, speakers, databases, or files. Actuators are the complement of sensors.
 
-This tutorial has two Actuator examples. The simplest example is the [ActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/actuators/ActuatorExample.scala), located at `libcog/actuators/ActuatorExample`.   
+This tutorial has two Actuator examples. The simplest example is the [ActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/actuators/ActuatorExample.scala), located in `libcog/actuators`.   
 
 Here is the constructor: 
 `val actuator = Actuator(field, actuatorData, (column) => 4 - column)`
@@ -246,9 +246,9 @@ The most basic *operators* are the algebraic *operators*. For example, the `+` *
 
 The algebraic *operators* are: `+ - * / %`
 
-For the comparison *operators*, such as `>=`, see tutorial example `libcog/operators/Comparison.scala`. Note, the equality and inequality operators in CCT are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the **cct-core** CogOperatorAPI.
+For the comparison *operators*, such as `>=`, see tutorial example [Comparison.scala](https://github.com//hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/Comparison.scala) in `libcog/operators`. Note, the equality and inequality operators in CCT are `===` and `!===`. These operators along with algebraic operators, the feedback operator (`<==`), and the outer product operator (`^`) are defined in the **cct-core** [CogOperatorAPI](https://github.com/hpe-cct/cct-core/blob/master/src/main/scala/cogx/api/CogOperatorAPI.scala.
 
-The *cct-core* library has many other built-in operators, including transcendental operators, complex operators, transformations, convolutions, and operators for signal processing and cognitive models. These are defined in the CogFunctionAPI. 
+The *cct-core* library has many other built-in operators, including transcendental operators, complex operators, transformations, convolutions, and operators for signal processing and cognitive models. These are defined in the [CogFunctionAPI](https://github.com/hpe-cct/cct-core/blob/master/src/main/scala/cogx/api/CogFunctionAPI.scala). 
 
 Several examples of various *operators* can be found in the `libcog/operators` directory, for example `Trigonometric.scala` and `MinMax.scala`. For *operators* on complex fields, see `Complex.scala`. The `Convolve.scala` tutorial shows convolution and cross-correlation.  The `DotProduct.scala` example shows some of the dot product functions. Several of the tutorial examples show transformation operations, such as indexing, field and tensor reductions, reshaping, downsampling and upsampling. `MatrixOps.scala` shows a few matrix operations. And `CentralGradient_BackwardDivergence.scala` is an example demonstrating the use of the central gradient, forward gradient, and its adjoint - the backward divergence operator.
 
