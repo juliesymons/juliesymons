@@ -134,7 +134,7 @@ The buttons at the top left allow you to control stepping through the *compute g
     )
 
 It can be found at this location in your IDE:
-`./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
+`./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`.
 
 The input is an mpeg movie file, `courtyard.mp4`. The `ColorMovie` API from **cct-io** (imported as `cogio`) opens the file, creates a sensor, and feeds one frame from the sensor to the *tensor field* `movie` with each step of the *compute graph*. The `movie` field is `ColorField` of 2 dimensions, 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most *operators* work on vector fields, not color fields.
 
@@ -256,7 +256,7 @@ Several examples of various *operators* can be found in the `libcog/operators` d
 
 The feedback operator, `<==`, is a special *operator*. It is used to evolve state within a computation. This is essential for learning and adaptation. Like a state machine, each step of computation reads input data (sensors) to produce new outputs (actuators) and update its internal state (using the feedback operator). The update happens at the end of each step.
 
-The following tutorial examples demonstrate the use of the feedback operator: [Counter.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/fields/Counter.scala), [BackgroundSubtraction.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala), and [ActuatorExample.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog\ActuatorExample.scala).
+The following tutorial examples demonstrate the use of the feedback operator: [Counter.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala), [BackgroundSubtraction.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala), and [ActuatorExample.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/ActuatorExample.scala).
 
 ### User-defined GPU Operators
 
