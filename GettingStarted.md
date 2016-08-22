@@ -183,7 +183,7 @@ The tutorial examples in `libcog/tensors` demonstrate the creation and use of th
 
 Sensors are inputs to *tensor fields* from external data streams, such as a video camera or a file. For a video camera, the sensor feeds one frame (or batch of frames) as a *tensor field* at each step of the *compute graph* for computation. Other examples of external data streams are consoles, video displays, microphones, speakers, touch sensors, databases, and so on.  
 
-In `libcog/sensors` the [ScalarSensorActuatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorActuatorExample.scala) tutorial illustrates how to implement a scalar sensor and actuator using
+In `libcog/sensors`, the [ScalarSensorActuatorExample.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/sensors/ScalarSensorActuatorExample.scala) tutorial illustrates how to implement a scalar sensor and actuator using
 Scala iterators and functions.
 
 Here's the constructor of a new sensor:
@@ -203,7 +203,7 @@ The **cct-core** library also contains sensor classes specifically for Vector an
 
 #### cct-io Sensors
 
-The `cogio` folder of the tutorial has examples that use the Sensors provided by the `cogio` library. The sensors used in these tutorials include `ColorImage`, `ColorMovie`, `GrayscalMovie`, and `ColorWebcam`. In the `BackgroundSubtraction` example, the `ColorMovie` Sensor API feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. The `cogio` library also supports a variety of image file formats and binary files. 
+The `cogio` folder of the tutorial has examples that use the Sensors provided by the `cogio` library. The sensors used in these tutorials include `ColorImage`, `ColorMovie`, `GrayscalMovie`, and `ColorWebcam`. In the  [BackgroundSubtraction](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) example, the `ColorMovie` Sensor API feeds one frame into a *tensor field* for each step (or cycle) of the *compute graph*. The `cogio` library also supports a variety of image file formats and binary files. 
 
 #### cct-nn Sensors
 
