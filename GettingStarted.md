@@ -74,7 +74,7 @@ The next section shows two examples to introduce the basic abstractions. The sec
 Here are two examples to get started with.  
 
 ### Example #1
-`Counter` is a very simple example of a *compute graph* with one *tensor field* and one *operator*. Here is the code:
+[Counter](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) is a very simple example of a *compute graph* with one *tensor field* and one *operator*. Here is the code:
 
     package tutorial.libcog.fields
 
@@ -89,7 +89,7 @@ Here are two examples to get started with.
     )
 
 
-It can also be found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/fields/Counter.scala) and at this location  in your IDE: `./cct-tutorial/src/scala/tutorial/libcog/fields/Counter.scala`.
+It can be found at this location in your IDE: `./cct-tutorial/src/scala/tutorial/libcog/fields/Counter.scala`.
 
 This program defines one *tensor field*, `counter`, which is a 2-dimensional scalar field with 200 rows and 200 columns. It uses the feedback *operator* `<==` to increment itself by 1 with each clock tick (or step) of the *compute graph*.
 
@@ -110,7 +110,7 @@ The buttons at the top left allow you to control stepping through the *compute g
 
 ### Example #2
 
-`BackgroundSubtraction` is another good example to illustrate several more concepts covered in this tutorial. Here is the code:
+[BackgroundSubtraction](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala)is another good example to illustrate several more concepts covered in this tutorial. Here is the code:
 
     package tutorial.cogio
 
@@ -133,7 +133,7 @@ The buttons at the top left allow you to control stepping through the *compute g
       }
     )
 
-It can be also found [here](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) and at this location in your IDE:
+It can be found at this location in your IDE:
 `./cct-tutorial/src/scala/tutorial/cogio/BackgroundSubtraction.scala`
 
 The input is an mpeg movie file, `courtyard.mp4`. The `ColorMovie` API from **cct-io** (imported as `cogio`) opens the file, creates a sensor, and feeds one frame from the sensor to the *tensor field* `movie` with each step of the *compute graph*. The `movie` field is `ColorField` of 2 dimensions, 270 rows by 480 columns with 3 pixels for the color. It is converted to a `VectorField` of the same shape. Most *operators* work on vector fields, not color fields.
@@ -256,17 +256,17 @@ Several examples of various *operators* can be found in the `libcog/operators` d
 
 The feedback operator, `<==`, is a special *operator*. It is used to evolve state within a computation. This is essential for learning and adaptation. Like a state machine, each step of computation reads input data (sensors) to produce new outputs (actuators) and update its internal state (using the feedback operator). The update happens at the end of each step.
 
-The following tutorial examples demonstrate the use of the feedback operator: `Counter.scala`, `BackgroundSubtraction.scala`, and `ActuatorExample.scala`.
+The following tutorial examples demonstrate the use of the feedback operator: [Counter.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/fields/Counter.scala), [BackgroundSubtraction.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala), and [ActuatorExample.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog\ActuatorExample.scala).
 
 ### User-defined GPU Operators
 
 The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs without the need to write low-level GPU kernels in CUDA or OpenCL. While there are many built-in operators already provided, there may still be other computations required that cannot be expressed by combining existing operators. For this the CCT Toolkit provides the capability for user-defined GPU operators through its *GPUOperators* API. *GPUOperators* provides a high-level, domain-specific language (DSL) for writing GPU kernels. This facility is recommended for more advanced users who have some familiarity with GPU hardware architecture and perofrmance issues.  
 
-*GPUOperators* is described in a separate document, *The Cog GPU Operator External Reference Specification*. **add link**
+*GPUOperators* is described in a separate document, *User-defined GPU Opererars* document available [here](https://github.com/hpe-cct/cct-core/tree/master/doc/UserGPUOperators.docx).
 
 ### User-defined CPU Operators
 
-The operators covered so far are compiled to execute on GPUs or some other multi-core compute resources. Some computations are more suited for execution on the CPU. Custom CPU operators can be written using the `Operator` class. Although this adds flexibility, custom operators can be a performance bottleneck since that may not parallelize well on a CPU. These are described in the "User-defined operators" section of the [CCT programming guide] (http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf).
+The operators covered so far are compiled to execute on GPUs or some other multi-core compute resources. Some computations are more suited for execution on the CPU. Custom CPU operators can be written using the `Operator` class. Although this adds flexibility, custom operators can be a performance bottleneck since that may not parallelize well on a CPU. These are described in the "User-defined operators" section (4.17) of the [CCT programming guide] (http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf).
 
 
 ## Compute Graph
