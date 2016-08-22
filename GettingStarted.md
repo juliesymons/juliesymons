@@ -110,7 +110,7 @@ The buttons at the top left allow you to control stepping through the *compute g
 
 ### Example #2
 
-[BackgroundSubtraction](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala)is another good example to illustrate several more concepts covered in this tutorial. Here is the code:
+[BackgroundSubtraction](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/cogio/BackgroundSubtraction.scala) is another good example to illustrate several more concepts covered in this tutorial. Here is the code:
 
     package tutorial.cogio
 
