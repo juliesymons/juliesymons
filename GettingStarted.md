@@ -264,6 +264,20 @@ The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs w
 
 The following tutorial example uses a GPU operator to do a horizontal reflection of an image: [GPUOperatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/GPUOperatorExample.scala). 
 
+    GPUOperator(img.fieldType, "horizontalRefection") {
+      _globalThreads(img.fieldShape, img.tensorShape)
+      val readRow = _row
+      val readColumn = _columns - _column - 1
+      val x = _readTensorElement(img, readRow, readColumn, _tensorElement)
+      _writeTensorElement(_out0, x, _tensorElement)
+    }
+    
+- input and name of the operator
+- _globalThreads for thread allocation
+- constants _columns, _column
+- readTensorElement
+- writeTensorElement
+
 Note that a leading underscore, _, appears on all supplied functions in GPU operators. This prevents collisions with similar Scala keywords and functions, and also reminds you that you are writing code that will run on a GPU.
 
 *GPUOperators* are described in a separate document, *User-defined GPU Opererars* document available [here](https://github.com/hpe-cct/cct-core/tree/master/doc/UserGPUOperators.docx).
