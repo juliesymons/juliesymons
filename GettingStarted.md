@@ -289,15 +289,20 @@ The operators covered so far are compiled to execute on GPUs or some other multi
 
 ## Compute Graph
 
-The *compute graph* defines the inputs and outputs and all of the operations. It puts all of the operations into a single, massively-parallel unit of computation. It is a state machine that evolves in discrete time. A single tick, or *step* of the CCT clock sends the input data through the entire *compute graph* to its outputs. Persistent state, for learning and adaptation, is handled using feedback. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning. The *compute graph* can be embedded in and controlled by a conventional application. 
+The *compute graph* defines the inputs and outputs and all of the operations. The *compute graph* wraps all of the operations into a single, massively-parallel unit of computation. It is a state machine that evolves in discrete time. A single tick, or *step* of the CCT clock sends the input data through the entire *compute graph* to its outputs. 
+
+Persistent state, for learning and adaptation, is handled using feedback. The state of a field can be updated at each step and fed back into the compute graph at the next step, providing control loops and learning. The *compute graph* can be embedded in and controlled by a conventional application. 
 
 External data is fed into the compute graph via sensors and output to external sources using actuators. 
 
-It is the computation unit, all the operations performed on a frame, for example. 
+Several examples in this tutorial demonstrate some of the basic uses of the *compute graph*. In the Counter example, a simple compute graph is wrapped by the CogDebugger. The ScalarSensorActuatorExample, defines a simple compute graph then shows some code that steps through the compute graph. This example also has a detailed description in the comments about what happens in the first call to `step` of a compute graph.  The ActuatorExample shows yet another way to invoke the use of a compute graph.
 
-tick two steps reset
+The most common methods of a compute graph are step, reset, and release. Save, too.  
 
-see the  `libcog/sensors/ScalarSensorActuatorExample` comments 
+
+The Programming Cog Applications chapter of the Programming Guide has a lot of detail about the internals of  compute graph For more details about the tick two steps reset
+
+
  
 
 
