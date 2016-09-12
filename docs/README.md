@@ -23,8 +23,8 @@
 *   [Coming Soon](#coming-soon)
 
 
- [1.  Introduction](#introduction)
-    [1.1 Language](#language)
+ [1.  Introduction](#1-introduction)
+    [1.1 Language](#1.1-language)
     [1.2 Libraries](#libraries)
     [Tensor Fields](#tensor-fields)
       *    [Sensors](#sensors)
