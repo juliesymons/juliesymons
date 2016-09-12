@@ -1,17 +1,49 @@
-![](./media/image2.jpeg){width="8.35in" height="10.85in"}
+#Cog 4.1 Programming Tutorial
 
-Table of Content {#table-of-content .TOCHeading}
-================
 
-[1. Introduction 4](#introduction)
+[//]: # (![](./media/image2.jpeg){width="8.35in" height="10.85in"})
+![](./media/image2.jpeg)
 
-[1.1 Language 4](#language)
+[//]: # (Table of Content {#table-of-content .TOCHeading})
+## Table of Contents
 
-[1.2 Libraries 4](#libraries)
+*   [Intro](#intro)
+*   [Abstractions](#abstractions)
+*   [Introductory Examples](#introductory-examples)
+*   [Tensor Fields](#tensor-fields)
+      *    [Sensors](#sensors)
+         *    [cct-io Sensors](#cct-io-sensors)
+         *    [cct-nn Sensors](#cct-nn-sensors)
+      *    [Actuators](#actuators)
+*   [Operators](#operators)
+      * [Built-in Operators](#built-in-operators)   
+      * [The Feedback Operator](#the-feedback-operator)
+      * [User-defined GPU Operators](#user-defined-gpu-operators)  
+      * [User-defined CPU Operators](#user-defined-cpu-operators)  
+*   [Coming Soon](#coming-soon)
 
-[1.3 Versioning 5](#versioning)
 
-[2. Abstractions 6](#abstractions)
+ [1.  Introduction](#introduction)
+    [1.1 Language](#language)
+    [1.2 Libraries](#libraries)
+    [Tensor Fields](#tensor-fields)
+      *    [Sensors](#sensors)
+         *    [cct-io Sensors](#cct-io-sensors)
+         *    [cct-nn Sensors](#cct-nn-sensors)
+      *    [Actuators](#actuators)
+*   [Operators](#operators)
+      * [Built-in Operators](#built-in-operators)   
+      * [The Feedback Operator](#the-feedback-operator)
+      * [User-defined GPU Operators](#user-defined-gpu-operators)  
+      * [User-defined CPU Operators](#user-defined-cpu-operators)  
+*   [Coming Soon](#coming-soon)
+
+
+[1. Introduction](#introduction)
+  [1.1 Language](#language)
+  [1.2 Libraries](#libraries)
+  [1.3 Versioning](#versioning)
+[2. Abstractions](#abstractions)
 
 [2.1 Tensor Fields 6](#tensor-fields)
 
@@ -315,6 +347,8 @@ This application contains a two-dimensional scalar field named
 “counter.” If you compile and run the above application, you will see a
 window that looks like this:
 
+![](./media/image3.png)
+*image_caption*
 ![](./media/image3.png){width="6.026336395450569in"
 height="3.336965223097113in"}
 
