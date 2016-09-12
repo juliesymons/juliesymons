@@ -275,7 +275,7 @@ The following tutorial example uses a GPU operator to do a horizontal reflection
 - input and name of the operator
 - _globalThreads for thread allocation
 - constants _columns, _column
-- readTensorElement
+- readTensorElement (inverting columns, rows stay same)
 - writeTensorElement
 
 Note that a leading underscore, _, appears on all supplied functions in GPU operators. This prevents collisions with similar Scala keywords and functions, and also reminds you that you are writing code that will run on a GPU.
