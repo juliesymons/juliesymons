@@ -272,20 +272,15 @@ The following code defines a GPU operator to do a horizontal reflection of an im
       _writeTensorElement(_out0, x, _tensorElement)
     }
     
-In this example, the `GPUOperator` is defined by the input `fieldType` and given an optional string name "horizontalReflection". Inside the `GPUOperator` the leading underscore distinguishes the supplied functions of the GPU Operator API. The `_globalThreads call give finer control of thread allocation to optimize the parallelism of the operation. In this case, one thread per tensor element is allocated. For a color image of 32 by 32 pixels, 3072 (32x32x3) threads are allocated. Each allocated thread can deduce its identity from the field constants, _row and _column (and _layer) in this case. 
+In this example, the `GPUOperator` is defined by the input `fieldType` and given an optional string name `horizontalReflection`. Inside the `GPUOperator` the leading underscore distinguishes the supplied functions of the GPU Operator API. The `_globalThreads` call give finer control of thread allocation to optimize the parallelism of the operation. In this case, one thread per tensor element is allocated. For a color image of 32 by 32 pixels, 3072 (32x32x3) threads are allocated. Each allocated thread can deduce its identity from the field constants, `_row`, `_column` and `_tensorElement` in this case. All thread use the `_columns` constant which is the number of columns in the field. Each thread does a `_readTensorElement` to read the appropriate tensor element from the field. Then the `_writeTensorElement` call writes out to `_out0`, the first output field. Up to ten output fields are allowed, `_out0` through `_out9`. In this example the GPU operator is reading the columns from the right, and writing them out from the left to achieve a horizontal reflection.
 
-    
-This example can be found in the tutorial in  [HorizontalReflectionGPU.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/GPUOperatorExample.scala).     
+This GPU Operator is used in  [HorizontalReflectionGPU.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/HorizontalReflectionGPU.scala).     
 
-- input and name of the operator
-- _globalThreads for thread allocation
-- constants _columns, _column
-- readTensorElement (inverting columns, rows stay same)
-- writeTensorElement
+In [HorizontalReflectionRandomGPU.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/HorizontalReflectionRandomGPU.scala.scala), an additional CPU `Operator` is invoked to randomly decide whether to do the horizontal reflection or not. The random 0 or 1 is generated on the CPU. Then the GPU can read the result and apply it. When running this example, you may need to `step` through the graph a couple of times to see a horizontal reflection of the image.      
 
-Note that a leading underscore, _, appears on all supplied functions in GPU operators. This prevents collisions with similar Scala keywords and functions, and also reminds you that you are writing code that will run on a GPU.
+Note that a leading underscore, `_`, appears on all supplied functions in GPU operators. This prevents collisions with similar Scala keywords and functions, and also reminds you that you are writing code that will run on a GPU.
 
-*GPUOperators* are described in a separate document, *User-defined GPU Opererars* document available [here](https://github.com/hpe-cct/cct-core/tree/master/doc/UserGPUOperators.docx).
+*GPUOperators* are described in more detail in the *User-defined GPU Operators* document available [here](https://github.com/hpe-cct/cct-core/tree/master/doc/UserGPUOperators.docx).
 
 ### User-defined CPU Operators
 
