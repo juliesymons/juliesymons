@@ -262,7 +262,7 @@ The following tutorial examples demonstrate the use of the feedback operator: [C
 
 The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs without the need to write low-level GPU kernels in CUDA or OpenCL. While there are many built-in operators already provided, there may still be other computations required that cannot be expressed by combining existing operators. For this the CCT Toolkit provides the capability for user-defined GPU operators through its *GPUOperators* API. *GPUOperators* provides a high-level, domain-specific language (DSL) for writing GPU kernels. This facility is recommended for more advanced users who have some familiarity with GPU hardware architecture and perofrmance issues.  
 
-The following tutorial example uses a GPU operator to do a horizontal reflection of an image: [GPUOperatorExample](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/GPUOperatorExample.scala). 
+The following code defines a GPU operator to do a horizontal reflection of an image: 
 
     GPUOperator(img.fieldType, "horizontalRefection") {
       _globalThreads(img.fieldShape, img.tensorShape)
@@ -272,6 +272,11 @@ The following tutorial example uses a GPU operator to do a horizontal reflection
       _writeTensorElement(_out0, x, _tensorElement)
     }
     
+In this example, the `GPUOperator` is defined by the input `fieldType` and given an optional string name "horizontalReflection". Inside the `GPUOperator` the leading underscore distinguishes the supplied functions of the GPU Operator API. The `_globalThreads call give finer control of thread allocation to optimize the parallelism of the operation. In this case, one thread per tensor element is allocated. For a color image of 32 by 32 pixels, 3072 (32x32x3) threads are allocated. Each allocated thread can deduce its identity from the field constants, _row and _column (and _layer) in this case. 
+
+    
+This example can be found in the tutorial in  [HorizontalReflectionGPU.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/GPUOperatorExample.scala).     
+
 - input and name of the operator
 - _globalThreads for thread allocation
 - constants _columns, _column
