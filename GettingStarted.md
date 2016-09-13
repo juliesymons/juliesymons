@@ -286,13 +286,22 @@ The `GPUOperator` API is described in more detail in the *User-defined GPU Opera
 
 The operators covered so far are compiled to execute on GPUs or some other multi-core compute resources. Some computations are more suited for execution on the CPU. Custom CPU operators can be written using the `Operator` class. 
 
-Two examples in cct-tutorial implement custom CPU operators.
+Two examples in cct-tutorial implement custom CPU operators. Here is a code snippet of a CPU operator:
 
-RandomFlip and UpsideDown - add descriptions here.
+    object RandomFlipOperator extends Operator {
+      def compute(in: ScalarFieldReader, out: ScalarFieldWriter): Unit = {
+        out.setShape(in.fieldShape)
+        val rng = new Random()
+        val x = Math.abs(rng.nextInt) % 2 // hard-coded to return 0 or 1
+        out.write(0,x)
+      }
+    }
+    
+This CPU `Operator` is called by [HorizontalReflectionRandomGPU.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/HorizontalReflectionRandomGPU.scala.scala), which was introduced in the previous section.
 
+The second example,`UpsideDownOperator`, does a vertical reflection of an image on the CPU and is similar to the `GPUOperator` that does horizontal reflection.  It is called by [UpsideDownCPU.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/UpsdieDownCPU.scala.scala).
 
-Although this adds flexibility, custom operators can be a performance bottleneck since that may not parallelize well on a CPU. These are described in the "User-defined operators" section (4.17) of the [CCT Programming Tutorial] (http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf).
-
+Although this `Operator` API adds flexibility, custom CPU operators can be a performance bottleneck since they may not parallelize well on a CPU. Additional detail about CPU operators can be found in the "User-defined operators" section (4.17) of the [CCT Programming Tutorial] (http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf).
 
 ## Compute Graph
 
