@@ -26,9 +26,9 @@ The HPE Cognitive Computing Toolkit (CCT) is a GPU-accelerated platform for deep
 
 The CCT platform is software platform for developing-massively parallel applications that execute on multi-core processors such as GPUs. CCT differs from most other parallel programming paradigms (such as MPI, actors, transactional memory) by exposing the parallelism implicitly in the programming model rather than through explicit mechanisms and data structures. The model contains no threads, locks, message queues, critical sections, or races. It is a deterministic, massively-parallel programming model. It is also a declarative dataflow programming model, meaning that a CCT application describes the structure of the computation, not sequential actions.
 
-For more detailed information, a draft of the CCT programming guide is available
+For more detailed information, a draft of the CCT Programming Tutorial document is available
 [here](http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf). Note that
-this is an early document, and still refers to CCT by its original internal
+this document still refers to CCT by its original internal
 working name (Cog ex Machina or Cog).
 
 ### Language
@@ -284,7 +284,7 @@ The `GPUOperator` API is described in more detail in the *User-defined GPU Opera
 
 ### User-defined CPU Operators
 
-The operators covered so far are compiled to execute on GPUs or some other multi-core compute resources. Some computations are more suited for execution on the CPU. Custom CPU operators can be written using the `Operator` class. Although this adds flexibility, custom operators can be a performance bottleneck since that may not parallelize well on a CPU. These are described in the "User-defined operators" section (4.17) of the [CCT programming guide] (http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf).
+The operators covered so far are compiled to execute on GPUs or some other multi-core compute resources. Some computations are more suited for execution on the CPU. Custom CPU operators can be written using the `Operator` class. Although this adds flexibility, custom operators can be a performance bottleneck since that may not parallelize well on a CPU. These are described in the "User-defined operators" section (4.17) of the [CCT Programming Tutorial] (http://hpe-cct.github.io/docs/CogProgrammingTutorial_4_1.pdf).
 
 
 ## Compute Graph
@@ -300,7 +300,7 @@ Several examples in this tutorial demonstrate some of the basic uses of the *com
 The most common methods of a compute graph are step, reset, and release. Save, too.  
 
 
-The Programming Cog Applications chapter of the Programming Guide has a lot of detail about the internals of  compute graph For more details about the tick two steps reset
+The Programming Cog Applications chapter of the Programming Tutorial document has a lot of detail about the internals of  compute graph For more details about the tick two steps reset
 
 
  
