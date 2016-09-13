@@ -260,9 +260,9 @@ The following tutorial examples demonstrate the use of the feedback operator: [C
 
 ### User-defined GPU Operators
 
-The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs without the need to write low-level GPU kernels in CUDA or OpenCL. While there are many built-in operators already provided, there may still be other computations required that cannot be expressed by combining existing operators. For this the CCT Toolkit provides the capability for user-defined GPU operators through its *GPUOperators* API. *GPUOperators* provides a high-level, domain-specific language (DSL) for writing GPU kernels. This facility is recommended for more advanced users who have some familiarity with GPU hardware architecture and perofrmance issues.  
+The CCT Toolkit is optimized for writing massiely-parallel programming on GPUs without the need to write low-level GPU kernels in CUDA or OpenCL. While there are many built-in operators already provided, there may still be other computations required that cannot be expressed by combining existing operators. For this the CCT Toolkit provides the capability for user-defined GPU operators through its `GPUOperator` API. `GPUOperator` provides a high-level, domain-specific language (DSL) for writing GPU kernels. This facility is recommended for more advanced users who have some familiarity with GPU hardware architecture and perofrmance issues.  
 
-The following code defines a GPU operator to do a horizontal reflection of an image: 
+The following code defines a `GPUOperator` to do a horizontal reflection of an image: 
 
     GPUOperator(img.fieldType, "horizontalRefection") {
       _globalThreads(img.fieldShape, img.tensorShape)
@@ -274,13 +274,13 @@ The following code defines a GPU operator to do a horizontal reflection of an im
     
 In this example, the `GPUOperator` is defined by the input `fieldType` and given an optional string name `horizontalReflection`. Inside the `GPUOperator` the leading underscore distinguishes the supplied functions of the GPU Operator API. The `_globalThreads` call give finer control of thread allocation to optimize the parallelism of the operation. In this case, one thread per tensor element is allocated. For a color image of 32 by 32 pixels, 3072 (32x32x3) threads are allocated. Each allocated thread can deduce its identity from the field constants, `_row`, `_column` and `_tensorElement` in this case. All thread use the `_columns` constant which is the number of columns in the field. Each thread does a `_readTensorElement` to read the appropriate tensor element from the field. Then the `_writeTensorElement` call writes out to `_out0`, the first output field. Up to ten output fields are allowed, `_out0` through `_out9`. In this example the GPU operator is reading the columns from the right, and writing them out from the left to achieve a horizontal reflection.
 
-This GPU Operator is used in  [HorizontalReflectionGPU.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/HorizontalReflectionGPU.scala).     
+This `GPUOperator` is used in  [HorizontalReflectionGPU.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/HorizontalReflectionGPU.scala).     
 
 In [HorizontalReflectionRandomGPU.scala](https://github.com/hpe-cct/cct-tutorial/blob/master/src/main/scala/tutorial/libcog/operators/HorizontalReflectionRandomGPU.scala.scala), an additional CPU `Operator` is invoked to randomly decide whether to do the horizontal reflection or not. The random 0 or 1 is generated on the CPU. Then the GPU can read the result and apply it. When running this example, you may need to `step` through the graph a couple of times to see a horizontal reflection of the image.      
 
-Note that a leading underscore, `_`, appears on all supplied functions in GPU operators. This prevents collisions with similar Scala keywords and functions, and also reminds you that you are writing code that will run on a GPU.
+Note that a leading underscore, `_`, appears on all supplied functions in `GPUOperator`. This prevents collisions with similar Scala keywords and functions, and also reminds you that you are writing code that will run on a GPU.
 
-*GPUOperators* are described in more detail in the *User-defined GPU Operators* document available [here](https://github.com/hpe-cct/cct-core/tree/master/doc/UserGPUOperators.docx).
+The `GPUOperator` API is described in more detail in the *User-defined GPU Operators* document available [here](https://github.com/hpe-cct/cct-core/tree/master/doc/UserGPUOperators.docx).
 
 ### User-defined CPU Operators
 
