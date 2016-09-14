@@ -5,6 +5,25 @@
 ![](./media/image2.jpeg)
 
 [//]: # (Table of Content {#table-of-content .TOCHeading})
+
+## do this style TOC
+
+*   [Intro](#intro)
+*   [Abstractions](#abstractions)
+*   [Introductory Examples](#introductory-examples)
+*   [Tensor Fields](#tensor-fields)
+      *    [Sensors](#sensors)
+         *    [cct-io Sensors](#cct-io-sensors)
+         *    [cct-nn Sensors](#cct-nn-sensors)
+      *    [Actuators](#actuators)
+*   [Operators](#operators)
+      * [Built-in Operators](#built-in-operators)   
+      * [The Feedback Operator](#the-feedback-operator)
+      * [User-defined GPU Operators](#user-defined-gpu-operators)  
+      * [User-defined CPU Operators](#user-defined-cpu-operators)  
+*   [Coming Soon](#coming-soon)
+
+
 ## Table of Contents
 
 1. [Introduction](1-introduction)
