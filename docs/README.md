@@ -449,7 +449,7 @@ into Sensor and Actuator operation.
 All field operations in Cog are expressed using operators, described in
 this chapter.
 
-### Arithmetic: + - * /
+### Arithmetic
 
 Two dynamic fields may be combined arithmetically if: (1) both fields
 have the same field shape, or at least one of the field shapes is
