@@ -171,7 +171,7 @@ tensors in the field having exactly the same order and shape. A field
 may have zero, one, two or three dimensions. A zero-dimensional field
 holds a single tensor.
 
-![](./media/diagram1.png)
+![](./media/diagram2.png)
 
 The following field types are supported by the Cog core, and additional
 field types may be defined by the user:
