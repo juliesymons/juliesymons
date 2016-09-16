@@ -744,45 +744,105 @@ Similarly a vector field can be sliced to form a scalar field:
 ### Trimming and Expanding
 
 The `trim` operator reduces the field size of a field by discarding an
-unneeded border region. Conversely, the expand operator increases the
+unneeded border region. Conversely, the `expand` operator increases the
 field size of a field while supplying additional border elements per the
 specified `borderPolicy` argument.
 
-Here’s a simple example using trim and expand:
+Here’s a simple example using `trim` and `expand`:
 
-The supported border policies available with expand are BorderZero,
-BorderClamp and BorderCyclic. The BorderZero policy supplies 0.0f for
+    // Create a 2-dimensional scalar field with contents:
+    //     0  1  2
+    //     3  4  5
+    //     6  7  8
+	
+    val field = ScalarField(rows=3, columns=3, (r,c) => r*3+c)
+
+    // Trim the field to a smaller field shape with contents:
+    // 0  1
+    // 3  4
+
+    val trimmed = trim(field, Shape(2,2))
+  
+    // Expand the trimmed field back to a 3x3 shape, with new elements being 0:
+    //     0  1  0
+    //     3  4  0
+    //     0  0  0
+
+    val expanded = expand(trimmed, BorderZero, Shape(3,3))
+
+The supported border policies available with expand are `BorderZero`,
+`BorderClamp` and `BorderCyclic`. The `BorderZero` policy supplies `0.0f` for
 the additional border elements as shown in the previous example. With
-the BorderClamp policy, the border values along all four input edges are
+the `BorderClamp` policy, the border values along all four input edges are
 copied into the expanded output field, wrapping around as though the
 output field were a torus. This is useful when doing convolution with
 the FFT and one wishes to minimize border effects by "border clamping".
-And finally with the BorderCyclic policy, the supplied border values are
+And finally with the `BorderCyclic` policy, the supplied border values are
 taken from a cyclic “wrap-around” view of the input. This policy is
 useful when expanding a field size to make it a power of 2 in each
 dimension prior to performing a cyclic convolution using the FFT.
 Further numeric examples of expand with the various border policies are
 given in the Scaladoc.
 
-4.8 Shifting and Warping
-------------------------
+### Shifting and Warping
 
-The expand and trim operators just presented alter a field’s shape while
-preserving the data origin. Conversely, the shift and warp operators
+The `expand` and `trim` operators just presented alter a field’s shape while
+preserving the data origin. Conversely, the `shift` and `warp` operators
 move the origin of the data while preserving the field shape.
 
-Here’s a simple example using shift:
+Here’s a simple example using `shift`:
+
+    // Create a 2-dimensional scalar field with contents:
+    //     0  1  2
+    //     3  4  5
+    //     6  7  8
+	
+    val field = ScalarField(rows=3, columns=3, (r,c) => r*3+c)
+
+    // Shift the field 1 element up and 2 elements to the right:
+    // 0  0  3
+    // 0  0  6
+    // 0  0  0
+
+    val shifted = shift(field, -1, 2)
+  
+    // Shift the field *cyclicly* 1 element down and 1 element to the right:
+    // 8  6  7
+    // 2  0  1
+    // 5  3  4
+
+    val cyclic = shiftCyclic(field, 1, 1)
 
 Note that positive shift amounts shift the input down and to the right,
 while negative shift amounts shift the input up and to the left.
 
-The warp operator introduces the added power of dynamic and non-integral
-shift amounts. In its simplest form, the warp operator inputs a
-0-dimensional “guide” field whose tensor dimension is equal to the field
-dimension of the field to be shifted. The warp operator performs a
+The `warp` operator introduces the added power of dynamic and non-integral
+shift amounts. In its simplest form, the `warp` operator inputs a
+0-dimensional `guide` field whose tensor dimension is equal to the field
+dimension of the field to be shifted. The `warp` operator performs a
 bilinear interpolation of field points in response to non-integral shift
 amounts specified by the guide vector. Here’s an example of the use of
 warp:
+
+    // Create a 2-dimensional scalar field with contents:
+    //     0  1  2
+    //     3  4  5
+    //     6  7  8
+	
+    val field = ScalarField(rows=3, columns=3, (r,c) => r*3+c)
+
+    // Create a guide vector field (could in practice be dynamically changing)
+
+    val guide = VectorField(new Vector(0.5f, 0.5f))
+
+    // Shift the field by the guide, result is:
+    // 0.00  0.25  0.75
+    // 0.75  2.00  4.00
+    // 2.25  5.00  6.00
+
+    val shifted = warp(field, guide, BorderZero)
+  
+    // The center output (2.0) is the average of the shifted inputs 0, 1, 3 and 4.
 
 The above example shows how warp can be used to perform a uniform shift
 of an input field. In truth, the guide field can have a field shape
@@ -793,29 +853,43 @@ output point to determine which input point it is equal to (this
 specified).
 
 Finally note that the border policies associated with expand, namely
-BorderZero, BorderClamp and BorderCyclic, are supported.
+`BorderZero`, `BorderClamp` and `BorderCyclic`, are supported.
 
-4.9 Subfield and apply(Range)
+### Subfield and apply(Range)
 -----------------------------
 
-While the shift operator performs only shifting, and the trim operator
+While the `shift` operator performs only shifting, and the `trim` operator
 performs only trimming, there are additional operators that allow you to
 perform both functions at the same time.
 
-If you wish to extract a “window” or “subfield” of a field’s data and
+If you wish to extract a “window” or `subfield` of a field’s data and
 know the size and origin or that window at model compile time, then you
-can extract this subfield using the “apply(Range)” operator:
+can extract this subfield using the `apply(Range)` operator:
 
-However, if the origin of the subfield can only be dynamically
-determined (i.e. comes from a field), then you can use the subfield
+    val x = ScalarField(100, 100)
+
+    // Extract the center (50 x 50) subfield of x and place in y:
+    y = x(25 to 75, 25 to 75)
+
+However, if the origin of the `subfield` can only be dynamically
+determined (i.e. comes from a field), then you can use the `subfield`
 operator:
 
+    val x = ScalarField(100, 100)
+    val windowShape = Shape(50, 50)
+
+    // Create a guide vector field (could in practice be dynamically changing)
+
+    val guide = VectorField(new Vector(25, 25))
+
+    // Extract a (50 x 50) subfield of dynamic origin from x and place in y:
+    y = subfield(x, guide, windowShape, BorderZero)
+
 Finally note that the border policies associated with warp, namely
-BorderZero, BorderClamp and BorderCyclic, are supported by subfield, as
+`BorderZero`, `BorderClamp` and `BorderCyclic`, are supported by `subfield`, as
 is the bilinear interpolation of elements for non-integral guide values.
 
-4.10 Tensor Reductions
-----------------------
+### Tensor Reductions
 
 Tensor reduction operators allow you to take a field with tensors of
 order 1 or more, and map it to a scalar field (with tensors of order 0).
