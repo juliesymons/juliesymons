@@ -1042,7 +1042,7 @@ operator:
       val flipped = upsideDown(field) named "flipped"
     }
 
-Which produces the following result:
+It produces the following result:
 
 ![](./media/image12.jpeg)
 
@@ -1075,17 +1075,15 @@ optimized kernels for the GPU based on that description.
 Because of the intricacies of writing GPUOperators, their use is
 described in a separate document *User-defined GPU Operators on Cog X*.
 
-4.17 Further operator documentation
------------------------------------
+### Further operator documentation
 
 The operators described thus far are some of the most important ones
 available within the Cog programming framework. However, a fair number
 of additional Cog operators exist that are perhaps used less often or
-only within certain modeling domains. Please see appendix A for
+only within certain modeling domains. Please see [Appendix A: Field Operator and Function API](#appendix-a-field-operator-and-function-api) for
 documentation of all Cog operators.
 
-5. Programming Cog Applications
-===============================
+## Programming Cog Applications
 
 Although we’ve discussed tensor fields and the operators that can
 combine them into new tensor fields, we’ve not yet shown how use them to
@@ -1094,8 +1092,7 @@ starting with simple feed-forward computation then moving to computation
 with feedback for implementing applications that need to adapt and
 learn.
 
-5.1 Feed-forward computation
-----------------------------
+### Feed-forward computation
 
 The following figure shows the high level model for feed-forward
 computation. External data is brought in to the computation through
