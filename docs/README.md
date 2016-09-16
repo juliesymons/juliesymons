@@ -58,8 +58,7 @@ Massively scalable computing made easy
 * [Appendix A: Field Operator and Function API](#appendix-a-field-operator-and-function-api)
 
 
-1. Introduction
-===============
+## Introduction
 
 Cog ex Machina, or “Cog” for short, is a software platform for
 developing autonomous, adaptive, massively-parallel applications that
@@ -87,14 +86,12 @@ the complete API as an appendix. The companion document, *Cog System
 Setup Guide*, explains how to install Cog on a single machine or
 cluster.
 
-1.1 Language
-------------
+### Language
 
 Cog is written in the Scala programming language which runs on the Java
 Virtual Machine (JVM).
 
-1.2 Libraries
--------------
+### Libraries
 
 Cog is distributed as a set of Scala libraries, and is organized in
 three components: the core library, a graphical debugger, and an I/O
@@ -109,7 +106,7 @@ system necessary to optimize and distribute a Cog application.
 
 The debugger is accessed by importing:
 
-import cogdebugger.\_
+> import cogdebugger.\_
 
 cogdebugger provides a graphical debugger that is used for
 single-stepping and probing the internals of a Cog application as it
@@ -117,19 +114,17 @@ runs.
 
 The I/O library is accessed by importing:
 
-import cogio.\_
+> import cogio.\_
 
 cogio provides a set of objects useful for getting data into and out of
 a running Cog app using the field initialization, sensor, and actuator
 primitives that are part of the core Cog API.
 
-1.3 Versioning
---------------
+### Versioning
 
 This document refers to Cog version 4.1.
 
-2. Abstractions
-===============
+## Abstractions
 
 The Cog programming model has three core abstractions: *tensor fields*,
 *operators*, and *compute graphs*. A *tensor field* is a
