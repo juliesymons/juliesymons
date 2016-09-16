@@ -1,70 +1,36 @@
 #Cog 4.1 Programming Tutorial
 
+Massively scalable computing made easy
 
 [//]: # (![](./media/image2.jpeg){width="8.35in" height="10.85in"})
-![](./media/image2.jpeg)
+[//]: # ![](./media/image2.jpeg)
 
 [//]: # (Table of Content {#table-of-content .TOCHeading})
 
-## do this style TOC
-
-*   [Intro](#intro)
-*   [Abstractions](#abstractions)
-*   [Introductory Examples](#introductory-examples)
-*   [Tensor Fields](#tensor-fields)
-      *    [Sensors](#sensors)
-         *    [cct-io Sensors](#cct-io-sensors)
-         *    [cct-nn Sensors](#cct-nn-sensors)
-      *    [Actuators](#actuators)
-*   [Operators](#operators)
-      * [Built-in Operators](#built-in-operators)   
-      * [The Feedback Operator](#the-feedback-operator)
-      * [User-defined GPU Operators](#user-defined-gpu-operators)  
-      * [User-defined CPU Operators](#user-defined-cpu-operators)  
-*   [Coming Soon](#coming-soon)
-
-
 ## Table of Contents
 
-1. [Introduction](1-introduction)
-    1.  [Language](#11-language)
-    2.  [Libraries](#12-libraries)
-    3.  [Versioning](#versioning)
-2. [Abstractions](#abstractions)
-
-[2.1 Tensor Fields 6](#tensor-fields)
-
-[2.2 Operators 7](#operators)
-
-[2.3 Compute Graphs 8](#compute-graphs)
-
-[3. Introductory Examples 9](#introductory-examples)
-
-[3.1 Hello, World 9](#hello-world)
-
-[3.2 Operators 11](#operators-1)
-
-[3.3 Sensors 13](#sensors)
-
-[3.4 Actuators 14](#actuators)
-
-[4. Operators 15](#operators-2)
-
-[4.1 Arithmetic: + - \* / 15](#arithmetic--)
-
-[4.2 Convolution 16](#convolution)
-
-[4.3 Real unary operators 17](#real-unary-operators)
-
-[4.4 Real binary operators 17](#real-binary-operators)
-
-[4.5 Complex operators 18](#complex-operators)
-
-[4.6 Stacking and Slicing 19](#stacking-and-slicing)
-
-[4.7 Trimming and Expanding 21](#trimming-and-expanding)
-
-[4.8 Shifting and Warping 22](#shifting-and-warping)
+*   [Introduction](#introduction)
+     * [Language](#language)
+     * [Libraries](#libraries)
+     * [Versioning](#versioning)
+*   [Abstractions](#abstractions)
+     * [Tensor Fields](#tensor-fields)
+     * [Operators](#operators)
+     * [Compute Graphs](#compute-graphs)
+* [Introductory Examples](#introductory-examples)
+     * [Hello, World](#hello-world)
+     * [Operators](#operators-1)
+     * [Sensors](#sensors)
+     * [Actuators](#actuators)
+* [Operators](#operators-2)
+     * [Arithmetic: + - \* /](#arithmetic--)
+     * [Convolution](#convolution)
+     * [Real unary operators](#real-unary-operators)
+     * [Real binary operators](#real-binary-operators)
+     * [Complex operators](#complex-operators)
+     * [Stacking and Slicing](#stacking-and-slicing)
+     * [Trimming and Expanding](#trimming-and-expanding)
+     * [Shifting and Warping 22](#shifting-and-warping)
 
 [4.9 Subfield and apply(Range) 23](#subfield-and-applyrange)
 
@@ -120,6 +86,23 @@
 
 [Appendix A: Field Operator and Function API
 41](#appendix-a-field-operator-and-function-api)
+  
+    
+*   [Tensor Fields](#tensor-fields)
+      *    [Sensors](#sensors)
+         *    [cct-io Sensors](#cct-io-sensors)
+         *    [cct-nn Sensors](#cct-nn-sensors)
+      *    [Actuators](#actuators)
+*   [Operators](#operators)
+      * [Built-in Operators](#built-in-operators)   
+      * [The Feedback Operator](#the-feedback-operator)
+      * [User-defined GPU Operators](#user-defined-gpu-operators)  
+      * [User-defined CPU Operators](#user-defined-cpu-operators)  
+*   [Coming Soon](#coming-soon)
+
+
+
+
 
 1. Introduction
 ===============
