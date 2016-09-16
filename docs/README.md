@@ -98,7 +98,7 @@ library.
 
 The core Cog library may be accessed with a single import statement:
 
-    `import libcog._`
+    import libcog._
 
 libcog implements the Cog API and contains the compiler and runtime
 system necessary to optimize and distribute a Cog application.
