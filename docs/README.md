@@ -545,75 +545,82 @@ This example details how you can initialize fields in Cog: you must
 supply the shape and type of the field along with a function object
 which defines how to initialize it. In this case we simply define a 2D
 array by hand and then access that array in the constructor function.
-After defining the filter we perform the convolution with the convolve
-operator. Note that the convolve operator requires a BorderPolicy, which
+After defining the filter we perform the convolution with the `convolve`
+operator. Note that the `convolve` operator requires a `BorderPolicy`, which
 defines how the border is handled during convolution. Here’s what you’ll
 see when you execute this program:
 
-![](./media/image9.png){width="6.405555555555556in"
-height="3.9791666666666665in"}
+![](./media/image9.png)
 
-4.3 Real unary operators
-------------------------
+### Real unary operators
 
 All real dynamic fields (scalar, vector and matrix) may have the
 following operators applied to each numeric component of each tensor in
 the field. The result is a field with the same type and shape as the
 input.
 
+    abs  acos  acosh  asin  cos  cosh  exp  floor  log  signum
+    sin  sinh  sq     sqrt  tan  tanh  - (unary minus)  
+
 The following operators take a real dynamic field and constant scalar as
 operands and compute a result by applying the operator to each tensor
 element independently. Since these operations involve only one field
 operand, they are listed here as unary operators:
 
-The constant operand supplied in the user’s code must be a Float or an
-Int. While the pow operator accepts both integer and floating point
-constants, all other operators will effectively convert an Int operand
-to a Float before the operation proceeds. Double (i.e. 64-bit floating
-point) constants are not accepted syntactically- use toFloat() or append
-an ‘f’ as in 0.0f. The operators that test for equality and inequality
-include three ‘=’ characters to avoid confusion with their Scala
-counterparts ‘==’ and ‘!=’.
+    +  -  *  /  %  >  >=  <  <=  ===  !===  
+    pow  max  min
 
-4.4 Real binary operators
--------------------------
+The constant operand supplied in the user’s code must be a `Float` or an
+`Int`. While the `pow` operator accepts both integer and floating point
+constants, all other operators will effectively convert an `Int` operand
+to a `Float` before the operation proceeds. Double (i.e. 64-bit floating
+point) constants are not accepted syntactically, use `toFloat()` or append
+an `f` as in `0.0f`. The operators that test for equality and inequality
+include three `=` characters to avoid confusion with their Scala
+counterparts `==` and `!=`.
+
+### Real binary operators
 
 The following binary operators take two real fields (scalar, vector or
 matrix) with the same shape and produce a result of the same shape with
 elements created by applying the binary operator to corresponding
 elements in the two input fields:
 
+    +  -  *  /  %  >  >=  <  <=  ===  !===  max  min  atan2
+
 As discussed in section 4.1, these operators also work if one of the
 operands has a 0D field shape and/or 0D tensor shape. In these cases,
 the data of these degenerate inputs is conceptually replicated along the
 missing field shape or tensor shape dimensions.
 
-4.5 Complex operators
----------------------
+### Complex operators
 
 Complex fields are particularly useful for processing in the frequency
 domain. Many algorithms involve correlations across a field; those can
 often be performed much more efficiently by transforming the algorithm
 between the space and frequency domains using the fast Fourier
-transform. The standard complex binary arithmetic operators (+, -, \*,
-/) are supported for complex fields as are the following unary
+transform. The standard complex binary arithmetic operators `+, -, *,
+/` are supported for complex fields as are the following unary
 operators:
+
+    exp  conjugate  - (unary minus)
 
 While the above complex unary operators produce complex fields, the
 following additional operators produce real fields:
 
-Here’s a screenshot of a complex field application, BoundaryCompletion
-(in the tutorial.toolkit.filtering package), that solves the problem of
+    phase  orientation  magnitude  realPart  imaginaryPart
+
+Here’s a screenshot of a complex field application, `BoundaryCompletion`
+(in the `tutorial.toolkit.filtering package`), that solves the problem of
 “filling-in” broken straight and curved line segments, a necessary step
 for recognizing partially occluded objects. This application uses a
 number of tricks, including data compression, steerable theory, and
 frequency domain convolution, to enable real-time completion of
 boundaries:
 
-![](./media/image11.png){width="6.0in" height="4.263888888888889in"}
+![](./media/image11.png)
 
-4.6 Stacking and Slicing
-------------------------
+### Stacking and Slicing
 
 In addition to the transformations already discussed, such as algebraic
 combinations or convolution, it’s sometimes necessary to merge or break
