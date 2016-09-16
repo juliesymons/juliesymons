@@ -100,23 +100,23 @@ The core Cog library may be accessed with a single import statement:
 
     import libcog._
 
-libcog implements the Cog API and contains the compiler and runtime
+`libcog` implements the Cog API and contains the compiler and runtime
 system necessary to optimize and distribute a Cog application.
 
 The debugger is accessed by importing:
 
-    `import cogdebugger._`
+    import cogdebugger._
 
-cogdebugger provides a graphical debugger that is used for
+`cogdebugger` provides a graphical debugger that is used for
 single-stepping and probing the internals of a Cog application as it
 runs.
 
 The I/O library is accessed by importing:
 
-    `import cogio._`
+    import cogio._
 
-cogio provides a set of objects useful for getting data into and out of
-a running Cog app using the field initialization, sensor, and actuator
+`cogio` provides a set of objects useful for getting data into and out of
+a running Cog app using the field initialization, `sensor`, and `actuator`
 primitives that are part of the core Cog API.
 
 ### Versioning
@@ -145,10 +145,9 @@ provide control loops and learning. Restricting the programming model to
 these simple abstractions provides sufficient information for the Cog
 compiler to optimize computation across operators and distribute
 computation efficiently on systems that scale from one CPU to clusters
-of millionsof GPU cores.
+of millions of GPU cores.
 
-2.1 Tensor Fields
------------------
+### Tensor Fields
 
 The word *tensor* has different connotations in math, physics and
 engineering, but we will use the simplest definition that appears to be
@@ -159,19 +158,30 @@ a tensor’s array of numbers is called the tensor’s *order*. An order-0
 tensor is called a scalar and contains a single number. An order-1
 tensor is called a vector and contains one or more numbers. An order-2
 tensor is called a matrix. Higher order tensors don’t have generally
-agreed-upon names, so Cog calls these Tensor3, Tensor4, etc…, where the
-numeric suffix specifies the order. Currently Tensor3 is the highest
+agreed-upon names, so Cog calls these `Tensor3`, `Tensor4`, etc., where the
+numeric suffix specifies the order. Currently `Tensor3` is the highest
 order tensor supported in Cog, though this can easily be extended. Here
 are some graphical examples, where each red dot denotes a number /
 element:
+
+<insert diagram 1 here>
 
 A *tensor field* is a multidimensional array of tensors, with all
 tensors in the field having exactly the same order and shape. A field
 may have zero, one, two or three dimensions. A zero-dimensional field
 holds a single tensor.
 
+< insert diagram here> 
+
 The following field types are supported by the Cog core, and additional
 field types may be defined by the user:
+
+     ScalarField
+     VectorField
+     MatrixField
+     ComplexField (a scalar field with complex elements)
+     ComplexVectorField (a vector field with complex elements)
+     ColorField (a field where each order-1 tensor is a pixel)
 
 Each tensor of a ScalarField has a single real tensor element, whereas
 each tensor of a ComplexField has a single complex tensor element.
