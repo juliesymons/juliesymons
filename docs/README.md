@@ -183,15 +183,15 @@ field types may be defined by the user:
      ComplexVectorField (a vector field with complex elements)
      ColorField (a field where each order-1 tensor is a pixel)
 
-Each tensor of a ScalarField has a single real tensor element, whereas
-each tensor of a ComplexField has a single complex tensor element.
-VectorFields and MatrixFields generally have multiple tensor elements
-per tensor. The tensor elements of the real fields (the ScalarFields,
-VectorFields and MatrixFields) are 32-bit floating point values
+Each tensor of a `ScalarField` has a single real tensor element, whereas
+each tensor of a `ComplexField` has a single complex tensor element.
+`VectorField` and `MatrixField` generally have multiple tensor elements
+per tensor. The tensor elements of the real fields (the `ScalarField`,
+`VectorFields` and `MatrixFields`) are 32-bit floating point values
 (“floats”), while the tensor elements of the complex fields
-(ComplexField and ComplexVectorField) are complex numbers whose real and
-imaginary components are also floats. A ColorField is actually a vector
-field holding three low-precision (8-bit) integer values. A ColorField
+(`ComplexField` and `ComplexVectorField`) are complex numbers whose real and
+imaginary components are also floats. A `ColorField` is actually a vector
+field holding three low-precision (8-bit) integer values. A `ColorField`
 vector, also called a pixel, holds three, 8-bit color channels (red,
 green, blue).
 
@@ -255,10 +255,10 @@ user-specified initial value by calling a `reset` method.
 
 ## Introductory Examples
 
-A ComputeGraph can be embedded within an application, but it is easier
+A `ComputeGraph` can be embedded within an application, but it is easier
 to learn the programming model and develop apps by using the Cog
 debugger, a graphical tool that allows you to step, reset, and “peek
-inside” a ComputeGraph to visualize the computation while it executes.
+inside” a `ComputeGraph` to visualize the computation while it executes.
 We will primarily use the debugger along with some visual examples for
 the purposes of exhibition in this guide, but keep in mind that the
 debugger generally will not be used for app deployment and the Cog model
@@ -280,21 +280,21 @@ Let’s start with a simple `ComputeGraph` that runs in the debugger:
       }
     )
 
-The Cog debugger wraps the compute graph, emulating the embedding of the
+The Cog debugger wraps the `computeGraph`, emulating the embedding of the
 graph in an application. Note that applications may create and control
-multiple ComputeGraphs if desired, but ComputeGraphs may not be nested.
+multiple compute graphs if desired, but compute graphs may not be nested.
 In the above code, the `import libcog._` statement provides your
 program access to all Cog functionality. The `import cogdebugger._`
 gives access to the Cog debugger.
 
-This application contains a two-dimensional scalar field named
+This application contains a two-dimensional `ScalarField` named
 `counter`. If you compile and run the above application, you will see a
 window that looks like this:
 
 ![](./media/image3.png)
 
 The blue box in the upper left labeled “counter” is the graphical
-representation of the field named “counter” in the code. The box label
+representation of the field named `counter` in the code. The box label
 text “counter” is taken from the variable name of the field in the code.
 Clicking on the blue box will cause a window to open which displays the
 current state of that field as a grayscale image:
@@ -442,7 +442,7 @@ executed, this will print the following to the console:
     4.0  5.0  6.0  7.0
 
 Please consult section [Feed-forward computation](#feed-forward-computation) for more insight
-into Sensor and Actuator operation.
+into `Sensor` and `Actuator` operations.
 
 ## Operators
 
@@ -457,7 +457,7 @@ Two dynamic fields may be combined arithmetically if: (1) both fields
 have the same field shape, or at least one of the field shapes is
 zero-dimensional; and (2) both fields have the same tensor shape, or at
 least one of the tensor shapes is zero-dimensional (i.e. the field is a
-ScalarField or ComplexField). The output field shape and tensor shape
+`ScalarField` or `ComplexField`). The output field shape and tensor shape
 are determined as described by the following pseudo-code:
 
     outFieldShape = if (is0D(in1FieldShape)) in2FieldShape else in1FieldShape
@@ -510,9 +510,36 @@ vector fields by using `colorField.toVectorField`.
 
 ### Convolution
 
-Two-dimensional ScalarFields, ComplexFields, and VectorFields can be
+Two-dimensional `ScalarField`, `ComplexField`, and `VectorField`'s can be
 convolved with a filter (expressed as a real or complex field). Here’s
 an example of applying a Laplacian filter to differentiate an input:
+
+    package tutorial.libcog.fields
+
+    import libcog._
+    import cogdebugger._
+    import cogio._
+
+    object Convolution extends CogDebuggerApp(
+      new ComputeGraph {
+        val leaves = GrayscaleImage("resources/leaves.jpg")
+
+        //manually define the elments in the filter
+        val filterElements = Array(
+          Array(0f, 1f, 0f),
+          Array(1f, -4f, 1f),
+          Array(0f, 1f, 0f)
+        )
+
+        //create a static filter field based on the filter elements
+        val filter = ScalarField(3,3, (r,c)=>filterElements(r)(c))
+
+        //perform convolution with the BorderClamp border policy
+        val filtered = convolve(leaves, filter, BorderClamp)
+
+        probeAll
+      }
+    )
 
 This example details how you can initialize fields in Cog: you must
 supply the shape and type of the field along with a function object
