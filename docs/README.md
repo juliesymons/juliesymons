@@ -632,12 +632,29 @@ tensor shapes, and combines them into a higher dimensional tensor field.
 Here’s an example of combining three 2-dimensional scalar fields into a
 single 3-dimensional scalar field:
 
+    // 2-dimensional scalar fields	
+    val field0 = ScalarField(Rows, Columns)
+    val field1 = ScalarField(Rows, Columns)
+    val field2 = ScalarField(Rows, Columns)
+
+    // Stacking creates a 3-dimensional field
+    val stackedField = stack(field0, field1, field2)
+
 Notice that the resulting stacked field has a one-higher dimension than
 the component fields that comprise it. This new dimension is indexed
 first.
 
 Stacking also works with higher-order fields, such as vector fields or
 matrix fields. Here’s an example of stacking vector fields:
+
+    // 2-dimensional vector fields	
+    val vectorShape = new Shape(5)
+    val field0 = VectorField(Rows, Columns, vectorShape)
+    val field1 = VectorField(Rows, Columns, vectorShape)
+    val field2 = VectorField(Rows, Columns, vectorShape)
+
+    // Stacking creates a 3-dimensional vector field
+    val stackedField = stack(field0, field1, field2)
 
 The stack operators shown so far increase the dimension of the component
 fields. It’s also possible to stack fields in a way that preserves the
@@ -648,8 +665,17 @@ fields into a vector field. The operator for stacking fields at the
 resulting field type. Here’s an example stacking 3 scalar fields into a
 vector field:
 
+    // 2-dimensional scalar fields	
+    val field0 = ScalarField(Rows, Columns)
+    val field1 = ScalarField(Rows, Columns)
+    val field2 = ScalarField(Rows, Columns)
+
+    // Create a 2-dimensional vector field, with each vector in the
+    // field of length 3
+    val stackedField = vectorField(field0, field1, field2)
+
 These “tensor stacking” operators also require that all input fields
-have exactly the same field and lattice tensor, just like the stack
+have exactly the same field and lattice tensor, just like the `stack`
 operator.
 
 In a very similar manner, you can also stack vector fields into a matrix
@@ -658,6 +684,15 @@ scalar fields that are being stacked; the number of columns is equal to
 the length of the vectors in the input vector fields. Here’s an example
 of stacking vector fields to a matrix field:
 
+    // 2-dimensional vector fields
+    val vectorShape = new Shape(5)	
+    val field0 = VectorField(Rows, Columns, vectorShape)
+    val field1 = VectorField(Rows, Columns, vectorShape)
+    val field2 = VectorField(Rows, Columns, vectorShape)
+
+    // Create a 2-dimensional matrix field. Each matrix has 3 rows, 5 columns
+    val stackedField = matrixField(field0, field1, field2)
+
 The inverse of stacking is “slicing,” and there are both field and
 tensor variants of it as well. Field slicing takes an N dimensional
 field and extracts an N-1 dimensional field indexed along the first
@@ -665,25 +700,53 @@ dimension. The field slicing operator is the Scala “apply” operator.
 Here’s an example of slicing a 2-dimensional scalar field to extract
 1-dimensional fields:
 
+    // 2-dimensional scalar field	
+    val field = ScalarField(Rows, Columns)
+
+    // Extract row 0 of field by slicing.
+    val row0 = field(0)
+  
+    // Extract row 1 of field by slicing.
+    val row1 = field(1)
+
 You may slice higher-order fields (vector fields, matrix fields) as
 well.
 
 Slicing at the “tensor level” rather than the “field level” may be done
-using the lattice slicing operators, vectorElement(index) or
-matrixRow(index). These operators return a field with the same field
+using the lattice slicing operators, `vectorElement(index)` or
+`matrixRow(index)`. These operators return a field with the same field
 shape as the input, but the order of the tensors in that returned field
 is one less than in the input field. For example, a matrix field can be
 sliced to a vector field:
 
+    // 2-dimensional matrix field
+    val matrixShape = new Shape(5, 7)	
+    val field = MatrixField(Rows, Columns, matrixShape)
+
+    // Extract row 0 of each matrix in “field,” creating a vector field.
+    val row0 = matrixRow(field, 0)
+    
+    // Extract row 1 of each matrix in “field,” creating a vector field.
+    val row1 = matrixRow(field, 1)
+
 Similarly a vector field can be sliced to form a scalar field:
 
-4.7 Trimming and Expanding
---------------------------
+    // 2-dimensional vector field
+    val vectorShape = new Shape(3)	
+    val field = VectorField(Rows, Columns, vectorShape)
 
-The trim operator reduces the field size of a field by discarding an
+    // Extract element 0 of each vector in “field,” creating a scalar field.
+    val element0 = vectorElement(field, 0)
+  
+    // Extract element 1 of each vector in “field,” creating a scalar field.
+    val element1 = vectorElement(field, 1)
+
+### Trimming and Expanding
+
+The `trim` operator reduces the field size of a field by discarding an
 unneeded border region. Conversely, the expand operator increases the
 field size of a field while supplying additional border elements per the
-specified “borderPolicy” argument.
+specified `borderPolicy` argument.
 
 Here’s a simple example using trim and expand:
 
