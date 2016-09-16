@@ -158,20 +158,20 @@ a tensor’s array of numbers is called the tensor’s *order*. An order-0
 tensor is called a scalar and contains a single number. An order-1
 tensor is called a vector and contains one or more numbers. An order-2
 tensor is called a matrix. Higher order tensors don’t have generally
-agreed-upon names, so Cog calls these `Tensor3`, `Tensor4`, etc., where the
-numeric suffix specifies the order. Currently `Tensor3` is the highest
+agreed-upon names, so Cog calls these Tensor3, Tensor4, etc., where the
+numeric suffix specifies the order. Currently Tensor3 is the highest
 order tensor supported in Cog, though this can easily be extended. Here
 are some graphical examples, where each red dot denotes a number /
 element:
 
-<insert diagram 1 here>
+![](./media/diagram1.png)
 
 A *tensor field* is a multidimensional array of tensors, with all
 tensors in the field having exactly the same order and shape. A field
 may have zero, one, two or three dimensions. A zero-dimensional field
 holds a single tensor.
 
-< insert diagram here> 
+![](./media/diagram1.png)
 
 The following field types are supported by the Cog core, and additional
 field types may be defined by the user:
