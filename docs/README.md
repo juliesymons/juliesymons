@@ -23,7 +23,7 @@ Massively scalable computing made easy
      * [Sensors](#sensors)
      * [Actuators](#actuators)
 * [Operators](#operators-2)
-     * [Arithmetic: + - \* /](#arithmetic--)
+     * [Arithmetic](#arithmetic)
      * [Convolution](#convolution)
      * [Real unary operators](#real-unary-operators)
      * [Real binary operators](#real-binary-operators)
@@ -451,12 +451,17 @@ this chapter.
 
 ### Arithmetic
 
+    +  -  *  /
+
 Two dynamic fields may be combined arithmetically if: (1) both fields
 have the same field shape, or at least one of the field shapes is
 zero-dimensional; and (2) both fields have the same tensor shape, or at
 least one of the tensor shapes is zero-dimensional (i.e. the field is a
 ScalarField or ComplexField). The output field shape and tensor shape
 are determined as described by the following pseudo-code:
+
+    outFieldShape = if (is0D(in1FieldShape)) in2FieldShape else in1FieldShape
+    outTensorShape = if (is0D(in1TensorShape)) in2TensorShape else in1TensorShape
 
 One caveat is that the output must have the same field shape and tensor
 shape as one of the inputs. Thus, the combination of a zero-dimensional
@@ -468,13 +473,42 @@ also.
 
 Some examples:
 
+    val fieldShape = Shape(100,100)
+    val bigFieldShape = Shape(200, 200)
+    val vectorShape = Shape(5)
+    val scalarField = ScalarField(fieldShape)
+    val bigScalarField = ScalarField(bigFieldShape)
+    val vectorField = VectorField(fieldShape, vectorShape)
+    val matrixField = MatrixField(fieldShape, Shape(7, 7))
+    val complexField = ComplexField(fieldShape)
+    val complexVectorField = ComplexVectorField(fieldShape, vectorShape)
+    val zeroDimScalarField = ScalarField(1.234f)
+    val zeroDimVectorField = VectorField(new Vector(5))
+
+    val x1 = scalarField + scalarField                 // OK
+    val x1c = complexField + complexField              // OK
+    val x2 = scalarField – bigScalarField              // ILLEGAL, different field shapes
+    val x3 = vectorField * scalarField                 // OK
+    val x3c = complexVectorField * scalarField         // OK
+    val x4 = vectorField / complexField                // OK
+    val x4c = complexVectorField / complexField        // OK
+    val x5v = vectorField * vectorField                // OK (element-wise multiplication)
+    val x5m = matrixField * matrixField                // OK (element-wise multiplication)
+    val x5c = complexMatrixField * matrixField         // OK (element-wise multiplication)
+    val x5c = complexVectorField * complexVectorField  // OK (element-wise multiplication)
+    val x5c2 = complexVectorField * vectorField        // OK (complex <op> real)
+    val x6 = vectorField + zeroDimVectorField       // OK, vector field <op> 0D vector field.
+    val x7 = vectorField + zeroDimScalarField       // OK, vector field <op> 0D scalar field.
+    val x8 = scalarField + zeroDimScalarField       // OK, scalar field <op> 0D scalar field.
+    val x9 = vectorField * matrixField        // ILLEGAL, incompatible tensor shapes
+    val x10 = scalarField + zeroDimVectorField // ILLEGAL, scalar field <op> 0D vector field
+
 Color fields are arithmetically incompatible with all other field types
 since their element type (color pixel) is non-numeric. If you want to
 perform operators on color fields you must first explicitly cast them as
-vector fields by using colorField.toVectorField.
+vector fields by using `colorField.toVectorField`.
 
-4.2 Convolution
----------------
+### Convolution
 
 Two-dimensional ScalarFields, ComplexFields, and VectorFields can be
 convolved with a filter (expressed as a real or complex field). Here’s
