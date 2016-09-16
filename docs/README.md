@@ -82,7 +82,7 @@ This manual is an informal tutorial about programming on Cog using a
 series of simple examples, most of which can be obtained from the Cog
 project’s **cct-tutorial** Git repository. This manual also discusses the Cog
 programming API at a high level, but then also includes links to the Scaladoc of
-the complete API in an appendix. The companion document, [[Download and Setup](https://github.com/hpe-cct/cct-tutorial/blob/master/DownloadAndSetup.md), 
+the complete API in an [appendix](#appendix-a-field-operator-and-function-api). The companion document, [Download and Setup](https://github.com/hpe-cct/cct-tutorial/blob/master/DownloadAndSetup.md), 
 explains how to install Cog on a single machine.
 
 ### Language
@@ -98,14 +98,14 @@ library.
 
 The core Cog library may be accessed with a single import statement:
 
-`import libcog._`
+    `import libcog._`
 
 libcog implements the Cog API and contains the compiler and runtime
 system necessary to optimize and distribute a Cog application.
 
 The debugger is accessed by importing:
 
-`import cogdebugger._`
+    `import cogdebugger._`
 
 cogdebugger provides a graphical debugger that is used for
 single-stepping and probing the internals of a Cog application as it
@@ -113,7 +113,7 @@ runs.
 
 The I/O library is accessed by importing:
 
-`import cogio._`
+    `import cogio._`
 
 cogio provides a set of objects useful for getting data into and out of
 a running Cog app using the field initialization, sensor, and actuator
