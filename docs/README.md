@@ -892,16 +892,26 @@ is the bilinear interpolation of elements for non-integral guide values.
 ### Tensor Reductions
 
 Tensor reduction operators allow you to take a field with tensors of
-order 1 or more, and map it to a scalar field (with tensors of order 0).
-In other words, they let you collapse a VectorField or MatrixField (or a
-higher order field) to a ScalarField.
+order 1 or more, and map it to a scalar field` (with tensors of order 0).
+In other words, they let you collapse a `VectorField` or `MatrixField` (or a
+higher order field) to a `ScalarField`.
 
 As an example, consider the problem of normalizing a vector field such
 that each vector in the field is normalized with either an L1 norm (the
 vector components sum to 1) or an L2 norm (the squares of the vector
 components sum to 1). Here’s how you can do this:
 
-The reduceSum operator maps each vector in the field to the sum of its
+    // 2-dimensional vector field, unnormalized
+    val vectorShape = new Shape(7)	
+    val field = VectorField(Rows, Columns, vectorShape)
+
+    // Normalize each vector in “field” (L1 norm)
+    val norm0 = field / reduceSum(field)
+
+    // Normalize each vector in “field” (L2 norm)
+    val norm1 = field / reduceSum(sq(field))
+
+The `reduceSum` operator maps each vector in the field to the sum of its
 component, which is a scalar. So the expressions in the above examples
 are each dividing a vector field by a scalar field, producing a
 (normalized) vector field as a result.
@@ -909,22 +919,50 @@ are each dividing a vector field by a scalar field, producing a
 Here’s an example of using this technique to approximate the max
 function using the L10 norm:
 
-There are two other tensor reduction operators, reduceMin and reduceMax,
+    // 2-dimensional vector field, unnormalized
+    val vectorShape = new Shape(7)	
+    val field = VectorField(Rows, Columns, vectorShape)
+
+    // Treat each vector in the field as a competitive shunting network;
+    // compute the approximate steady-state result.
+    val shunting = pow(field, 10) / reduceSum(pow(field, 10))
+    
+There are two other tensor reduction operators, `reduceMin` and `reduceMax`,
 which map each vector in the field to a scalar corresponding to the
 smallest or largest component of the vector, respectively. Here’s an
-example of using reduceMax to compute a “winner-take-all” version of a
+example of using `reduceMax` to compute a “winner-take-all” version of a
 vector field, where each vector has its largest component set to 1 and
 the rest set to 0:
+
+    // 2-dimensional vector field
+    val vectorShape = new Shape(7)	
+    val field = VectorField(Rows, Columns, vectorShape) {...}
+
+    // Winner-take-all for each vector in the “field” vector field.
+  
+    val winners = field === reduceMax(field)
 
 A final class of tensor reduction operators, designed to be useful in
 processing image and filter frames, take an additional integer “factor”
 argument and perform “block” tensor reductions. The block tensor
 reduction operators are:
+    
+    blockReduceSum    fieldReduceMax    fieldReduceMin
 
 The following example shows a block reduction:
 
-4.11 Field Reductions
----------------------
+    // 2-dimensional vector field
+    val vectorShape = new Shape(8)	
+    val field = VectorField(Rows, Columns, vectorShape) {...}
+
+    // Block reduction by a factor of 4, output will be a length-2 VectorField.
+    // For corresponding tensors of the input and output,
+    //     outTensor(0) = max(inTensor(0), inTensor(1), inTensor(2), inTensor(3))
+    //     outTensor(1) = max(inTensor(4), inTensor(5), inTensor(6), inTensor(7))
+  
+    val reduced = blockReduceMax(field, 4)
+
+### Field Reductions
 
 Field reduction operators allow you to take a multi-dimensional field
 and reduce it down to a zero dimensional field (with tensors of the same
