@@ -968,51 +968,63 @@ Field reduction operators allow you to take a multi-dimensional field
 and reduce it down to a zero dimensional field (with tensors of the same
 order). The field reduction operators are:
 
+    fieldReduceSum    fieldReduceMax    fieldReduceMin    fieldReduceMedian
+
 For example, if one had a two-dimensional scalar field with positive
 values that you wanted to bring into the range \[0,1\], one could write:
 
+    // 2-dimensional scalar field	
+    val field = ScalarField(Rows, Columns) {...}
+
+    // Scale values down so max value = 1.0f
+  
+    val scaled = field / fieldReduceMax(field)
+
 When the field reduction operators are applied to vector and matrix
 fields, they operate on each set of like-indexed tensor elements
-separately. For example, fieldReduceMax operating on a vector field of
+separately. For example, `fieldReduceMax` operating on a vector field of
 vector-length 3 would produce a single length-3 vector as its output.
 Each of the elements in the vector would be the maximum of the
 like-indexed “plane” of the input vector field.
 
-Another field reduction operator, maxPosition is similar to
-winnerTakeAll. However, maxPosition is restricted to operate on scalar
+Another field reduction operator, `maxPosition` is similar to
+`winnerTakeAll`. However, `maxPosition` is restricted to operate on scalar
 fields and returns the coordinates of the position holding the field’s
 maximum value (rather than the value itself). These coordinates are
 returned as a zero dimensional vector field of length equal to the field
 dimensionality of the input.
 
-4.12 WinnerTakeAll
-------------------
+### WinnerTakeAll
 
-The winnerTakeAll operator identifies the maximum value in the field
-with a 1.0f value, with all other values being set to 0.0f. Should there
+The `winnerTakeAll` operator identifies the maximum value in the field
+with a `1.0f` value, with all other values being set to `0.0f`. Should there
 be multiple field points with the same maximum, the lowest indexed field
 point (counting first along columns, then rows, then layers) is marked
 the winner.
 
-When winnerTakeAll is applied to vector and matrix fields, it operates
+When `winnerTakeAll` is applied to vector and matrix fields, it operates
 on each set of like-indexed tensor elements separately. For example,
-winnerTakeAll operating on a vector field of vector-length 3 would
-produce three 1.0f values, each having a different element index within
+`winnerTakeAll` operating on a vector field of vector-length 3 would
+produce three `1.0f` values, each having a different element index within
 its tensor (though not necessarily in the same tensor).
 
-4.13 Inner products
--------------------
+### Inner products
 
 Inner products of two fields are performed by taking dot products of
 corresponding tensors within the fields:
 
-4.14 ProjectFrame, BackProjectFrame and ConvolveFilterAdjoint
--------------------------------------------------------------
+    // Fields x, y have the same shape
+    val x, y: VectorField
+
+    // Compute dot product of corresponding tensors in x and y. 
+    // Result z is a scalar field
+    z = dot(x, y)
+
+### ProjectFrame, BackProjectFrame and ConvolveFilterAdjoint
 
 To be written.
 
-4.15 User-defined operators
----------------------------
+### User-defined operators
 
 Field operations are compiled to execute on GPUs or other multicore
 compute resources. However, you might occasionally need an operator that
@@ -1021,25 +1033,39 @@ cases you can write a custom operator. Although this gives great
 flexibility in using irregular operations, custom operators can be a
 performance bottleneck since they may not parallelize well on a CPU.
 
-Here’s an example of a custom operator, “upsideDown,” that takes a 2D
+Here’s an example of a custom operator, `upsideDown`, that takes a 2D
 scalar field and flips it upside down. Here’s a program that uses the
 operator:
 
+    new ComputeGraph {
+      val field = GrayscaleMovie("releaseResources/movies/SealSurfboard.mp4")
+      val flipped = upsideDown(field) named "flipped"
+    }
+
 Which produces the following result:
 
-![](./media/image12.jpeg){width="3.4791666666666665in"
-height="4.181395450568679in"}
+![](./media/image12.jpeg)
 
 The custom operator is implemented as follows:
 
+    /** Operator to flip a 2D scalar field upside down. */
+    object upsideDown extends Operator {
+      def compute(in: ScalarFieldReader, out: ScalarFieldWriter) {
+        out.setShape(in.fieldShape)
+        for (row <- 0 until in.rows; col <- 0 until in.columns) {
+          val pixel = in.read(row, col)
+          out.write(in.rows - row - 1, col, pixel)
+        }
+      }
+    }
+
 Because of the potential performance bottleneck of these user-defined
 operators, their use is discouraged in favor of the more powerful
-GPUOperator facility described next.
+`GPUOperator` facility described next.
 
-4.16 GPUOperators
------------------
+### GPUOperators
 
-GPUOperators deliver the power of GPU’s to user-defined operations. This
+`GPUOperator` delivers the power of GPUs to user-defined operations. This
 facility is recommended for the more advanced modeler who has some
 familiarity with GPU hardware architecture and performance issues. Keep
 in mind that when a user’s needs can be met through a composition of the
