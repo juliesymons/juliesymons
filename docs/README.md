@@ -3,7 +3,7 @@
 Massively scalable computing made easy
 
 [//]: # (![](./media/image2.jpeg){width="8.35in" height="10.85in"})
-[//]: # ![](./media/image2.jpeg)
+[//]: # (![](./media/image2.jpeg))
 
 [//]: # (Table of Content {#table-of-content .TOCHeading})
 
@@ -31,77 +31,31 @@ Massively scalable computing made easy
      * [Stacking and Slicing](#stacking-and-slicing)
      * [Trimming and Expanding](#trimming-and-expanding)
      * [Shifting and Warping 22](#shifting-and-warping)
-
-[4.9 Subfield and apply(Range) 23](#subfield-and-applyrange)
-
-[4.10 Tensor Reductions 24](#tensor-reductions)
-
-[4.11 Field Reductions 25](#field-reductions)
-
-[4.12 WinnerTakeAll 25](#winnertakeall)
-
-[4.13 Inner products 26](#inner-products)
-
-[4.14 ProjectFrame, BackProjectFrame and ConvolveFilterAdjoint
-26](#projectframe-backprojectframe-and-convolvefilteradjoint)
-
-[4.15 User-defined operators 26](#user-defined-operators)
-
-[4.16 GPUOperators 27](#gpuoperators)
-
-[4.17 Further operator documentation
-28](#further-operator-documentation)
-
-[5. Programming Cog Applications 29](#programming-cog-applications)
-
-[5.1 Feed-forward computation 29](#feed-forward-computation)
-
-[5.2 Feedback for adaptation 31](#feedback-for-adaptation)
-
-[5.3 Reset and step 32](#reset-and-step)
-
-[5.4 Programming styles in Cog: Think functional
-33](#programming-styles-in-cog-think-functional)
-
-[6. Debugging 34](#debugging)
-
-[6.1 Launching the Debugger 34](#launching-the-debugger)
-
-[6.2 Probing Fields 35](#probing-fields)
-
-[6.3 Controlling the Computation 35](#controlling-the-computation)
-
-[6.4 Viewing Compute Graph Structure
-36](#viewing-compute-graph-structure)
-
-[6.5 Visualizing Field Contents 39](#visualizing-field-contents)
-
-[6.6 Standard Field Visualizations 39](#standard-field-visualizations)
-
-[6.6.1 Scalar Fields 40](#scalar-fields)
-
-[6.6.2 Vector Fields 40](#vector-fields)
-
-[6.6.3 Matrix Fields 40](#matrix-fields)
-
-[Appendix A: Field Operator and Function API
-41](#appendix-a-field-operator-and-function-api)
-  
-    
-*   [Tensor Fields](#tensor-fields)
-      *    [Sensors](#sensors)
-         *    [cct-io Sensors](#cct-io-sensors)
-         *    [cct-nn Sensors](#cct-nn-sensors)
-      *    [Actuators](#actuators)
-*   [Operators](#operators)
-      * [Built-in Operators](#built-in-operators)   
-      * [The Feedback Operator](#the-feedback-operator)
-      * [User-defined GPU Operators](#user-defined-gpu-operators)  
-      * [User-defined CPU Operators](#user-defined-cpu-operators)  
-*   [Coming Soon](#coming-soon)
-
-
-
+     * [Subfield and apply(Range)](#subfield-and-applyrange)
+     * [Tensor Reductions](#tensor-reductions)
+     * [Field Reductions](#field-reductions)
+     * [WinnerTakeAll](#winnertakeall)
+     * [Inner products](#inner-products)
+     * [ProjectFrame, BackProjectFrame and ConvolveFilterAdjoint](#projectframe-backprojectframe-and-convolvefilteradjoint)
+     * [User-defined operators](#user-defined-operators)
+     * [GPUOperators](#gpuoperators)
+     * [Further operator documentation](#further-operator-documentation)
+* [Programming Cog Applications](#programming-cog-applications)
+     * [Feed-forward computation](#feed-forward-computation)
+     * [Feedback for adaptation](#feedback-for-adaptation)
+     * [Reset and step](#reset-and-step)
+     * [Programming styles in Cog: Think functional](#programming-styles-in-cog-think-functional)
+* [Debugging](#debugging)
+     * [Launching the Debugger](#launching-the-debugger)
+     * [Probing Fields](#probing-fields)
+     * [Controlling the Computation](#controlling-the-computation)
+     * [Viewing Compute Graph Structure](#viewing-compute-graph-structure)
+     * [Visualizing Field Contents](#visualizing-field-contents)
+     * [Standard Field Visualizations](#standard-field-visualizations)
+         * [Scalar Fields](#scalar-fields)
+         * [Vector Fields](#vector-fields)
+         * [Matrix Fields](#matrix-fields)
+* [Appendix A: Field Operator and Function API](#appendix-a-field-operator-and-function-api)
 
 
 1. Introduction
