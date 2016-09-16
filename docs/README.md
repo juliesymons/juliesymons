@@ -377,7 +377,7 @@ tick. Here’s an example of reading in a movie file in a sensor:
     )
 
 Here we use the IO library function `ColorMovie` to create field from a
-movie file. Since the movie will evolve over time, `ColorMovi`e creates a
+movie file. Since the movie will evolve over time, `ColorMovie` creates a
 Cog `Sensor` which provides an interface for data flow from the outside
 world into the compute graph at each Cog tick. Executing this example,
 then clicking on the movie box followed by clicking Run will play the
@@ -444,14 +444,12 @@ executed, this will print the following to the console:
 Please consult section [Feed-forward computation](#feed-forward-computation) for more insight
 into Sensor and Actuator operation.
 
-4. Operators
-============
+## Operators
 
 All field operations in Cog are expressed using operators, described in
 this chapter.
 
-4.1 Arithmetic: + - \* /
-------------------------
+### Arithmetic: + - * /
 
 Two dynamic fields may be combined arithmetically if: (1) both fields
 have the same field shape, or at least one of the field shapes is
