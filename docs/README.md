@@ -195,8 +195,7 @@ field holding three low-precision (8-bit) integer values. A ColorField
 vector, also called a pixel, holds three, 8-bit color channels (red,
 green, blue).
 
-2.2 Operators
--------------
+### Operators
 
 An operator takes one or more tensor fields and computes a new tensor
 field as a result. For example, the + operator can be used to combine
@@ -204,10 +203,14 @@ two real or complex tensor fields with the same shape and tensor order
 into a new field with the same shape and order, where each tensor
 element is the sum of the corresponding tensor elements in the operands:
 
+![](./media/diagram3.png)
+
 Cog supports the usual arithmetic operators on real and complex fields
 which operate on the corresponding tensor elements of the two input
 fields:
 
+    +  -  *  /
+    
 Beyond these basic operators, Cog supplies a rich set of algebraic and
 transcendental operators, in addition to a number of operators useful to
 signal processing and cognitive models. The full set of operators is
@@ -216,14 +219,17 @@ described in Chapter 4 and the operator API is presented in Appendix A.
 One important operator introduced by the Cog programming framework is
 the feedback operator
 
+    <==
+
 which is used to evolve state within a computation. This is essential
 for learning and adaptation.
 
-2.3 Compute Graphs
-------------------
+### Compute Graphs
 
 Tensors fields and operators are combined to create a computation unit
 called a *compute graph*:
+
+![](./media/diagram4.png)
 
 The compute graph brings in information from the outside world into the
 computation with *sensors*, which are tensor fields that are sourced by
@@ -238,17 +244,16 @@ first phase, operators propagate field information bottom-up from
 sensors to actuators, ignoring any feedback connections (shown as a
 dashed line in the above figure). In the second phase, the feedback
 information is used to change the state of each field receiving a
-feedback connection, specified by the &lt;== operator. This is
+feedback connection, specified by the `<==` operator. This is
 essentially a state machine: each step of computation reads input data
 (sensors) to produce new outputs (actuators) and updates its internal
 state.
 
 A user may create a compute graph and “step” its computation by
-repeatedly calling a step method, and may reset its state to
-user-specified initial value by calling a reset method.
+repeatedly calling a `step` method, and may reset its state to
+user-specified initial value by calling a `reset` method.
 
-3. Introductory Examples
-========================
+## Introductory Examples
 
 A ComputeGraph can be embedded within an application, but it is easier
 to learn the programming model and develop apps by using the Cog
@@ -259,26 +264,34 @@ the purposes of exhibition in this guide, but keep in mind that the
 debugger generally will not be used for app deployment and the Cog model
 can be used for processing and interacting with arbitrary types of data.
 
-3.1 Hello, World
-----------------
+### Hello, World
 
-Let’s start with a simple ComputeGraph that runs in the debugger:
+Let’s start with a simple `ComputeGraph` that runs in the debugger:
+
+    package tutorial.libcog.fields
+
+    import libcog._
+    import cogdebugger._
+
+    object Counter extends CogDebuggerApp(
+      new ComputeGraph {
+      val counter = ScalarField(200, 200)
+      counter <== counter + 1
+      }
+    )
 
 The Cog debugger wraps the compute graph, emulating the embedding of the
 graph in an application. Note that applications may create and control
 multiple ComputeGraphs if desired, but ComputeGraphs may not be nested.
-In the above code, the “import libcog.\_” statement provides your
-program access to all Cog functionality. The “import cogdebugger.\_”
+In the above code, the `import libcog._` statement provides your
+program access to all Cog functionality. The `import cogdebugger._`
 gives access to the Cog debugger.
 
 This application contains a two-dimensional scalar field named
-“counter.” If you compile and run the above application, you will see a
+`counter`. If you compile and run the above application, you will see a
 window that looks like this:
 
 ![](./media/image3.png)
-*image_caption*
-![](./media/image3.png){width="6.026336395450569in"
-height="3.336965223097113in"}
 
 The blue box in the upper left labeled “counter” is the graphical
 representation of the field named “counter” in the code. The box label
@@ -286,8 +299,7 @@ text “counter” is taken from the variable name of the field in the code.
 Clicking on the blue box will cause a window to open which displays the
 current state of that field as a grayscale image:
 
-![](./media/image4.png){width="5.903695319335083in"
-height="3.273584864391951in"}
+![](./media/image4.png)
 
 The black box above is a 200 x 200 image, with each pixel displaying the
 corresponding value of a real scalar within the dynamic field. The color
@@ -299,14 +311,15 @@ Clicking on the “step 1” button in the debugger will “clock” the field,
 causing it to change its state by executing the line of code called the
 “mutation operation”:
 
+    counter <== counter + 1
+
 This statement says that the next state of the field, after the next
 clock tick, is equal to the current state of the field with 1 added to
 every point in the field. Since there are 40,000 points in the field,
 this statement is describing 40,000 additions. Here’s what you’ll see in
 the debugger after stepping once:
 
-![](./media/image5.png){width="5.9602985564304465in"
-height="3.301887576552931in"}
+![](./media/image5.png)
 
 Since every point in the field is now equal to one, the image
 representing that field uses 40,000 white pixels to represent the field
@@ -315,33 +328,57 @@ that they each have the value 2. Placing the cursor over a point in a
 field will momentarily bring up a tooltip describing the coordinates and
 precise value at that point.
 
-![](./media/image6.png){width="5.922563429571303in"
-height="3.283018372703412in"}
+![](./media/image6.png)
 
-3.2 Operators
--------------
+### Operators
 
 Here’s a simple example of combining two fields to create a new one:
 
+    package tutorial.libcog.fields
+
+    import libcog._
+    import cogdebugger._
+    import cogio._
+
+    object MultipleFields extends CogDebuggerApp (
+      new ComputeGraph {
+        val grass = GrayscaleImage("resources/grass.jpg")
+        val leaves = GrayscaleImage("resources/leaves.jpg")
+        val average = (grass + leaves)/2
+        probeAll   // Makes all fields visible in the debugger
+      }
+    )
+
 This example utilizes the IO Library which includes a number of useful
 functions for getting data into a compute graph. In this example we use
-the cogio object GrayscaleImage, a function object that initializes a
+the `cogio` object `GrayscaleImage`, a function object that initializes a
 scalar field with data from an image file. In this example, two fields
-named “grass” and “leaves”, which are necessarily the same size, are
-averaged to create the field “average.” Here’s what you should see:
+named `grass` and `leaves`, which are necessarily the same size, are
+averaged to create the field `average`. Here’s what you should see:
 
-![](./media/image7.png){width="5.9602985564304465in"
-height="5.386792432195976in"}
+![](./media/image7.png)
 
-3.3 Sensors
------------
+### Sensors
 
 Sensors pull in streams of data as a stream of fields, one for each Cog
 tick. Here’s an example of reading in a movie file in a sensor:
 
-Here we use the IO library function ColorMovie to create field from a
-movie file. Since the movie will evolve over time, ColorMovie creates a
-Cog Sensor which provides an interface for data flow from the outside
+    package tutorial.cogio
+
+    import libcog._
+    import cogdebugger._
+    import cogio._
+
+    object ColorMovieExample extends CogDebuggerApp (
+      new ComputeGraph {
+        val movieFile = "resources/Wildlife.wmv"
+        val movie = ColorMovie(movieFile)
+      }
+    )
+
+Here we use the IO library function `ColorMovie` to create field from a
+movie file. Since the movie will evolve over time, `ColorMovi`e creates a
+Cog `Sensor` which provides an interface for data flow from the outside
 world into the compute graph at each Cog tick. Executing this example,
 then clicking on the movie box followed by clicking Run will play the
 movie within the debugger, displaying one frame per Cog tick<span
@@ -349,28 +386,62 @@ id="_Toc361056916" class="anchor"><span id="_Toc361057339"
 class="anchor"><span id="_Toc361057380" class="anchor"><span
 id="_Toc361067518" class="anchor"></span></span></span></span>.
 
-![](./media/image8.png){width="5.903695319335083in"
-height="4.556604330708661in"}
+![](./media/image8.png)
 
-3.4 Actuators
--------------
+### Actuators
 
 Actuators complement sensors; they are a mechanism for exporting data or
 executing data-dependent side effects from within compute graphs. Here’s
 a simple application which creates a one-dimensional scalar field with
 simple feedback and prints it out each time the computation is stepped:
 
-Note that since no special I/O is used we do not import cogio and since
-we are just printing to the console we do not import cogdebugger. Since
+    package tutorial.libcog.actuators
+
+    import libcog._
+
+    object ActuatorExample extends App {
+      val graph = new ComputeGraph {
+
+        // Initialize a field to (1,2,3,4)
+        val field = ScalarField(4, (column) => 1 + column)
+        //Increment each element by one each tick
+        field <== field + 1
+
+        // define an actuator that outputs the field elements to an array each tick
+        // and specifies an initial actuator state of (4,3,2,1)
+        val actuatorData = new Array[Float](4)
+        val actuator = Actuator(field, actuatorData, (column) => 4 - column)
+      }
+      import graph._
+      withRelease {
+      // reset the graph, print actuator data
+        reset
+        println(actuatorData.mkString("  "))
+        // step the graph 5 times, print actuator data after each step
+        for(i <- 0 until 5) {
+          step
+          println(actuatorData.mkString("  "))
+        }
+      }
+    }
+
+Note that since no special I/O is used we do not import `cogio` and since
+we are just printing to the console we do not import `cogdebugger`. Since
 we are not using the debugger here, we programmatically step the graph
-each time we want to write output to the console. By importing graph.\_,
+each time we want to write output to the console. With `import graph._`,
 we can refer to various methods and fields of the compute graph simply.
-The withRelease method ensures the release of the compute graph at the
+The `withRelease` method ensures the release of the compute graph at the
 end of the computation, which allows the runtime system to release the
 CPU and GPU memory it has claimed and shut down gracefully. When
 executed, this will print the following to the console:
 
-Please consult section 5.1 “Feed-forward computation” for more insight
+    4.0  3.0  2.0  1.0
+    1.0  2.0  3.0  4.0
+    2.0  3.0  4.0  5.0
+    3.0  4.0  5.0  6.0
+    4.0  5.0  6.0  7.0
+
+Please consult section [Feed-forward computation](#feed-forward-computation) for more insight
 into Sensor and Actuator operation.
 
 4. Operators
