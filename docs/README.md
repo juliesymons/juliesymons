@@ -1175,7 +1175,7 @@ cycle. A “constant” field which its value changed each cycle by the
 Constant fields and recurrences alter the feed-forward compute model
 only slightly:
 
-<insert 8>
+![](./media/diagram8.png)
 
 Constant fields and recurrences are treated as inputs to the field
 computation just like sensors. Recurrences are initially declared as
@@ -1192,7 +1192,7 @@ The change of `x`'s value, though, is not immediate but delayed until the
 following cycle. This is because recurrences have the same master/slave
 buffer structure as sensors and actuators:
 
-<insert 9>
+![](./media/diagram9.png)
 
 During field computation, the *slave* buffer provides the field data
 used by the computation (this slave field data is the result of the
