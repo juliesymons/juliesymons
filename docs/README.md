@@ -1527,9 +1527,8 @@ is:
 
     color = (*x* - min) / (max - min)
     
-    ![](./media/image20.png)
+![](./media/image20.png)
     
-
 The values *min* and *max* are determined by the state of the **Floating
 Max** toggle button on the visualization’s toolbar. If the button is
 toggled on, they are the minimum and maximum values in the field at the
