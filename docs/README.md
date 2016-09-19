@@ -1238,18 +1238,13 @@ during the next tick. Two things to keep in mind as you program are the
 following:
 
 1.  Make a concerted effort to not use feedback unless you need to preserve some state through a Cog tick.
-2.  Explicitly and conceptually 
 2.  Explicitly and conceptually divide the computation into two sequential parts. he input slave registers then flow through field computation to the inputs of the actuator master buffers.
-
-
-1. Mark a concerted effort to not use feedback unless you need to preserve some state through a Cog tick.
-2. Explicitly and divide the computation into two sequential parts: (1) a feed-forward pass of the model computation, (2) an update phase in which all feedback/recurrent variables are computed.
 
 
 ## Debugging
 
 Debugging is an important part of any application development process.
-This chapter describes the CogDebugger tool in greater detail than
+This chapter describes the `CogDebugger` tool in greater detail than
 previous chapters and provides suggestions for identifying and
 correcting errors in Cog programs.
 
@@ -1266,57 +1261,78 @@ The third is a ‘probe desktop’ where visualizations of a model’s various
 fields can be displayed. These individual parts are more thoroughly
 described later in this chapter.
 
-![](./media/image13.png){width="6.0in" height="4.277777777777778in"}
+![](./media/image13.png)
 
-6.1 Launching the Debugger
---------------------------
+### Launching the Debugger
 
-The CogDebugger class defines the actual graphical user interface of the
+The `CogDebugger` class defines the actual graphical user interface of the
 debugging tool. It allows users to start, stop, step, and reset a
 compute graph while visualizing its structure and the contents of its
 fields. The simplest way to launch the GUI is to extend the
-CogDebuggerApp class, which wraps a ComputeGraph instance and provides a
+`CogDebuggerApp` class, which wraps a `ComputeGraph` instance and provides a
 runnable main method that launches an instance of the visual debugger.
 
-CogDebuggerApp and its related classes are members of the cogdebugger
-package. Note that you must define an *object* (not a class!) that
-extends CogDebuggerApp for the application to actually be executable, as
+`CogDebuggerApp` and its related classes are members of the `cogdebugger
+package`. Note that you must define an *object* (not a class!) that
+extends `CogDebuggerApp` for the application to actually be executable, as
 shown below.
 
-The above example defines a simple application, MultiplierDebugger, that
+    import libcog._
+    import cogdebugger._
+
+    object MultiplierDebugger extends CogDebuggerApp(new Multiplier)
+
+    class Multiplier extends ComputeGraph {
+      val counter = ScalarField()
+      val multiplied = counter * 2
+      counter <== counter + 1
+    }
+
+The above example defines a simple application, `MultiplierDebugger`, that
 can be launched from the command line or your IDE. If you launch this
-app as is however, you will notice that the ‘multiplied’ field is
+app as is however, you will notice that the `multiplied` field is
 unaccounted for in the debugger. This is due to the Cog platform
 compiler’s optimizer. The next section describes how to prevent the
 compiler from eliminating a field of interest.
 
-6.2 Probing Fields
-------------------
+### Probing Fields
 
 By default, the Cog compiler aggressively optimizes a compute graph to
 maximize its execution performance. In some cases, fields and
 expressions defined in a compute graph can be merged together or
 eliminated entirely by the optimizer, and are thus unavailable to the
-debugger. In the previous example, the field ‘multiplied’ is not used in
+debugger. In the previous example, the field `multiplied` is not used in
 any other expression and is seen as ‘dead code’ by the compiler and
 consequently removed. To prevent the compiler from optimizing away a
 field of interest, we must explicitly state in our program that we would
-like to ‘probe’ the field in the debugger,by calling the probe method
+like to ‘probe’ the field in the debugger, by calling the `probe` method
 (defined on all fields), as shown below.
 
-The previous example has been modified to ensure that the ‘multiplied’
-field appears in the debugger. Alternatively, ComputeGraph also defines
-a probeAll method that essentially disables the optimizer. This causes
+    import libcog._
+    import cogdebugger._
+
+    object MultiplierDebugger extends CogDebuggerApp(new Multiplier)
+
+    class Multiplier extends ComputeGraph {
+      val counter = ScalarField()
+      val multiplied = counter * 2
+      counter <== counter + 1
+
+      probe(multiplied)
+    }
+
+The previous example has been modified to ensure that the `multiplied`
+field appears in the debugger. Alternatively, `ComputeGraph` also defines
+a `probeAll` method that essentially disables the optimizer. This causes
 the computation to execute more slowly, but every field will be
 available for inspection in the debugger. Note that sensors and
 actuators are never eliminated by the compiler and do not need to be
-explicitly probed. Lastly, also be aware that a field’s probe method
+explicitly probed. Lastly, also be aware that a field’s `probe` method
 accepts an optional user-defined String to use as the field’s name in
 the debugger, though the default name, derived from the val or var to
 which the field is assigned, usually suffices.
 
-6.3 Controlling the Computation
--------------------------------
+### Controlling the Computation
 
 The main toolbar across the top of the debugger window serves as home to
 all the controls for starting, stopping, and resetting the computation,
@@ -1325,7 +1341,7 @@ update. It also displays the current cycle of a running computation and
 the rate at which it is advancing. An example of the toolbar (taken from
 a running app) is shown below.
 
-![](./media/image15.png){width="6.0in" height="0.1840277777777778in"}
+![](./media/image15.png)
 
 In order of their appearance on the toolbar (left to right), the
 provided controls and displays are:
@@ -1367,8 +1383,7 @@ provided controls and displays are:
 9.  **Platform** – Prints information to the console about the OpenCL
     platform detected in the system and any installed GPUs.
 
-6.4 Viewing Compute Graph Structure
------------------------------------
+### Viewing Compute Graph Structure
 
 The left panel of the debugger window is dedicated to visualizations of
 a ComputeGraph’s structure. Using the tabs at the top of the panel, you
