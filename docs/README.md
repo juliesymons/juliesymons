@@ -1378,28 +1378,27 @@ provided controls and displays are:
 ### Viewing Compute Graph Structure
 
 The left panel of the debugger window is dedicated to visualizations of
-a ComputeGraph’s structure. Using the tabs at the top of the panel, you
+a `ComputeGraph`’s structure. Using the tabs at the top of the panel, you
 can choose among the different visualizations, which may show or more
 less detail or simply present the graph structure in different ways.
 These visualizations also provide the means for launching the
 visualizations of individual fields in a compute graph, which are
-covered in section 7.1.4.
+covered in [Visualizing Field Contents](#visualizing-field-contents).
 
 The default visualization for a compute graph’s structure is the Graph
 View. The compute graph is displayed as directed node graph, with each
 field in the computation presented as a vertex (labeled according to the
 field name), and each edge indicating data flows between fields. Blue
 edges represent the feed-forward data flow of the computation – that is,
-clock phase 1 (see section 5.1). Red edges are feedback edges; data is
-passed along them in clock phase 2 (section 5.2). Note that a ‘step’ in
+clock phase 1 (see [Launching the Debugger](#launching-the-debugger)). Red edges are feedback edges; data is
+passed along them in clock phase 2 ([Probing Fields](#probing-fields)). Note that a ‘step’ in
 the debugger consists of both clock phases.
 
-![](./media/image16.png){width="4.815972222222222in"
-height="4.175694444444445in"}
+![](./media/image16.png)
 
 Any vertex in the graph can be clicked to launch the default
 visualization for the associated field. The visualization appears on the
-Probe Desktop (see section 7.1.4). If multiple visualizations exist for
+Probe Desktop (see [Visualizing Field Contents](#visualizing-field-contents)). If multiple visualizations exist for
 a particular field, right-clicking the field will pop-up a context menu
 with the alternatives. Note that clicking (left or right) a field for
 which a visualization is already open on the desktop will bring that
@@ -1412,28 +1411,50 @@ vertices and edges, the graph view can optionally group fields into
 indirect, to fields and other modules. Those fields and modules directly
 accessible from a given module are said to be children of or contained
 in that module. Thus, a module hierarchy is implicit in the definition
-of any ComputeGraph, with the class extending ComputeGraph serving as
+of any `ComputeGraph`, with the class extending `ComputeGraph` serving as
 the root or top-level module. Consider the following example Cog
 program:
 
+    import libcog._
+    import cogdebugger._
+
+    object ModuleExampleDebugger extends CogDebuggerApp(new ModuleExample)
+
+    class ModuleExample extends ComputeGraph {
+      val foo = new Foo
+      val bar = new Bar
+      val scalarField = foo.scalarField + bar.scalarField
+      probe(scalarField)
+    }
+
+    class Foo {
+      val bar = new Bar
+      val scalarField = bar.scalarField * 2
+      probe(scalarField)
+    }
+
+    class Bar {
+      val scalarField = ScalarField()
+      scalarField <== scalarField + 1
+      probe(scalarField)
+    }
+
+
 Four scalar fields exist in this compute graph implementation. One in
-the ModuleExample instance, one in an instance of Foo, and one in each
-of two instances of Bar. From the perspective of the ModuleExample
+the `ModuleExample` instance, one in an instance of `Foo`, and one in each
+of two instances of `Bar`. From the perspective of the `ModuleExample`
 instance, each of these fields can be accessed by a different chain of
-references, e.g. ‘scalarField’ refers to a different field than does
-‘foo.bar.scalarField’. Only the first scalarField is directly accessible
-from the ModuleExample instance, the others are only accessible through
-a Foo and Bar object. Thus, the ModuleExample instance defines a single
+references, e.g. `scalarField` refers to a different field than does
+`foo.bar.scalarField`. Only the first `scalarField` is directly accessible
+from the `ModuleExample` instance, the others are only accessible through
+a `Foo` and `Bar` object. Thus, the `ModuleExample` instance defines a single
 module containing one field and two sub-modules.
 
 To see the modules into which a compute graph can be divided, click the
 **Graph Options** button in the graph view’s toolbar, and then select
 **Show Modules**.
 
-![](./media/image17.png){width="2.7916666666666665in"
-height="3.404861111111111in"}
-![](./media/image18.png){width="2.7916666666666665in"
-height="3.404861111111111in"}
+![](./media/image17.png)
 
 In this mode, the view is focused on a single module at a time,
 indicated on the secondary toolbar (that only displays in this mode).
