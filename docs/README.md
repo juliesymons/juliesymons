@@ -1152,6 +1152,14 @@ sum with the data from Sensor C.
 
 Here’s a Cog program that implements the computation shown in the
 previous figure:
+    new ComputeGraph {
+      val sensorA = Sensor(...)
+      val sensorB = Sensor(...)
+      val sensorC = Sensor(...)
+      val result = (sensorA + sensorB) convolve sensorC
+      new Actuator(result, ...)
+    }
+
 
 5.2 Feedback for adaptation
 ---------------------------
