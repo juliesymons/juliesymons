@@ -1112,7 +1112,7 @@ Thus a more detailed view of the computation looks like this:
 
 ![](./media/diagram7.png)
 
-When the ComputeGraph is reset, each sensor fills its master buffer with
+When the `ComputeGraph` is reset, each sensor fills its master buffer with
 initial data. It then executes a single computational step to “prime”
 the computational pipeline.
 
@@ -1144,9 +1144,9 @@ step or cycle between the input to a sensor and the output of an
 actuator.
 
 Field computation is conceptually done in a data-flow style and involves
-no clocking. In the following figure, the + operator adds inputs from
+no clocking. In the following figure, the `+` operator adds inputs from
 Sensor A and Sensor B as soon as they become available at beginning of
-phase 1. The convolve operator depends on the result of the + operator,
+phase 1. The convolve operator depends on the result of the `+` operator,
 so it waits for that to complete, then performs the convolution of that
 sum with the data from Sensor C.
 
