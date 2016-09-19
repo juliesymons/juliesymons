@@ -1150,6 +1150,8 @@ phase 1. The convolve operator depends on the result of the `+` operator,
 so it waits for that to complete, then performs the convolution of that
 sum with the data from Sensor C.
 
+![](./media/diagram8.png)
+
 Here’s a Cog program that implements the computation shown in the
 previous figure:
 
@@ -1175,7 +1177,7 @@ cycle. A “constant” field which its value changed each cycle by the
 Constant fields and recurrences alter the feed-forward compute model
 only slightly:
 
-![](./media/diagram8.png)
+![](./media/diagram9.png)
 
 Constant fields and recurrences are treated as inputs to the field
 computation just like sensors. Recurrences are initially declared as
@@ -1192,7 +1194,7 @@ The change of `x`'s value, though, is not immediate but delayed until the
 following cycle. This is because recurrences have the same master/slave
 buffer structure as sensors and actuators:
 
-![](./media/diagram9.png)
+![](./media/diagram10.png)
 
 During field computation, the *slave* buffer provides the field data
 used by the computation (this slave field data is the result of the
@@ -1212,7 +1214,7 @@ the following steps:
 2.  The input slave registers then flow through field computation to the inputs of the actuator master buffers.
 3.  Finally the master buffers latch their inputs from the field computation.
 
-<insert 10>
+<insert 11>
 
 When reset has completed, all input slave buffers, fields in the field
 computation, and master buffers in actuators hold valid field data. Each
