@@ -1152,6 +1152,7 @@ sum with the data from Sensor C.
 
 Here’s a Cog program that implements the computation shown in the
 previous figure:
+
     new ComputeGraph {
       val sensorA = Sensor(...)
       val sensorB = Sensor(...)
@@ -1161,54 +1162,57 @@ previous figure:
     }
 
 
-5.2 Feedback for adaptation
----------------------------
+### Feedback for adaptation
 
 Field computation is necessarily feed-forward; it is not possible to
 express feedback loops there (the Cog compiler will complain if you try
-to do something like x = x + 1). However learning and adaption requires
-feedback. This is accomplished with the &lt;== operator which can be
+to do something like `x = x + 1`). However learning and adaption requires
+feedback. This is accomplished with the `<==` operator which can be
 used to change the value of a “constant” field input at the end of each
 cycle. A “constant” field which its value changed each cycle by the
-&lt;== operator is called a *recurrence*.
+`<==` operator is called a *recurrence*.
 
 Constant fields and recurrences alter the feed-forward compute model
 only slightly:
 
+<insert 8>
+
 Constant fields and recurrences are treated as inputs to the field
 computation just like sensors. Recurrences are initially declared as
-constants and then “mutated” into recurrences using the &lt;== operator:
+constants and then “mutated” into recurrences using the `<==` operator:
 
-The change of x’s value, though, is not immediate but delayed until the
+    val x = ScalarField(...)   // x is a constant field.
+    val y = ScalarField(...)   // y is a constant field.
+    x <== x + 1                // x has been changed into a recurrence,
+                               // y is still a constant.
+    val z = x + 1              // z in NOT a recurrence, its value is calculated
+                               // with the current value of x.
+
+The change of `x`'s value, though, is not immediate but delayed until the
 following cycle. This is because recurrences have the same master/slave
 buffer structure as sensors and actuators:
+
+<insert 9>
 
 During field computation, the *slave* buffer provides the field data
 used by the computation (this slave field data is the result of the
 computation during the previous step). But the next state for the
-recurrence value (x + 1 in the above example) is driven to the *master*
+recurrence value (`x + 1` in the above example) is driven to the *master*
 buffer, and is thus not visible until the next compute cycle. This
 eliminates possible race conditions that could otherwise occur and also
 prevents cyclic computations that could (at least in principle)
 oscillate forever.
 
-5.3 Reset and step
-------------------
+### Reset and step
 
-Resetting a ComputeGraph initializes all fields in the computation in
+Resetting a `ComputeGraph` initializes all fields in the computation in
 the following steps:
 
-1.  The slave registers of all inputs are initialized with
-    user-defined values. Constant fields are given their declared value;
-    sensors have attached user functions which are queried for their
-    field value; recurrences are initialized to the value given them
-    when they were initially declared as constants.
+1.  The slave registers of all inputs are initialized with user-defined values. Constant fields are given their declared value; sensors have attached user functions which are queried for their field value; recurrences are initialized to the value given them when they were initially declared as constants.
+2.  The input slave registers then flow through field computation to the inputs of the actuator master buffers.
+3.  Finally the master buffers latch their inputs from the field computation.
 
-2.  The input slave registers then flow through field computation to the
-    inputs of the actuator master buffers.
-
-3.  Finally the master buffers latch their inputs from the
-    field computation.
+<insert 10>
 
 When reset has completed, all input slave buffers, fields in the field
 computation, and master buffers in actuators hold valid field data. Each
@@ -1216,8 +1220,7 @@ step thereafter then performs phase 1 clocking (copying all masters to
 their slaves) followed by phase 2 clocking (filling master buffers with
 their inputs).
 
-5.4 Programming styles in Cog: Think functional 
-------------------------------------------------
+### Programming styles in Cog: Think functional 
 
 Although there are many styles in which a Cog application could be
 programmed, a functional style is probably the easiest. The functional
@@ -1227,18 +1230,13 @@ during a single Cog tick. The inputs are constants, sensors and
 recurrences fed back from the previous tick. From a functional point of
 view, these cannot be distinguished. The function consists of the field
 computation, which is stateless and propagates completely during the
-single tick. The sensors and the &lt;== operator, then, are nothing more
+single tick. The sensors and the `<==` operator, then, are nothing more
 than mechanisms for supplying the function with a new set of inputs
 during the next tick. Two things to keep in mind as you program are the
 following:
 
-(1) Make a concerted effort to not use feedback unless you need to
-    preserve some state through a Cog tick.
-
-(2) Explicitly and conceptually divide the computation into two
-    sequential parts: 1) a feed-forward pass of the model
-    computation, 2) an update phase in which all feedback/recurrent
-    variables are computed
+1. Make a concerted effort to not use feedback unless you need to preserve some state through a Cog tick.
+2. Explicitly and conceptually divide the computation into two sequential parts: 1) a feed-forward pass of the model computation, 2) an update phase in which all feedback/recurrent variables are computed
 
 6. Debugging
 ============
