@@ -1481,12 +1481,12 @@ left-clicking a button opens the default visualization for the
 corresponding field, while right-clicking presents all available
 options.
 
-![](./media/image19.png){width="2.7909722222222224in" height="1.4in"}
+![](./media/image19.png)
 
 6.5 Visualizing Field Contents
 ------------------------------
 
-The last pane of the debugger is the Probe Desktop. This is where the
+The last pane of the debugger is the **Probe Desktop**. This is where the
 visualizations for fields will appear when a field vertex or button is
 clicked in the structure pane. Each visualization opens in its own
 window that can be moved, resized, minimized, and maximized, and that
@@ -1500,15 +1500,14 @@ briefly paused to ensure data consistency and that all the data that
 produced a visual came from the same cycle of the computation. As a
 result, opening many visualizations simultaneously can impact the
 performance of a running app. The maximum rate at which visualizations
-will update and rerender can be controlled by the **Frames/sec**
+will update and re-render can be controlled by the **Frames/sec**
 dropdown on the main toolbar. Note that some visualizations are
 computationally expensive to render and may not achieve this target
-update rate. You can request that all visualizations update and rerender
+update rate. You can request that all visualizations update and re-render
 at any time by clicking the **Read Probes** button on the desktop’s
 toolbar.
 
-6.6 Standard Field Visualizations
----------------------------------
+### Standard Field Visualizations
 
 The aim of this section is to familiarize you with the standard
 visualizations that are part of the Cog Debugger tool. Depending on the
@@ -1517,7 +1516,7 @@ example, a field consisting of two-dimensional vectors can be displayed
 as a grid of grid of arrows with varying orientations and lengths, but
 the same visualization doesn’t make sense for a field of scalar values.
 
-### 6.6.1 Scalar Fields {#scalar-fields .ListParagraph}
+#### Scalar Fields 
 
 The default visualization for scalar fields is simply called
 **Scalars**. It produces a grayscale image where each pixel represents a
@@ -1526,7 +1525,10 @@ out into a separate image). With 0 representing pure black, and 1
 representing pure white, the color mapping for a value *x* in the field
 is:
 
-color = (*x* - min) / (max - min)
+    color = (*x* - min) / (max - min)
+    
+    ![](./media/image20.png)
+    
 
 The values *min* and *max* are determined by the state of the **Floating
 Max** toggle button on the visualization’s toolbar. If the button is
@@ -1541,7 +1543,7 @@ benefit of faster rendering than the default view, but will produce
 artifacts if the values within your field aren’t already inside that
 range.
 
-### 6.6.2 Vector Fields {#vector-fields .ListParagraph}
+#### Vector Fields
 
 The default visualization for vector fields extracts two components from
 each vector to produce a 2-dimensional geometric vector, drawn as a
@@ -1566,7 +1568,7 @@ example, a field containing two-dimensional geometric vectors would be
 visualized as two scalar fields – one containing all the *x* values and
 the other all the *y* values.
 
-### 6.6.3 Matrix Fields {#matrix-fields .ListParagraph}
+#### Matrix Fields 
 
 The default viewer for matrix fields, named **Matrices**, produces a
 grayscale image for each matrix, in the same manner as the default
