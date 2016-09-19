@@ -1525,7 +1525,7 @@ out into a separate image). With 0 representing pure black, and 1
 representing pure white, the color mapping for a value *x* in the field
 is:
 
-    color = (*x* - min) / (max - min)
+    color = (x - min) / (max - min)
     
 ![](./media/image20.png)
     
