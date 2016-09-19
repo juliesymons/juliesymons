@@ -1099,12 +1099,18 @@ computation. External data is brought in to the computation through
 sensors, transformed by field computations, then written back out
 through actuators.
 
+<insert figure5>
+
 Each sensor or actuator contains two buffers, called the master and
 slave, and behaves much like a master-slave flip-flop. Computation uses
 a 2-phase clocking model, where each computational step consists of a
 phase 1 clock followed by a phase 2 clock.
 
+<insert figure6>
+
 Thus a more detailed view of the computation looks like this:
+
+<insert figure7>
 
 When the ComputeGraph is reset, each sensor fills its master buffer with
 initial data. It then executes a single computational step to “prime”
