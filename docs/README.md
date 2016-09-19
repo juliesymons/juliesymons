@@ -1237,9 +1237,9 @@ than mechanisms for supplying the function with a new set of inputs
 during the next tick. Two things to keep in mind as you program are the
 following:
 
-1.  The slave registers of all inputs are initialized with user-defined values. Constant fields are given their declared value; sensors have attached user functions which are queried for their field value; recurrences are initialized to the value given them when they were initially declared as constants.
-2.  The input slave registers then flow through field computation to the inputs of the actuator master buffers.
-3.  Finally the master buffers latch their inputs from the field computation.
+1.  TMark a concerted effort not to use the feedback unless you need to preserve some state through a Cog tick.y were initially declared as constants.
+2.  TExplicitly and conceptually divide the computation into two sequential parts. he input slave registers then flow through field computation to the inputs of the actuator master buffers.
+
 
 1. Mark a concerted effort to not use feedback unless you need to preserve some state through a Cog tick.
 2. Explicitly and  
