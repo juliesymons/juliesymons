@@ -1214,7 +1214,7 @@ the following steps:
 2.  The input slave registers then flow through field computation to the inputs of the actuator master buffers.
 3.  Finally the master buffers latch their inputs from the field computation.
 
-<insert 11>
+![](./media/diagram11.png)
 
 When reset has completed, all input slave buffers, fields in the field
 computation, and master buffers in actuators hold valid field data. Each
