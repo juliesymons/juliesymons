@@ -1237,18 +1237,16 @@ than mechanisms for supplying the function with a new set of inputs
 during the next tick. Two things to keep in mind as you program are the
 following:
 
-1.  TMark a concerted effort not to use the feedback unless you need to preserve some state through a Cog tick.y were initially declared as constants.
-2.  TExplicitly and conceptually divide the computation into two sequential parts. he input slave registers then flow through field computation to the inputs of the actuator master buffers.
+1.  Make a concerted effort to not use feedback unless you need to preserve some state through a Cog tick.
+2.  Explicitly and conceptually 
+2.  Explicitly and conceptually divide the computation into two sequential parts. he input slave registers then flow through field computation to the inputs of the actuator master buffers.
 
 
 1. Mark a concerted effort to not use feedback unless you need to preserve some state through a Cog tick.
-2. Explicitly and  
+2. Explicitly and divide the computation into two sequential parts: (1) a feed-forward pass of the model computation, (2) an update phase in which all feedback/recurrent variables are computed.
 
-1.  Make a concerted effort to not use feedback unless you need to preserve some state through a Cog tick.
-2.  Explicitly and conceptually divide the computation into two sequential parts: (1) a feed-forward pass of the model computation, (2) an update phase in which all feedback/recurrent variables are computed
 
-6. Debugging
-============
+## Debugging
 
 Debugging is an important part of any application development process.
 This chapter describes the CogDebugger tool in greater detail than
