@@ -1350,15 +1350,12 @@ provided controls and displays are:
     as possible. The running computation can be interrupted by pressing
     **Stop**, or be made to end after achieving a certain cycle count by
     setting the **Cycle Count Box** to a number other than zero.
-
 2.  **Step Count Box** – Controls how many steps will be executed by
     pressing the **Run** button. If set to 0, the model will execute
     until **Stop** is pressed. If a number is entered, pressing **Run**
     will only execute that many steps before stopping.
-
 3.  **Stop** – Stops a running computation, regardless of how it was
     started or if it had queued steps remaining.
-
 4.  **Stepping controls** – Steps the computation a fixed number of
     times (in powers of ten from 0 to 4). These buttons are provided for
     convenience, as the same can be achieved through use of the **Step
@@ -1368,18 +1365,13 @@ provided controls and displays are:
     two-thousand cycles before pausing). These buttons have no effect if
     the computation is executing as a result of pressing the
     **Run** button.
-
 5.  **Reset** – Resets the current computation to its initial state (at
     step zero). Any currently executing computation is first stopped.
-
 6.  **Cycle Counter** – Displays the current step of the computation.
-
 7.  **Frames/sec Dropdown** – Controls the maximum rate at which field
     visualizations will update and redraw themselves.
-
 8.  **Cycles/sec Counter** – Displays the rate at which the computation
     is executing (in Hertz)
-
 9.  **Platform** – Prints information to the console about the OpenCL
     platform detected in the system and any installed GPUs.
 
